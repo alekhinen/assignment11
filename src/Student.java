@@ -9,11 +9,21 @@ import java.util.HashMap;
  *
  */
 public class Student {
-    String name;
-    HashMap<String, ArrayList<Assignment>> assignMap;
+    String userName;
+    String firstName;
+    String middleName;
+    String lastName;
+    int gradYear;
     
-    Student(String name, HashMap<String, ArrayList<Assignment>> assignMap) {
-        this.name = name;
-        this.assignMap = new HashMap<String, ArrayList<Assignment>>();
+    Student(String userName, 
+            String firstName, 
+            String middleName, 
+            String lastName, 
+            int gradYear) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.gradYear = gradYear;
     }
 }
