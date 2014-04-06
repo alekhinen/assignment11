@@ -11,14 +11,39 @@ import java.util.HashMap;
  *
  */
 public class GradeBook {
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // FIELDS /////////////////////////////////////////////////////////////////
+    
+    /** The name of the course for this GradeBook */
     String courseName;
+    /** The mapping of students and assignments. */
     HashMap<Student, ArrayList<Assignment>> studAssignMap;
     
+    
+    
+    
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // CONSTRUCTORS ///////////////////////////////////////////////////////////
+    
+    /**
+     * 
+     * @param courseName
+     * @param studAssignMap
+     */
     GradeBook(String courseName, 
             HashMap<Student, ArrayList<Assignment>> studAssignMap) {
         this.courseName = courseName;
         this.studAssignMap = new HashMap<Student, ArrayList<Assignment>>();
     }
+    
+    
+    
+    
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // METHODS ////////////////////////////////////////////////////////////////
     
     /**
      * Changes the assignment (named assignmentName) grade for student (whose

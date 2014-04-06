@@ -13,6 +13,7 @@ public class Student {
     
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
+  
     /** The username of this student */
     String userName;
     /** The first name of this student */
@@ -30,9 +31,15 @@ public class Student {
     
     ///////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS ///////////////////////////////////////////////////////////
-    /** CONSTRUCTOR
+   
+    /**
      * 
-     * */
+     * @param userName
+     * @param firstName
+     * @param middleName
+     * @param lastName
+     * @param gradYear
+     */
     Student(String userName, 
             String firstName, 
             String middleName, 

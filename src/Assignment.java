@@ -9,11 +9,26 @@
  *
  */
 public class Assignment {
+
+    ///////////////////////////////////////////////////////////////////////////
+    // FIELDS /////////////////////////////////////////////////////////////////
+   
+    /** The name of this assignment */
     String name;
+    /** The total points of this assignment */
     double total;
+    /** The weight of this assignment in the overall grade of the class */
     double weight;
+    /** The score received on this assignment */
     Double score;
-    
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // CONSTRUCTORS ///////////////////////////////////////////////////////////
+  
     /**
      * The constructor for Assignment that works for addAssignments.txt
      * @param name the name of the assignment
@@ -28,4 +43,11 @@ public class Assignment {
         this.weight = weight;
         this.score = null;
     }
+
+    
+    
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // METHODS ////////////////////////////////////////////////////////////////
 }
