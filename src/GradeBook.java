@@ -12,15 +12,40 @@ import java.util.Set;
  *
  */
 public class GradeBook {
+
+    ///////////////////////////////////////////////////////////////////////////
+    // FIELDS /////////////////////////////////////////////////////////////////
+
+    /** The name of the course for this GradeBook */
     String courseName;
+    /** The mapping of students and assignments. */
     HashMap<Student, ArrayList<Assignment>> studAssignMap;
-    
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // CONSTRUCTORS ///////////////////////////////////////////////////////////
+
+    /**
+     * 
+     * @param courseName
+     * @param studAssignMap
+     */
     GradeBook(String courseName, 
             HashMap<Student, ArrayList<Assignment>> studAssignMap) {
         this.courseName = courseName;
         this.studAssignMap = new HashMap<Student, ArrayList<Assignment>>();
     }
-    
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // METHODS ////////////////////////////////////////////////////////////////
+
     /**
      * Changes the assignment (named assignmentName) grade for student (whose
      * username is equal to username) to newGrade
@@ -53,6 +78,7 @@ public class GradeBook {
         this.studAssignMap.put(username, assignList);
         return result;
     }
+
     
     /**
      * Calculates the average across all students for a given assignment
@@ -80,5 +106,19 @@ public class GradeBook {
             }
         }
         return result/totalStudents;
+    }
+
+    /**
+     * To return a mapping of all students and grades associated with 
+     * each student.
+     */
+    public HashMap<String, ArrayList<Assignment>> currentGrades() {
+        HashMap<String, ArrayList<Assignment>> result 
+        = new HashMap<String, ArrayList<Assignment>>();
+
+        for (Student s : this.studAssignMap.keySet()) {
+
+        }
+        return this.studAssignMap;
     }
 }
