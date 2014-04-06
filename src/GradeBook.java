@@ -37,18 +37,19 @@ public class GradeBook {
             String username, double newGrade) {
         //create a duplicate of the assignment list at the given student
         ArrayList<Assignment> assignList = this.studAssignMap.get(username);
-        
+        //set the result
+        boolean result = false;
         //for every assignment in assignmentlist of the student
         for (Assignment a : assignList) {
             //if the given assignmentname equals this current name, change it
             // and break
             if (a.name.equals(assignmentName)) {
                 a.score = newGrade;
+                result = true;
                 break;
-                return true;
             }
-            return false;
         }
         this.studAssignMap.put(username, assignList);
+        return result;
     }
 }
