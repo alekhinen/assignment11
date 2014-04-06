@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /** represents the grade book for each course that an instructor teaches
  * There can be multiple gradebooks for one instructor
@@ -51,5 +52,33 @@ public class GradeBook {
         }
         this.studAssignMap.put(username, assignList);
         return result;
+    }
+    
+    /**
+     * Calculates the average across all students for a given assignment
+     * 
+     * @param assignmentName
+     *            name of the assignment
+     * @return the average across all students for assignmentName
+     */
+    public double average(String assignmentName) {
+        
+        Set<Student> students = this.studAssignMap.keySet();
+        int totalStudents = students.size();
+        double result = 0;
+        
+        for (Student s : students) {
+            ArrayList<Assignment> ass = this.studAssignMap.get(s);
+            
+            for(int i = 0; i < ass.size(); i++) {
+                Assignment current = ass.get(i);
+                
+                if (current.name.equals(assignmentName)) {
+                    result += current.score;
+                    break;
+                }
+            }
+        }
+        return result/totalStudents;
     }
 }
