@@ -35,6 +35,7 @@ public class GradeBook {
      */
     public boolean changeGrade(String assignmentName,
             String username, double newGrade) {
-        
+        for (Assignment a : )
+        this.studAssignMap.entrySet(username, newArray)
     }
 }
