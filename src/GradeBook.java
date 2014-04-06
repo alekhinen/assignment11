@@ -62,7 +62,7 @@ public class GradeBook {
     public boolean changeGrade(String assignmentName,
             String username, double newGrade) {
         
-        Student theStudent;
+        Student theStudent = null;
         
         for (Student s : this.studAssignMap.keySet()) {
             if (s.userName.equals(username)) {
