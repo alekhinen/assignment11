@@ -15,7 +15,7 @@ public class Assignment {
     Double score;
     
     /**
-     * The constructor for Assigment that works for addAssignments.txt
+     * The constructor for Assignment that works for addAssignments.txt
      * @param name the name of the assignment
      * @param total the total points possible for the student to get
      * @param weight the weight of this assignment on
