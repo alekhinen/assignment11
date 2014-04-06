@@ -1,6 +1,7 @@
 /**
  * 
  * @author Nick Alekhine
+ * @author Austin Colcord
  * @version 2014-04-06
  *
  */
@@ -11,7 +12,7 @@ public class MyGradeBook {
      * 
      * @return an empty MyGradeBook
      */
-    public static MyGradeBook initialize() 
+    public static MyGradeBook initialize()
 
     /**
      * Factory method to construct a MyGradebook that contains the grade book
