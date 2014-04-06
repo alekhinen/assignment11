@@ -6,7 +6,7 @@
  *
  */
 
-public class MyGradeBook {
+public abstract class MyGradeBook {
     /**
      * Factory method to construct an empty MyGradebook
      * 
