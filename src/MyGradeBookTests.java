@@ -2,7 +2,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-
+/**
+ * A testing suite for our GradeBook implementation 
+ * 
+ * @author Charles Perrone
+ * @version 4-6-2014
+ *
+ */
 public class MyGradeBookTests {
 
     Student s1 = new Student("chperrone", "Charles", "Haydon", "Perrone", 2017);
