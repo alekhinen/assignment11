@@ -94,6 +94,18 @@ public class Assignment {
                 this.score.hashCode();
     }
     
+    /**
+     * override the toString method
+     * 
+     * @author charlesperrone
+     * 
+     * @return the name of the assignment
+     */
+    @Override
+    public String toString() {
+        return this.name;
+    }
+    
     /** write the method that changes the grade of this assignment to the given
      * score that the student receives
      * 

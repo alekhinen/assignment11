@@ -35,9 +35,9 @@ public class GradeBook extends MyGradeBook {
      * @param studAssignMap
      */
     GradeBook(String courseName, 
-            HashMap<Student, ArrayList<Assignment>> studAssignMap) {
+              HashMap<Student, ArrayList<Assignment>> studAssignMap) {
         this.courseName = courseName;
-        this.studAssignMap = new HashMap<Student, ArrayList<Assignment>>();
+        this.studAssignMap = studAssignMap;
     }
 
 
@@ -212,7 +212,7 @@ public class GradeBook extends MyGradeBook {
      * @param username
      * @return
      */
-    private Student getStudent(String username) {
+    public Student getStudent(String username) {
         // Get all students 
         Set<Student> students = this.studAssignMap.keySet();
         
@@ -290,5 +290,10 @@ public class GradeBook extends MyGradeBook {
     public String outputGradebook() {
         // TODO Auto-generated method stub
         return null;
+    }
+    
+    @Override
+    public String toString() {
+        return this.courseName + this.studAssignMap;
     }
 }

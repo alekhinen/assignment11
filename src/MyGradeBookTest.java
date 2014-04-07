@@ -3,8 +3,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.Assert.*;
-
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -99,7 +97,7 @@ public class MyGradeBookTest {
         map1.put(this.s2, this.aList2);
         map1.put(this.s3, this.aList3);
         
-        gb1 = new GradeBook("GRADEBOOK1", this.map1);
+        gb1 = new GradeBook("GRADEBOOK1", map1);
     }
     
     
@@ -120,7 +118,7 @@ public class MyGradeBookTest {
     /** test the changeScore grade in Assignment */
     @Test
     public void testChangeScore() {
-        reset();
+        this.reset();
         Double d1 = new Double(9);
         assertEquals(this.a1.score, new Double(90));
         this.a1.changeScore(d1);
@@ -129,9 +127,17 @@ public class MyGradeBookTest {
     
     @Test
     public void testAverage() {
-        reset();
         //assertEquals(gb1.average("Assignment1"), 77, .001);
         
+    }
+    
+    /**
+     * To test the getStudent method in GradeBook.
+     */
+    @Test
+    public void testGetStudent() {
+        this.reset();
+        assertEquals(this.gb1.getStudent("nalekhn"), this.s3);
     }
 
 }
