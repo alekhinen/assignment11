@@ -30,8 +30,20 @@ public class MyGradeBookTests {
     Assignment a1;
     /** Assignment 2 */
     Assignment a2;
+    /** Assignment 3 */
+    Assignment a3;
+    /** Assignment 4 */
+    Assignment a4;
+    /** Assignment 5 */
+    Assignment a5;
+    /** Assignment 6 */
+    Assignment a6;
+    /** Assignment 7 */
+    Assignment a7;
+    /** Assignment 8 */
+    Assignment a8;
     
-    /** Assignments 1 */
+    /** Assignments List 1 */
     ArrayList<Assignment> aList1;
 
     /** Student => Assignments 1 */
