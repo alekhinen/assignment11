@@ -12,7 +12,7 @@ import java.util.Set;
  * @version 2014-04-06
  *
  */
-public class GradeBook {
+public class GradeBook extends MyGradeBook {
 
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
@@ -65,6 +65,7 @@ public class GradeBook {
         }
     }
     
+    
     /** override the hashcode method for student class
      * 
      * @author Austin Colcord
@@ -77,18 +78,16 @@ public class GradeBook {
                 this.studAssignMap.hashCode();
     }
     
+    
     /**
      * Changes the assignment (named assignmentName) grade for student (whose
      * username is equal to username) to newGrade
      * 
      * @author Austin Colcord
      * 
-     * @param assignmentName
-     *            name of the assignment
-     * @param username
-     *            username for the student
-     * @param newGrade
-     *            the new grade for the given assignment and student
+     * @param assignmentName - name of the assignment
+     * @param username - username for the student
+     * @param newGrade - the new grade for the given assignment and student
      * @return whether there was a grade to change. Returns true if the given
      *         assignment/student combination exists, returns false otherwise
      */
@@ -129,8 +128,7 @@ public class GradeBook {
     /**
      * Calculates the average across all students for a given assignment
      * 
-     * @param assignmentName
-     *            name of the assignment
+     * @param assignmentName - name of the assignment
      * @return the average across all students for assignmentName
      */
     public double average(String assignmentName) {
@@ -153,25 +151,34 @@ public class GradeBook {
         }
         return sum/totalStudents;
     }
-
-    /**
-     * To return a mapping of all students and grades associated with 
-     * each student.
-     * 
-     * @author Nick Alekhine
-     * @version 2014-04-07
-     * @return a mapping of all students and grades associated with 
-     * each student
-     */
-    public HashMap<String, ArrayList<Assignment>> currentGrades() {
-        HashMap<String, ArrayList<Assignment>> result 
-        = new HashMap<String, ArrayList<Assignment>>();
-
-        for (Student s : this.studAssignMap.keySet()) {
-            result.put(s.userName, this.studAssignMap.get(s));
-        }
-        return result;
+    
+    
+    @Override
+    public double median(String assignmentName) {
+        // TODO Auto-generated method stub
+        return 0;
     }
+
+
+
+
+
+    @Override
+    public double min(String assignmentName) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+
+
+
+
+    @Override
+    public double max(String assignmentName) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
     
     /**
      * Calculates the current grade for the given student
@@ -198,5 +205,71 @@ public class GradeBook {
                 result = result + 
             }
         }
+    }
+
+    
+    /**
+     * To return a mapping of all students and their grade
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
+     * @return a mapping of all students and their grades.
+     */
+    public HashMap<String, Double> currentGrades() {
+        HashMap<String, Double> result = new HashMap<String, Double>();
+
+        for (Student s : this.studAssignMap.keySet()) {
+            result.put(s.userName, this.currentGrade(s.userName));
+        }
+        
+        return result;
+    }
+
+
+
+    @Override
+    public double assignmentGrade(String assignmentName, String username) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+
+
+
+
+    @Override
+    public String outputCurrentGrades() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+
+
+
+    @Override
+    public String outputStudentGrades(String username) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+
+
+
+    @Override
+    public String outputAssignmentGrades(String assignName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+
+
+
+    @Override
+    public String outputGradebook() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
