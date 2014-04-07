@@ -124,14 +124,46 @@ public class GradeBook {
     /**
      * To return a mapping of all students and grades associated with 
      * each student.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
+     * @return a mapping of all students and grades associated with 
+     * each student
      */
     public HashMap<String, ArrayList<Assignment>> currentGrades() {
         HashMap<String, ArrayList<Assignment>> result 
         = new HashMap<String, ArrayList<Assignment>>();
 
         for (Student s : this.studAssignMap.keySet()) {
-
+            result.put(s.userName, this.studAssignMap.get(s));
         }
-        return this.studAssignMap;
+        return result;
+    }
+    
+    /**
+     * Calculates the current grade for the given student
+     * 
+     * @param username
+     *            username for the student
+     * @return the current grade for student with username. The current grade is
+     *         calculated based on the current assignment grades, assignment
+     *         total points, assignment percent of semester. The current grade
+     *         for a student is the sum of the relative assignment grades
+     *         divided by the current percent of semester time 100. Since all
+     *         grades may not currently be entered, we have to divide by the
+     *         current percent. The relative assignment grade is the student's
+     *         assignment grade divide by total point value for the assignment
+     *         times the percent of semester.
+     */
+    public double currentGrade(String username) {
+        if (this.studAssignMap.containsKey(username)) {
+            
+            double result = 0;
+            ArrayList<Assignment> assignList = this.studAssignMap.get(username);
+            
+            for (Assignment a: assignList) {
+                result = result + 
+            }
+        }
     }
 }

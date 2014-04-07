@@ -16,9 +16,7 @@ public class Assignment {
     /** The name of this assignment */
     String name;
     /** The total points of this assignment */
-    double total;
-    /** The weight of this assignment in the overall grade of the class */
-    double weight;
+    Double weight;
     /** The score received on this assignment */
     Double score;
 
