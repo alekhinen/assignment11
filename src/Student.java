@@ -6,6 +6,7 @@ import java.util.HashMap;
  * 
  * @author Austin Colcord
  * @author Nick Alekhine
+ * @author Charles Perrone
  * @version 2014-04-06
  *
  */

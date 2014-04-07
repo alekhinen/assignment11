@@ -8,6 +8,7 @@ import java.util.Set;
  * as the list of students assigned to this course
  * 
  * @author Austin Colcord
+ * @author Charles Perrone
  * @version 2014-04-06
  *
  */
@@ -136,7 +137,7 @@ public class GradeBook {
         
         Set<Student> students = this.studAssignMap.keySet();
         int totalStudents = students.size();
-        double result = 0;
+        double sum = 0;
         
         for (Student s : students) {
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
@@ -145,12 +146,12 @@ public class GradeBook {
                 Assignment current = ass.get(i);
                 
                 if (current.name.equals(assignmentName)) {
-                    result += current.score;
+                    sum += current.score;
                     break;
                 }
             }
         }
-        return result/totalStudents;
+        return sum/totalStudents;
     }
 
     /**
