@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Set;
+
+import javax.management.RuntimeErrorException;
 
 /** represents the grade book for each course that an instructor teaches
  * There can be multiple gradebooks for one instructor
@@ -30,7 +33,7 @@ public class GradeBook extends MyGradeBook {
     // CONSTRUCTORS ///////////////////////////////////////////////////////////
 
     /**
-     * 
+     * TODO description of this constructor
      * @param courseName
      * @param studAssignMap
      */
@@ -50,6 +53,7 @@ public class GradeBook extends MyGradeBook {
     /** overriding the equals method for GradeBook class
      * 
      * @author Austin Colcord
+     * @version 2014-04-07
      * 
      * @param other the object to compare to this gradebook
      * @return boolean true if the other object is equal to this gradebook
@@ -69,6 +73,7 @@ public class GradeBook extends MyGradeBook {
     /** override the hashcode method for student class
      * 
      * @author Austin Colcord
+     * @version 2014-04-07
      * 
      * @return int the hashcode for this student
      */
@@ -84,6 +89,7 @@ public class GradeBook extends MyGradeBook {
      * username is equal to username) to newGrade
      * 
      * @author Austin Colcord
+     * @version 2014-04-06
      * 
      * @param assignmentName - name of the assignment
      * @param username - username for the student
@@ -127,6 +133,9 @@ public class GradeBook extends MyGradeBook {
     
     /**
      * Calculates the average across all students for a given assignment
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-06
      * 
      * @param assignmentName - name of the assignment
      * @return the average across all students for assignmentName
@@ -196,15 +205,41 @@ public class GradeBook extends MyGradeBook {
      *         times the percent of semester.
      */
     public double currentGrade(String username) {
-        if (this.studAssignMap.containsKey(username)) {
-            
-            double result = 0;
-            ArrayList<Assignment> assignList = this.studAssignMap.get(username);
-            
-            for (Assignment a: assignList) {
-                result = result + 
+        // Get the student with the given username
+        Student s = this.getStudent(username); 
+        ArrayList<Assignment> assignments = this.studAssignMap.get(s);
+        double result = 0; 
+        
+        // If the user exists, total the grade.
+        if (s != null) {
+            for (Assignment a : assignments) {
+                result += (((a.score / a.total) * 100) * a.weight);
             }
         }
+        
+        return result;
+    }
+    
+    /** 
+     * To get the Student with the given username from the student mapping.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
+     * @param username
+     * @return
+     */
+    private Student getStudent(String username) {
+        // Get all students 
+        Set<Student> students = this.studAssignMap.keySet();
+        
+        // Go through each element of the keySet and check if there is a match.
+        for (Student s : students) {
+            if (s.userName.equals(username)) {
+                return s;
+            }
+        }
+        
+        return null;
     }
 
     
