@@ -149,7 +149,7 @@ public class MyGradeBookTest {
     public void testCurrentGrade() {
         this.reset();
         assertEquals(94, this.gb1.currentGrade("nalekhn"), .01);
-        assertEquals(70.42, this.gb1.currentGrade("chperrone"), .01);
+        assertEquals(93.89, this.gb1.currentGrade("chperrone"), .01);
         assertEquals(67.08, this.gb1.currentGrade("thmyolk"), .01);
     }
     
@@ -160,7 +160,7 @@ public class MyGradeBookTest {
     public void testCurrentGrades() {
         this.reset();
         HashMap<String, Double> result = new HashMap<String, Double>();
-        result.put("chperrone", 70.42);
+        result.put("chperrone", 93.89);
         result.put("thmyolk", 67.08);
         result.put("nalekhn", (double) 94);
         assertEquals(result, this.gb1.currentGrades());

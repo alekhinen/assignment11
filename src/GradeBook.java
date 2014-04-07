@@ -193,14 +193,17 @@ public class GradeBook extends MyGradeBook {
         Student s = this.getStudent(username); 
         ArrayList<Assignment> assignments = this.studAssignMap.get(s);
         double result = 0; 
+        double weight = 0;
         
         // If the user exists, total the grade.
         if (s != null) {
             for (Assignment a : assignments) {
+                weight += a.weight;
                 result += (((a.score / a.total) * 100) * a.weight);
             }
         }
         
+        result = result / weight;
         result = Math.round( result * 100.0 ) / 100.0;
         return result;
     }
