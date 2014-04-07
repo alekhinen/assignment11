@@ -124,15 +124,20 @@ public class GradeBook {
     /**
      * To return a mapping of all students and grades associated with 
      * each student.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
+     * @return a mapping of all students and grades associated with 
+     * each student
      */
     public HashMap<String, ArrayList<Assignment>> currentGrades() {
         HashMap<String, ArrayList<Assignment>> result 
         = new HashMap<String, ArrayList<Assignment>>();
 
         for (Student s : this.studAssignMap.keySet()) {
-
+            result.put(s.userName, this.studAssignMap.get(s));
         }
-        return this.studAssignMap;
+        return result;
     }
     
     /**
