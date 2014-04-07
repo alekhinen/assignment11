@@ -2,6 +2,7 @@
  * 
  * @author Nick Alekhine
  * @author Austin Colcord
+ * @author Charles Perrone
  * @version 2014-04-06
  *
  */
