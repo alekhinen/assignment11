@@ -45,6 +45,10 @@ public class MyGradeBookTests {
     
     /** Assignments List 1 */
     ArrayList<Assignment> aList1;
+    /** Assignments List 2 */
+    ArrayList<Assignment> aList2;
+    /** Assignments List 3 */
+    ArrayList<Assignment> aList3;
 
     /** Student => Assignments 1 */
     HashMap<Student, ArrayList<Assignment>> map1;
@@ -56,16 +60,35 @@ public class MyGradeBookTests {
      * To set values to each variable. 
      * */
     public void reset() {
+        /** Students */
         s1 = new Student("chperrone", "Charles", "Haydon", "Perrone", 2017);
         s2 = new Student("thmyolk", "Thom", "Mearle", "Yorke", 2017);
         s3 = new Student("nalekhn", "Nick", "Alex", "Alekhine", 2017);
 
-        a1 = new Assignment("Assignment1", 100, .25);
-        a2 = new Assignment("Assignment2", 120, .45);
+        /** Assignments */
+        a1 = new Assignment("Assignment1", 100, 90, .25);
+        a2 = new Assignment("Assignment2", 120, 90, .45);
+        a3 = new Assignment("Assignment1", 120, 45, .45);
+        a4 = new Assignment("Assignment2", 120, 80, .45);
+        a5 = new Assignment("Assignment3", 120, 90, .45);
+        a6 = new Assignment("Assignment3", 120, 100, .45);
+        a7 = new Assignment("Assignment1", 120, 114, .45);
+        a8 = new Assignment("Assignment2", 120, 114, .45);
         
+        /** Populate Assignment Lists */
         aList1 = new ArrayList<Assignment>();
         aList1.add(a1);
         aList1.add(a2);
+        
+        aList2 = new ArrayList<Assignment>();
+        aList2.add(a3);
+        aList2.add(a4);
+        aList2.add(a5);
+        
+        aList3 = new ArrayList<Assignment>();
+        aList3.add(a6);
+        aList3.add(a7);
+        aList3.add(a8);
         
         map1 = new HashMap<Student, ArrayList<Assignment>>();
         map1.put(this.s1, this.aList1);
@@ -85,6 +108,11 @@ public class MyGradeBookTests {
     public void testChangeGrade() {
         reset();
         this.gb1.changeGrade("Assignment1", "chperrone", 90);
+    }
+    
+    public void testAverage() {
+        reset();
+        
     }
 
 }

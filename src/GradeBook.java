@@ -114,7 +114,7 @@ public class GradeBook {
                 Assignment current = ass.get(i);
                 
                 if (current.name.equals(assignmentName)) {
-                    sum += current.score;
+                    sum += current.score/current.total;
                     break;
                 }
             }

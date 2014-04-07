@@ -20,11 +20,9 @@ public class Assignment {
     Double weight;
     /** The score received on this assignment */
     Double score;
-
-
-
-
-
+    /** The total points possible */
+    Double total;
+    
     ///////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS ///////////////////////////////////////////////////////////
   
@@ -41,6 +39,21 @@ public class Assignment {
         this.total = total;
         this.weight = weight;
         this.score = null;
+    }
+    
+    /**
+     * The constructor for Assignment that accepts a score
+     * @param name the name of the assignment
+     * @param total the total points possible for the student to get
+     * @param weight the weight of this assignment on
+     *               the overall grade of the student
+     * The score will be set when the instructor changes the student's grade
+     */
+    Assignment(String name, double total, double score, double weight) {
+        this.name = name;
+        this.total = total;
+        this.weight = weight;
+        this.score = score;
     }
 
     
