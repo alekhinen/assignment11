@@ -28,9 +28,10 @@ Need to work on this.
 - median(String assignmentName) CHARLES
 - min(String assignmentName) CHARLES
 - max(String assignmentName) CHARLES
-- currentGrade() NICK
-- currentGrades() NICK
-- assignmentGrade(String assignmentName, String username)
+- ~~getStudent(String username)~~ NICK (need to throw exceptions)
+- ~~currentGrade(String username)~~ NICK
+- ~~currentGrades()~~ NICK (need to throw exceptions)
+- ~~assignmentGrade(String assignmentName, String username)~~ NICK (need to throw exceptions)
 - outputCurrentGrades()
 - outputStudentGrades(String username)
 - outputAssignmentGrades(String assignName)

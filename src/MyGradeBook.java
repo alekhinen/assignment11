@@ -172,7 +172,6 @@ public abstract class MyGradeBook {
      *         assignment grade divide by total point value for the assignment
      *         times the percent of semester.
      */
-    // TODO ...
     public abstract double currentGrade(String username);
 
     
@@ -191,7 +190,6 @@ public abstract class MyGradeBook {
      *         divide by total point value for the assignment times the percent
      *         of semester.
      */
-    // TODO ...
     public abstract HashMap<String, Double> currentGrades(); 
 
     
@@ -204,7 +202,6 @@ public abstract class MyGradeBook {
      *            username for the student
      * @return the grade earned by username for assignmentName
      */
-    // TODO ...
     public abstract double assignmentGrade(String assignmentName,
             String username);
 

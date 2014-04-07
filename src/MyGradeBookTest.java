@@ -165,5 +165,22 @@ public class MyGradeBookTest {
         result.put("nalekhn", (double) 94);
         assertEquals(result, this.gb1.currentGrades());
     }
+    
+    /**
+     * To test the assignmentGrade method in GradeBook
+     */
+    @Test
+    public void testAssignmentGrade() {
+        this.reset();
+        assertEquals((double) 90, 
+                     this.gb1.assignmentGrade("Assignment1", "chperrone"), 
+                     .01);
+        assertEquals(95.83,
+                    this.gb1.assignmentGrade("Assignment2", "chperrone"),
+                    .01);
+        assertEquals(0, 
+                     this.gb1.assignmentGrade("Assignment3", "chperrone"), 
+                     .01);
+    }
 
 }
