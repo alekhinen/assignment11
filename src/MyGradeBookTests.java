@@ -1,4 +1,3 @@
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +54,7 @@ public class MyGradeBookTests {
     
     /** Gradebook 1 */
     GradeBook gb1;
-
+    
     /** 
      * To set values to each variable. 
      * */
@@ -67,13 +66,13 @@ public class MyGradeBookTests {
 
         /** Assignments */
         a1 = new Assignment("Assignment1", 100, 90, .25);
-        a2 = new Assignment("Assignment2", 120, 90, .45);
-        a3 = new Assignment("Assignment1", 120, 45, .45);
+        a2 = new Assignment("Assignment2", 120, 115, .45);
+        a3 = new Assignment("Assignment1", 100, 45, .25);
         a4 = new Assignment("Assignment2", 120, 80, .45);
-        a5 = new Assignment("Assignment3", 120, 90, .45);
-        a6 = new Assignment("Assignment3", 120, 100, .45);
-        a7 = new Assignment("Assignment1", 120, 114, .45);
-        a8 = new Assignment("Assignment2", 120, 114, .45);
+        a5 = new Assignment("Assignment3", 100, 90, .45);
+        a6 = new Assignment("Assignment1", 100, 96, .25);
+        a7 = new Assignment("Assignment2", 120, 114, .45);
+        a8 = new Assignment("Assignment3", 100, 90, .45);
         
         /** Populate Assignment Lists */
         aList1 = new ArrayList<Assignment>();
@@ -92,10 +91,10 @@ public class MyGradeBookTests {
         
         map1 = new HashMap<Student, ArrayList<Assignment>>();
         map1.put(this.s1, this.aList1);
+        map1.put(this.s2, this.aList2);
+        map1.put(this.s3, this.aList3);
         
         gb1 = new GradeBook("GRADEBOOK1", this.map1);
-        
-        
     }
     
     
@@ -110,8 +109,10 @@ public class MyGradeBookTests {
         this.gb1.changeGrade("Assignment1", "chperrone", 90);
     }
     
+    @Test
     public void testAverage() {
         reset();
+        //assertEquals(gb1.average("Assignment1"), 77, .001);
         
     }
 
