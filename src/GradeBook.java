@@ -47,9 +47,41 @@ public class GradeBook {
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
 
+    /** overriding the equals method for GradeBook class
+     * 
+     * @author Austin Colcord
+     * 
+     * @param other the object to compare to this gradebook
+     * @return boolean true if the other object is equal to this gradebook
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof GradeBook) {
+            return this.courseName.equals(((GradeBook) other).courseName) &&
+                   this.studAssignMap.equals(((GradeBook) other).studAssignMap);
+        }
+        else {
+            return false;
+        }
+    }
+    
+    /** override the hashcode method for student class
+     * 
+     * @author Austin Colcord
+     * 
+     * @return int the hashcode for this student
+     */
+    @Override
+    public int hashCode() {
+        return this.courseName.hashCode() +
+                this.studAssignMap.hashCode();
+    }
+    
     /**
      * Changes the assignment (named assignmentName) grade for student (whose
      * username is equal to username) to newGrade
+     * 
+     * @author Austin Colcord
      * 
      * @param assignmentName
      *            name of the assignment
