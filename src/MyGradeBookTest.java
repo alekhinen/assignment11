@@ -109,9 +109,9 @@ public class MyGradeBookTest {
 
     @Test
     public void testChangeGrade() {
-        this.reset();
-        assertEquals(this.a1.score, null);
-        this.gb1.changeGrade("Assignment1", "chperrone", 100);
+        reset();
+        assertEquals(this.a1.score, new Double(90));
+        this.gb1.changeGrade("Assignment1", "chperrone", new Double(100));
         assertEquals(this.a1.score, new Double(100));
     }
     
