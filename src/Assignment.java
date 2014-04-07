@@ -17,6 +17,8 @@ public class Assignment {
     /** The name of this assignment */
     String name;
     /** The total points of this assignment */
+    Double total;
+    /** the weight of this assignment on the full grade */
     Double weight;
     /** The score received on this assignment */
     Double score;
@@ -62,4 +64,39 @@ public class Assignment {
 
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
+    
+    /** overriding the equals method for assignment class
+     * 
+     * @author Austin Colcord
+     * 
+     * @param other the object to compare to this assignment
+     * @return boolean true if the other object is equal to this assignment
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Assignment) {
+            return this.name.equals(((Assignment) other).name) &&
+                    this.total == ((Assignment) other).total &&
+                    this.weight == ((Assignment) other).weight &&
+                    this.score == ((Assignment) other).score;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    /** override the hashcode method for student class
+     * 
+     * @author Austin Colcord
+     * 
+     * @return int the hashcode for this student
+     */
+    @Override
+    public int hashCode() {
+        return this.name.hashCode() +
+                this.total.hashCode() +
+                this.weight.hashCode() +
+                this.score.hashCode();
+    }
+    
 }

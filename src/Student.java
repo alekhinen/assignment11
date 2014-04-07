@@ -60,5 +60,40 @@ public class Student {
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
     
+    /** overriding the equals method for student class
+     * 
+     * @author Austin Colcord
+     * 
+     * @param other the object to compare to this student
+     * @return boolean true if the other object is equal to this student
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Student) {
+            return this.userName.equals(((Student) other).userName) &&
+                    this.firstName.equals(((Student) other).firstName) &&
+                    this.middleName.equals(((Student) other).middleName) &&
+                    this.lastName.equals(((Student) other).lastName)&&
+                    this.gradYear == ((Student) other).gradYear;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    /** override the hashcode method for student class
+     * 
+     * @author Austin Colcord
+     * 
+     * @return int the hashcode for this student
+     */
+    @Override
+    public int hashCode() {
+        return this.userName.hashCode() +
+                this.firstName.hashCode() +
+                this.middleName.hashCode() +
+                this.lastName.hashCode() +
+                this.gradYear;
+    }
     
 }
