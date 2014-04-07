@@ -96,4 +96,16 @@ public class Student {
                 this.gradYear;
     }
     
+    /**
+     * override the toString method
+     * 
+     * @author charlesperrone
+     * 
+     * @return this Student's userName
+     */
+    @Override
+    public String toString() {
+        return this.userName;
+    }
+    
 }

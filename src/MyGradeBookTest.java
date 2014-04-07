@@ -99,7 +99,7 @@ public class MyGradeBookTest {
         map1.put(this.s2, this.aList2);
         map1.put(this.s3, this.aList3);
         
-        gb1 = new GradeBook("GRADEBOOK1", this.map1);
+        gb1 = new GradeBook("GRADEBOOK1", map1);
     }
     
     
@@ -130,6 +130,7 @@ public class MyGradeBookTest {
     @Test
     public void testAverage() {
         reset();
+        System.out.println(gb1);
         //assertEquals(gb1.average("Assignment1"), 77, .001);
         
     }

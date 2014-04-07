@@ -291,4 +291,9 @@ public class GradeBook extends MyGradeBook {
         // TODO Auto-generated method stub
         return null;
     }
+    
+    @Override
+    public String toString() {
+        return this.courseName + this.studAssignMap;
+    }
 }
