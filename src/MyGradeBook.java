@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * 
  * @author Nick Alekhine
@@ -8,13 +10,20 @@
  */
 
 public abstract class MyGradeBook {
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // STATIC METHODS /////////////////////////////////////////////////////////
+    
     /**
-     * Factory method to construct an empty MyGradebook
-     * 
+     * Factory method to construct an empty MyGradebook 
      * @return an empty MyGradeBook
      */
-    public static MyGradeBook initialize()
+    public static MyGradeBook initialize() {
+        // TODO ...
+        return null;
+    }
 
+    
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from filename
@@ -24,8 +33,12 @@ public abstract class MyGradeBook {
      *            book, which is formatted like initial.txt
      * @return a MyGradebook that contains the grade book from filename
      */
-    public static MyGradeBook initializeWithFile(String filename)
+    public static MyGradeBook initializeWithFile(String filename) {
+        // TODO ...
+        return null;
+    }
 
+    
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from startingString
@@ -36,8 +49,18 @@ public abstract class MyGradeBook {
      * @return a MyGradebook that contains the grade book from startingString
      */
     public static MyGradeBook initializeWithString(
-            String startingString) 
+            String startingString) {
+        // TODO ...
+        return null;
+    }
 
+    
+    
+    
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // DYNAMIC METHODS ////////////////////////////////////////////////////////
+    
     /**
      * Add to the state of this grade book---new assignments, new students, new
      * grades---by processing filename
@@ -50,8 +73,11 @@ public abstract class MyGradeBook {
      *            addAssignments.txt, addStudents.txt, gradesForAssignment1.txt,
      *            and gradesForStudent.txt.
      */
-    public void processFile(String filename)
+    public void processFile(String filename) {
+        // TODO ...
+    }
 
+    
     /**
      * Add to the state of this grade book---new assignments, new students, new
      * grades---by processing additionalString
@@ -64,8 +90,11 @@ public abstract class MyGradeBook {
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
      */
-    public void processString(String additionalString)
+    public void processString(String additionalString) {
+        // TODO ...
+    }
 
+    
     /**
      * Changes the assignment (named assignmentName) grade for student (whose
      * username is equal to username) to newGrade
@@ -79,9 +108,11 @@ public abstract class MyGradeBook {
      * @return whether there was a grade to change. Returns true if the given
      *         assignment/student combination exists, returns false otherwise
      */
-    public boolean changeGrade(String assignmentName,
-            String username, double newGrade)
+    // TODO ...
+    public abstract boolean changeGrade(String assignmentName,
+            String username, double newGrade);
 
+    
     /**
      * Calculates the average across all students for a given assignment
      * 
@@ -89,8 +120,10 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the average across all students for assignmentName
      */
-    public double average(String assignmentName)
+    // TODO ...
+    public abstract double average(String assignmentName);
 
+    
     /**
      * Calculates the median across all students for a given assignment
      * 
@@ -98,8 +131,10 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the median across all students for assignmentName
      */
-    public double median(String assignmentName)
+    // TODO ...
+    public abstract double median(String assignmentName);
 
+    
     /**
      * Calculates the min across all students for a given assignment
      * 
@@ -107,8 +142,10 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the min across all students for assignmentName
      */
-    public double min(String assignmentName)
+    // TODO ...
+    public abstract double min(String assignmentName);
 
+    
     /**
      * Calculates the max across all students for a given assignment
      * 
@@ -116,8 +153,10 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the max across all students for assignmentName
      */
-    public double max(String assignmentName)
+    // TODO ...
+    public abstract double max(String assignmentName);
 
+    
     /**
      * Calculates the current grade for the given student
      * 
@@ -133,8 +172,10 @@ public abstract class MyGradeBook {
      *         assignment grade divide by total point value for the assignment
      *         times the percent of semester.
      */
-    public double currentGrade(String username)
+    // TODO ...
+    public abstract double currentGrade(String username);
 
+    
     /**
      * Calculates the current grade for all students
      * 
@@ -150,8 +191,10 @@ public abstract class MyGradeBook {
      *         divide by total point value for the assignment times the percent
      *         of semester.
      */
-    public HashMap<String, Double> currentGrades()
+    // TODO ...
+    public abstract HashMap<String, Double> currentGrades(); 
 
+    
     /**
      * Provides the grade earned by the given student for the given assignment
      * 
@@ -161,9 +204,11 @@ public abstract class MyGradeBook {
      *            username for the student
      * @return the grade earned by username for assignmentName
      */
-    public double assignmentGrade(String assignmentName,
-            String username)
+    // TODO ...
+    public abstract double assignmentGrade(String assignmentName,
+            String username);
 
+    
     /**
      * Provide a String that contains the current grades of all students in the
      * course
@@ -174,8 +219,10 @@ public abstract class MyGradeBook {
      *         followed by tab and current grade. The usernames will be listed
      *         alphabetically.
      */
-    public String outputCurrentGrades()
+    // TODO ...
+    public abstract String outputCurrentGrades();
 
+    
     /**
      * Provide a String that contains the current grades of the given student
      * 
@@ -187,8 +234,10 @@ public abstract class MyGradeBook {
      *         followed by tab and assignment grade), and current grade.
      *         Assignments are to remain in the same order as given.
      */
-    public String outputStudentGrades(String username)
+    // TODO ...
+    public abstract String outputStudentGrades(String username);
 
+    
     /**
      * Provide a String that contains the assignment grades of all students in
      * the course for the given assignment
@@ -203,8 +252,10 @@ public abstract class MyGradeBook {
      *         alphabetically while assignments are to remain in the same 
      *         order as given.
      */
-    public String outputAssignmentGrades(String assignName)
+    // TODO ...
+    public abstract String outputAssignmentGrades(String assignName);
 
+    
     /**
      * Provide a String that contains the current grade book. This String could
      * be used to initialize a new grade book.
@@ -214,5 +265,7 @@ public abstract class MyGradeBook {
      *         formatted like gradebook.txt. The usernames will be listed
      *         alphabetically.
      */
-    public String outputGradebook()
+    // TODO ...
+    public abstract String outputGradebook(); 
+    
 }

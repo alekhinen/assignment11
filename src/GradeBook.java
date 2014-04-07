@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Set;
-
 
 /** represents the grade book for each course that an instructor teaches
  * There can be multiple gradebooks for one instructor
@@ -14,7 +12,7 @@ import java.util.Set;
  * @version 2014-04-06
  *
  */
-public class GradeBook {
+public class GradeBook extends MyGradeBook {
 
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
@@ -32,7 +30,7 @@ public class GradeBook {
     // CONSTRUCTORS ///////////////////////////////////////////////////////////
 
     /**
-     * 
+     * TODO description of this constructor
      * @param courseName
      * @param studAssignMap
      */
@@ -52,6 +50,7 @@ public class GradeBook {
     /** overriding the equals method for GradeBook class
      * 
      * @author Austin Colcord
+     * @version 2014-04-07
      * 
      * @param other the object to compare to this gradebook
      * @return boolean true if the other object is equal to this gradebook
@@ -67,9 +66,11 @@ public class GradeBook {
         }
     }
 
+    
     /** override the hashcode method for student class
      * 
      * @author Austin Colcord
+     * @version 2014-04-07
      * 
      * @return int the hashcode for this student
      */
@@ -79,18 +80,17 @@ public class GradeBook {
                 this.studAssignMap.hashCode();
     }
 
+
     /**
      * Changes the assignment (named assignmentName) grade for student (whose
      * username is equal to username) to newGrade
      * 
      * @author Austin Colcord
+     * @version 2014-04-06
      * 
-     * @param assignmentName
-     *            name of the assignment
-     * @param username
-     *            username for the student
-     * @param newGrade
-     *            the new grade for the given assignment and student
+     * @param assignmentName - name of the assignment
+     * @param username - username for the student
+     * @param newGrade - the new grade for the given assignment and student
      * @return whether there was a grade to change. Returns true if the given
      *         assignment/student combination exists, returns false otherwise
      */
@@ -124,8 +124,10 @@ public class GradeBook {
     /**
      * Calculates the average across all students for a given assignment
      * 
-     * @param assignmentName
-     *            name of the assignment
+     * @author Charles Perrone
+     * @version 2014-04-06
+     * 
+     * @param assignmentName - name of the assignment
      * @return the average across all students for assignmentName
      */
     public double average(String assignmentName) {
@@ -141,33 +143,36 @@ public class GradeBook {
                 Assignment current = ass.get(i);
 
                 if (current.name.equals(assignmentName)) {
-                    sum += current.score;
+                    sum += current.score/current.total;
                     break;
                 }
             }
         }
         return sum/totalStudents;
     }
-
-    /**
-     * To return a mapping of all students and grades associated with 
-     * each student.
-     * 
-     * @author Nick Alekhine
-     * @version 2014-04-07
-     * @return a mapping of all students and grades associated with 
-     * each student
-     */
-    public HashMap<String, ArrayList<Assignment>> currentGrades() {
-        HashMap<String, ArrayList<Assignment>> result 
-        = new HashMap<String, ArrayList<Assignment>>();
-
-        for (Student s : this.studAssignMap.keySet()) {
-            result.put(s.userName, this.studAssignMap.get(s));
-        }
-        return result;
+    
+    
+    @Override
+    public double median(String assignmentName) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
+
+    @Override
+    public double min(String assignmentName) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+
+    @Override
+    public double max(String assignmentName) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    
     /**
      * Calculates the current grade for the given student
      * 
@@ -184,14 +189,106 @@ public class GradeBook {
      *         times the percent of semester.
      */
     public double currentGrade(String username) {
-        if (this.studAssignMap.containsKey(username)) {
-
-            double result = 0;
-            ArrayList<Assignment> assignList = this.studAssignMap.get(username);
-
-            for (Assignment a: assignList) {
-                result = result + 
+        // Get the student with the given username
+        Student s = this.getStudent(username); 
+        ArrayList<Assignment> assignments = this.studAssignMap.get(s);
+        double result = 0; 
+        
+        // If the user exists, total the grade.
+        if (s != null) {
+            for (Assignment a : assignments) {
+                result += (((a.score / a.total) * 100) * a.weight);
             }
         }
+        
+        return result;
+    }
+    
+    /** 
+     * To get the Student with the given username from the student mapping.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
+     * @param username
+     * @return
+     */
+    private Student getStudent(String username) {
+        // Get all students 
+        Set<Student> students = this.studAssignMap.keySet();
+        
+        // Go through each element of the keySet and check if there is a match.
+        for (Student s : students) {
+            if (s.userName.equals(username)) {
+                return s;
+            }
+        }
+        
+        return null;
+    }
+
+    
+    /**
+     * To return a mapping of all students and their grade
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
+     * @return a mapping of all students and their grades.
+     */
+    public HashMap<String, Double> currentGrades() {
+        HashMap<String, Double> result = new HashMap<String, Double>();
+
+        for (Student s : this.studAssignMap.keySet()) {
+            result.put(s.userName, this.currentGrade(s.userName));
+        }
+        
+        return result;
+    }
+
+
+
+    @Override
+    public double assignmentGrade(String assignmentName, String username) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+
+
+
+
+    @Override
+    public String outputCurrentGrades() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+
+
+
+    @Override
+    public String outputStudentGrades(String username) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+
+
+
+    @Override
+    public String outputAssignmentGrades(String assignName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+
+
+
+    @Override
+    public String outputGradebook() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
