@@ -201,6 +201,7 @@ public class GradeBook extends MyGradeBook {
             }
         }
         
+        result = Math.round( result * 100.0 ) / 100.0;
         return result;
     }
     
