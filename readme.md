@@ -17,17 +17,19 @@ This is a gradebook system developed for CS3500: Object-Oriented Design.
 Need to work on this.
 
 ### Methods
-- initialize()
-- initializeWithFile(String filename)
-- initializeWithString(String startingString) 
-- processFile(String filename)
-- processString(String additionalString)
-- changeGrade(String assignmentName, String username, double newGrade)
-- average(String assignmentName)
-- median(String assignmentName)
-- min(String assignmentName)
-- max(String assignmentName)
-- currentGrades()
+- initialize() !!!
+- initializeWithFile(String filename) !!!
+- initializeWithString(String startingString)  !!!
+- processFile(String filename) !!!
+- processString(String additionalString) !!!
+
+- changeGrade(String assignmentName, String username, double newGrade) AUSTIN
+- ~~average(String assignmentName)~~ CHARLES
+- median(String assignmentName) CHARLES
+- min(String assignmentName) CHARLES
+- max(String assignmentName) CHARLES
+- currentGrade() NICK
+- currentGrades() NICK
 - assignmentGrade(String assignmentName, String username)
 - outputCurrentGrades()
 - outputStudentGrades(String username)
