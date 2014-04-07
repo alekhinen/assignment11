@@ -81,10 +81,22 @@ public class MyGradeBookTests {
     
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
-    
+    @Test
     public void testChangeGrade() {
         reset();
-        this.gb1.changeGrade("Assignment1", "chperrone", 90);
+        assertEquals(this.a1.score, null);
+        this.gb1.changeGrade("Assignment1", "chperrone", 100);
+        assertEquals(this.a1.score, new Double(100));
+    }
+    
+    /** test the changeScore grade in Assignment */
+    @Test
+    public void testChangeScore() {
+        reset();
+        Double d1 = new Double(9);
+        assertEquals(this.a1.score, null);
+        this.a1.changeScore(d1);
+        assertEquals(this.a1.score, d1);
     }
 
 }

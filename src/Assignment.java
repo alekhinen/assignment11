@@ -86,4 +86,14 @@ public class Assignment {
                 this.score.hashCode();
     }
     
+    /** write the method that changes the grade of this assignment to the given
+     * score that the student receives
+     * 
+     * @author Austin Colcord
+     * 
+     * @param newScore the new score that the student receives (Double)
+     */
+    public void changeScore(Double newScore) {
+        this.score = newScore;
+    }
 }

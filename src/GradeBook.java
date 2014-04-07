@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
+
 
 /** represents the grade book for each course that an instructor teaches
  * There can be multiple gradebooks for one instructor
@@ -58,13 +60,13 @@ public class GradeBook {
     public boolean equals(Object other) {
         if (other instanceof GradeBook) {
             return this.courseName.equals(((GradeBook) other).courseName) &&
-                   this.studAssignMap.equals(((GradeBook) other).studAssignMap);
+                    this.studAssignMap.equals(((GradeBook) other).studAssignMap);
         }
         else {
             return false;
         }
     }
-    
+
     /** override the hashcode method for student class
      * 
      * @author Austin Colcord
@@ -76,7 +78,7 @@ public class GradeBook {
         return this.courseName.hashCode() +
                 this.studAssignMap.hashCode();
     }
-    
+
     /**
      * Changes the assignment (named assignmentName) grade for student (whose
      * username is equal to username) to newGrade
@@ -94,38 +96,31 @@ public class GradeBook {
      */
     public boolean changeGrade(String assignmentName,
             String username, double newGrade) {
-        
-        Student theStudent = null;
-        
-        for (Student s : this.studAssignMap.keySet()) {
-            if (s.userName.equals(username)) {
-                theStudent = s;
-                break;
-            }
-            return false;
-        }
-        
-        //create a duplicate of the assignment list at the given student
-        ArrayList<Assignment> assignList = this.studAssignMap.get(theStudent);
-        
         //set the result
         boolean result = false;
+
+        Set<Student> students = this.studAssignMap.keySet();
         
-        //for every assignment in assignmentlist of the student
-        for (Assignment a : assignList) {
-            //if the given assignmentname equals this current name, change it
-            // and break
-            if (a.name.equals(assignmentName)) {
-                a.score = newGrade;
-                result = true;
-                break;
+        for (Student s : students) {
+            if (s.userName.equals(username)) {
+                //for every assignment in assignmentlist of the student
+                for (Assignment a : this.studAssignMap.get(s)) {
+                    //if the given assignmentname equals this current name, change it
+                    // and break
+                    if (a.name.equals(assignmentName)) {
+                        a.changeScore(newGrade);
+                        result = true;
+                    }
+                }
+
             }
+
         }
-        this.studAssignMap.put(theStudent, assignList);
         return result;
+
     }
 
-    
+
     /**
      * Calculates the average across all students for a given assignment
      * 
@@ -134,17 +129,17 @@ public class GradeBook {
      * @return the average across all students for assignmentName
      */
     public double average(String assignmentName) {
-        
+
         Set<Student> students = this.studAssignMap.keySet();
         int totalStudents = students.size();
         double sum = 0;
-        
+
         for (Student s : students) {
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
-            
+
             for(int i = 0; i < ass.size(); i++) {
                 Assignment current = ass.get(i);
-                
+
                 if (current.name.equals(assignmentName)) {
                     sum += current.score;
                     break;
@@ -172,7 +167,7 @@ public class GradeBook {
         }
         return result;
     }
-    
+
     /**
      * Calculates the current grade for the given student
      * 
@@ -190,10 +185,10 @@ public class GradeBook {
      */
     public double currentGrade(String username) {
         if (this.studAssignMap.containsKey(username)) {
-            
+
             double result = 0;
             ArrayList<Assignment> assignList = this.studAssignMap.get(username);
-            
+
             for (Assignment a: assignList) {
                 result = result + 
             }
