@@ -71,9 +71,11 @@ public class MyGradeBookTest {
         /** Assignments */
         this.a1 = new Assignment("Assignment1", 100, 90, .25);
         this.a2 = new Assignment("Assignment2", 120, 115, .50);
+        
         this.a3 = new Assignment("Assignment1", 100, 45, .25);
         this.a4 = new Assignment("Assignment2", 120, 80, .50);
         this.a5 = new Assignment("Assignment3", 100, 90, .25);
+        
         this.a6 = new Assignment("Assignment1", 100, 96, .25);
         this.a7 = new Assignment("Assignment2", 120, 114, .50);
         this.a8 = new Assignment("Assignment3", 100, 90, .25);
@@ -109,40 +111,75 @@ public class MyGradeBookTest {
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
 
+    /** test the changeGrade method in GradeBook 
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * */
     @Test
     public void testChangeGrade() {
-        reset();
+        this.reset();
         assertEquals(this.a1.score, new Double(90));
         this.c1.changeGrade("Assignment1", "chperrone", new Double(100));
         assertEquals(this.a1.score, new Double(100));
+        
+        assertEquals(this.a3.score, new Double(45));
+        this.c1.changeGrade("Assignment1", "thmyolk", new Double(50));
+        assertEquals(this.a3.score, new Double(50));
+        
+        assertEquals(this.a4.score, new Double(80));
+        this.c1.changeGrade("Assignment2", "thmyolk", new Double(70));
+        assertEquals(this.a4.score, new Double(70));
     }
     
-    /** test the changeScore grade in Assignment */
+    /** test the changeScore grade in Assignment 
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     */
     @Test
     public void testChangeScore() {
         this.reset();
-        Double d1 = new Double(9);
         assertEquals(this.a1.score, new Double(90));
-        this.a1.changeScore(d1);
-        assertEquals(this.a1.score, d1);
+        this.a1.changeScore(new Double(9));
+        assertEquals(this.a1.score, new Double(9));
+        
+        assertEquals(this.a3.score, new Double(45));
+        this.a1.changeScore(new Double(20));
+        assertEquals(this.a1.score, new Double(20));
     }
     
-    /**
-     * To test the makeList method
+    /** test the makeList method
+     * 
+     * @author Charles Perrone
+     * @author Austin Colcord
+     * @version 2014-04-08
      */
     @Test
     public void testMakeList() {
         this.reset();
-        assertEquals(c1.makeList("Assignment1"), Arrays.asList(45.0, 90.0, 96.0));
+        assertEquals(this.c1.makeList("Assignment1"), 
+                Arrays.asList(45.0, 90.0, 96.0));
+        this.reset();
+        assertEquals(this.c1.makeList("AssignmentNull"),
+                Arrays.asList());
+        this.reset();
+        assertEquals(this.c1.makeList("Assignment2"),
+                Arrays.asList(66.66666666666666, 95.0, 95.83333333333334));   
     }
     
-    /**
-     * To test the average method
+    /** test the average method
+     * 
+     * @author Charles Perrone
+     * @author Austin Colcord
+     * @version 2014-04-08
      */
     @Test
     public void testAverage() {
         this.reset();
-        assertEquals(c1.average("Assignment1"), 77.0, .001);  
+        assertEquals(c1.average("Assignment1"), 77.0, .001);
+        assertEquals(c1.average("Assignment2"), 85.833, .001);
+        assertEquals(c1.average("Assignment3"), 90.0, .001);
     }
     
     /**
