@@ -1,3 +1,4 @@
+package MyGradeBook;
 
 import static org.junit.Assert.*;
 

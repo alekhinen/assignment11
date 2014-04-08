@@ -1,3 +1,4 @@
+
 /**
  * A set of ANSI escaped color codes.
  * 
