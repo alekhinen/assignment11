@@ -183,22 +183,25 @@ public class MyGradeBookTest {
         assertEquals(c1.average("Assignment3"), 90.0, .001);
     }
     
-    /**
-     * To test the median method
+    /** test the median method
+     * 
+     * @author Charles Perrone
+     * @author Austin Colcord
+     * @version 2014-04-08
      */
     @Test
     public void testMedian() {
         this.reset();
         //list with an even size
         assertEquals(c1.median("Assignment1"), 90.0, .001);
-        
-        System.out.println(c1.makeList("Assignment2"));
-        //list with an odd size
         assertEquals(c1.median("Assignment3"), 90.0, .001);
+        assertEquals(c1.median("Assignment2"), 95.0, .001);
     }
     
-    /**
-     * To test the min method
+    /** test the min method
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-08
      */
     @Test
     public void testMin() {
@@ -206,8 +209,10 @@ public class MyGradeBookTest {
         assertEquals(c1.min("Assignment1"), 45.0, .001);
     }
 
-    /**
-     * To test the max method
+    /** test the max method
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-08
      */
     @Test
     public void testMax() {
@@ -215,8 +220,9 @@ public class MyGradeBookTest {
         assertEquals(c1.max("Assignment1"), 96.0, .001);
     }
 
-    /**
-     * To test the getStudent method in GradeBook.
+    /** test the getStudent method in GradeBook
+     * 
+     * @author Nick Alekhine
      */
     @Test
     public void testGetStudent() {
@@ -226,8 +232,9 @@ public class MyGradeBookTest {
         assertEquals(this.s1, this.c1.getStudent("chperrone"));
     }
     
-    /**
-     * To test the currentGrade method in GradeBook
+    /** test the currentGrade method in GradeBook
+     * 
+     * @author Nick Alekhine
      */
     @Test
     public void testCurrentGrade() {
@@ -257,14 +264,11 @@ public class MyGradeBookTest {
     public void testAssignmentGrade() {
         this.reset();
         assertEquals((double) 90, 
-                     this.c1.assignmentGrade("Assignment1", "chperrone"), 
-                     .01);
+                     this.c1.assignmentGrade("Assignment1", "chperrone"), .01);
         assertEquals(95.83,
-                    this.c1.assignmentGrade("Assignment2", "chperrone"),
-                    .01);
+                    this.c1.assignmentGrade("Assignment2", "chperrone"),.01);
         assertEquals(0, 
-                     this.c1.assignmentGrade("Assignment3", "chperrone"), 
-                     .01);
+                     this.c1.assignmentGrade("Assignment3", "chperrone"), .01);
     }
 
 }

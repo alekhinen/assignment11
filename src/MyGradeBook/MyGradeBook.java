@@ -17,8 +17,11 @@ public abstract class MyGradeBook {
     ///////////////////////////////////////////////////////////////////////////
     // STATIC METHODS /////////////////////////////////////////////////////////
     
-    /**
-     * Factory method to construct an empty MyGradebook 
+    /**Factory method to construct an empty MyGradebook 
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * 
      * @return an empty MyGradeBook
      */
     public static MyGradeBook initialize() {
