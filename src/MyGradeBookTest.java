@@ -2,7 +2,7 @@
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -125,12 +125,56 @@ public class MyGradeBookTest {
         assertEquals(this.a1.score, d1);
     }
     
+    /**
+     * To test the makeList method
+     */
     @Test
-    public void testAverage() {
-        //assertEquals(gb1.average("Assignment1"), 77, .001);
-        
+    public void testMakeList() {
+        this.reset();
+        assertEquals(gb1.makeList("Assignment1"), Arrays.asList(45.0, 90.0, 96.0));
     }
     
+    /**
+     * To test the average method
+     */
+    @Test
+    public void testAverage() {
+        this.reset();
+        assertEquals(gb1.average("Assignment1"), 77.0, .001);  
+    }
+    
+    /**
+     * To test the median method
+     */
+    @Test
+    public void testMedian() {
+        this.reset();
+        //list with an even size
+        assertEquals(gb1.median("Assignment1"), 90.0, .001);
+        
+        System.out.println(gb1.makeList("Assignment2"));
+        //list with an odd size
+        assertEquals(gb1.median("Assignment3"), 90.0, .001);
+    }
+    
+    /**
+     * To test the min method
+     */
+    @Test
+    public void testMin() {
+        this.reset();
+        assertEquals(gb1.min("Assignment1"), 45.0, .001);
+    }
+
+    /**
+     * To test the max method
+     */
+    @Test
+    public void testMax() {
+        this.reset();
+        assertEquals(gb1.max("Assignment1"), 96.0, .001);
+    }
+
     /**
      * To test the getStudent method in GradeBook.
      */
