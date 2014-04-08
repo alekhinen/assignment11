@@ -5,7 +5,7 @@ This is a gradebook system developed for CS3500: Object-Oriented Design.
 ### Developers
 - [Nick Alekhine](https://github.com/alekhinen)
 - Chris Clark
-- Austin Colcord
+- [Austin Colcord](https://github.com/ajdcolcord)
 - Charles Perrone
 
 ### Technologies Used
@@ -22,7 +22,7 @@ Need to work on this.
 - [ ] initializeWithString(String startingString)  !!!
 - [ ] processFile(String filename) !!!
 - [ ] processString(String additionalString) !!!
-- [ ] changeGrade(String assignmentName, String username, double newGrade) AUSTIN
+- [x] changeGrade(String assignmentName, String username, double newGrade) AUSTIN
 - [x] average(String assignmentName) CHARLES
 - [x] median(String assignmentName) CHARLES
 - [x] min(String assignmentName) CHARLES
