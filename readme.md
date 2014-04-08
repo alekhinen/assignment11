@@ -25,9 +25,9 @@ Need to work on this.
 
 - changeGrade(String assignmentName, String username, double newGrade) AUSTIN
 - ~~average(String assignmentName)~~ CHARLES
-- median(String assignmentName) CHARLES
-- min(String assignmentName) CHARLES
-- max(String assignmentName) CHARLES
+- ~~median(String assignmentName)~~ AUSTIN
+- ~~min(String assignmentName)~~ AUSTIN
+- ~~max(String assignmentName)~~ AUSTIN
 - ~~getStudent(String username)~~ NICK (need to throw exceptions)
 - ~~currentGrade(String username)~~ NICK
 - ~~currentGrades()~~ NICK (need to throw exceptions)
@@ -36,4 +36,34 @@ Need to work on this.
 - outputStudentGrades(String username)
 - outputAssignmentGrades(String assignName)
 - outputGradebook()
+
+### Distribution of Work
+#### Nick Alekhine
+- Build User Interface
+- Collaborate with Charles on file i/o
+- Build several methods for Gradebook 
+    - getStudent 
+    - currentGrade 
+    - currentGrades
+    - assignmentGrades
+- Quality Control with testing, commenting, and formatting
+
+#### Charles Perrone
+- Build file i/o 
+- Parse files and text inputs
+- Build several methods for Gradebook
+    - Average
+
+#### Austin Colcord
+- Work on methods for Gradebook
+    - median
+    - min
+    - max
+    - changeGrade
+- Quality Control, Testing.
+- Linking MyGradebook to Gradebook.
+
+#### Chris Clark
+- ???
+
 

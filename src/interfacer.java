@@ -26,7 +26,7 @@ public class Interfacer {
 
         try {
             ui.welcome();
-            ui.inputter();
+            ui.initialInputter();
         }
         catch (Exception e) {
             System.out.println("Something unexpected happened...");
@@ -98,7 +98,7 @@ public class Interfacer {
     *  @version 2014-04-08
     *  
     */
-    public void inputter() {
+    public void initialInputter() {
         // Create an instance of Scanner
         Scanner in = new Scanner(System.in);
         // The input from the user
