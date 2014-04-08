@@ -242,19 +242,24 @@ public class GradeBook extends MyGradeBook {
      *         assignment grade divide by total point value for the assignment
      *         times the percent of semester.
      */
+    // TODO return a println when there is no result?
     public double currentGrade(String username) {
         // Get the student with the given username
         Student s = this.getStudent(username); 
         ArrayList<Assignment> assignments = this.studAssignMap.get(s);
         double result = 0; 
+        double weight = 0;
         
         // If the user exists, total the grade.
         if (s != null) {
             for (Assignment a : assignments) {
+                weight += a.weight;
                 result += (((a.score / a.total) * 100) * a.weight);
             }
         }
         
+        result = result / weight;
+        result = Math.round( result * 100.0 ) / 100.0;
         return result;
     }
     
@@ -266,6 +271,7 @@ public class GradeBook extends MyGradeBook {
      * @param username
      * @return
      */
+    // TODO return a println when there is no result?
     public Student getStudent(String username) {
         // Get all students 
         Set<Student> students = this.studAssignMap.keySet();
@@ -298,11 +304,36 @@ public class GradeBook extends MyGradeBook {
     }
 
 
-
+    /**
+     * Provides the grade earned by the given student for the given assignment
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
+     * 
+     * @param assignmentName - name of the assignment
+     * @param username - username for the student
+     * @return the grade earned by username for assignmentName
+     */
+    // TODO return a println when there is no result?
     @Override
     public double assignmentGrade(String assignmentName, String username) {
-        // TODO Auto-generated method stub
-        return 0;
+        double result = 0;
+        ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+        Student s = this.getStudent(username);
+        
+        if (s != null) {
+            assignments = this.studAssignMap.get(s);
+            
+            for (Assignment a : assignments) {
+                if (a.name.equals(assignmentName)) {
+                    result = ((a.score / a.total) * 100);
+                    break;
+                }
+            }
+        }
+        
+        result = Math.round( result * 100.0 ) / 100.0;
+        return result;
     }
 
 

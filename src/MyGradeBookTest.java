@@ -1,8 +1,8 @@
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -69,13 +69,14 @@ public class MyGradeBookTest {
 
         /** Assignments */
         a1 = new Assignment("Assignment1", 100, 90, .25);
-        a2 = new Assignment("Assignment2", 120, 115, .45);
+        a2 = new Assignment("Assignment2", 120, 115, .50);
         a3 = new Assignment("Assignment1", 100, 45, .25);
-        a4 = new Assignment("Assignment2", 120, 80, .45);
-        a5 = new Assignment("Assignment3", 100, 90, .45);
+        a4 = new Assignment("Assignment2", 120, 80, .50);
+        a5 = new Assignment("Assignment3", 100, 90, .25);
         a6 = new Assignment("Assignment1", 100, 96, .25);
-        a7 = new Assignment("Assignment2", 120, 114, .45);
-        a8 = new Assignment("Assignment3", 100, 90, .45);
+        a7 = new Assignment("Assignment2", 120, 114, .50);
+        a8 = new Assignment("Assignment3", 100, 90, .25);
+        
         
         /** Populate Assignment Lists */
         aList1 = new ArrayList<Assignment>();
@@ -109,9 +110,9 @@ public class MyGradeBookTest {
 
     @Test
     public void testChangeGrade() {
-        this.reset();
-        assertEquals(this.a1.score, null);
-        this.gb1.changeGrade("Assignment1", "chperrone", 100);
+        reset();
+        assertEquals(this.a1.score, new Double(90));
+        this.gb1.changeGrade("Assignment1", "chperrone", new Double(100));
         assertEquals(this.a1.score, new Double(100));
     }
     
@@ -181,7 +182,50 @@ public class MyGradeBookTest {
     @Test
     public void testGetStudent() {
         this.reset();
-        assertEquals(this.gb1.getStudent("nalekhn"), this.s3);
+        assertEquals(this.s3, this.gb1.getStudent("nalekhn"));
+        assertEquals(null, this.gb1.getStudent("blah"));
+        assertEquals(this.s1, this.gb1.getStudent("chperrone"));
+    }
+    
+    /**
+     * To test the currentGrade method in GradeBook
+     */
+    @Test
+    public void testCurrentGrade() {
+        this.reset();
+        assertEquals(94, this.gb1.currentGrade("nalekhn"), .01);
+        assertEquals(93.89, this.gb1.currentGrade("chperrone"), .01);
+        assertEquals(67.08, this.gb1.currentGrade("thmyolk"), .01);
+    }
+    
+    /**
+     * To test the currentGrades method in GradeBook
+     */
+    @Test
+    public void testCurrentGrades() {
+        this.reset();
+        HashMap<String, Double> result = new HashMap<String, Double>();
+        result.put("chperrone", 93.89);
+        result.put("thmyolk", 67.08);
+        result.put("nalekhn", (double) 94);
+        assertEquals(result, this.gb1.currentGrades());
+    }
+    
+    /**
+     * To test the assignmentGrade method in GradeBook
+     */
+    @Test
+    public void testAssignmentGrade() {
+        this.reset();
+        assertEquals((double) 90, 
+                     this.gb1.assignmentGrade("Assignment1", "chperrone"), 
+                     .01);
+        assertEquals(95.83,
+                    this.gb1.assignmentGrade("Assignment2", "chperrone"),
+                    .01);
+        assertEquals(0, 
+                     this.gb1.assignmentGrade("Assignment3", "chperrone"), 
+                     .01);
     }
 
 }
