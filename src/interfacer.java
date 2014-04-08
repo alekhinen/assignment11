@@ -57,6 +57,18 @@ public class Interfacer {
                 + "is."
                 + "\n");
 
+    }
+    
+    
+   /**
+    * The screen that awaits a response from the User.
+    * 
+    *  @author Nick Alekhine
+    *  @version 2014-04-08
+    *  
+    */
+    public void initialInputter() {
+        
         // OPTIONS
         System.out.println(ANSI.HIGH_INTENSITY + "Options" + ANSI.SANE);
         System.out.println("    " 
@@ -89,27 +101,31 @@ public class Interfacer {
                 + "        This option will create a new instance of"
                 + " a Gradebook with the supplied text content."
                 + ANSI.SANE);
-    }
-    
-    
-   /**
-    * The screen that awaits a response from the User.
-    * 
-    *  @author Nick Alekhine
-    *  @version 2014-04-08
-    *  
-    */
-    public void initialInputter() {
+        System.out.println("    "
+                + ANSI.RED + ANSI.HIGH_INTENSITY 
+                + "q"
+                + ANSI.BLACK + ANSI.SANE
+                + " - Exit the program.");
+        System.out.println(ANSI.LOW_INTESITY
+                + "        This option will end the current session."
+                + ANSI.SANE);
+        
+        
         // Create an instance of Scanner
         Scanner in = new Scanner(System.in);
         // The input from the user
-        int input;
+        String input;
         
         System.out.println("\n");
-        System.out.print("Enter a number from one of the 3 options above: "
+        System.out.print("Enter a command: "
                          + ANSI.GREEN + ANSI.HIGH_INTENSITY);
-        input = in.nextInt();
+        input = in.nextLine();
         System.out.println(ANSI.BLACK + ANSI.SANE + "you entered" + input);
+        
+        if (input.equals("q")) {
+            System.out.println("Thanks for using Gradebook.");
+            System.exit(0);
+        }
     }
 
 }
