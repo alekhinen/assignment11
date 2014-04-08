@@ -8,7 +8,7 @@
  *
  */
 public class Interfacer {
-    
+
     /**
      * Runs the program
      * 
@@ -28,8 +28,8 @@ public class Interfacer {
             System.out.println(e);
         }
     }
-    
-    
+
+
     /**
      * The welcome screen. First thing the user sees when they run the program.
      * 
@@ -38,22 +38,51 @@ public class Interfacer {
      * 
      */
     public void welcome() {
-       System.out.println(ANSI.HIGH_INTENSITY 
-                          + "         Welcome to Gradebook.");
-       System.out.println("--------------------------------------- \n");
-       
-       System.out.println(ANSI.SANE + "Options:");
-       System.out.println("    " + ANSI.GREEN + "1" + ANSI.BLACK + 
-                          " - Create an empty Gradebook.");
-       System.out.println("        This option will create a new instance of "
-               + "a Gradebook that is completely empty.");
-       System.out.println("    2 - Create a Gradebook with a file.");
-       System.out.println("        This option will create a new instance of "
-               + "a Gradebook with the supplied text file."
-               + "\n        All content found "
-               + "within the file will be put into the Gradebook if properly "
-               + "formatted.");
-       System.out.println("    3 - Create a Gradebook with a text input.");
+        // WELCOME 
+        System.out.println(ANSI.HIGH_INTENSITY 
+                + "\n" 
+                + "--------------------------------------- \n"
+                + "         Welcome to Gradebook.");
+        System.out.println("--------------------------------------- \n");
+        
+        // ABOUT
+        System.out.println(ANSI.HIGH_INTENSITY + "About" + ANSI.SANE);
+        System.out.println("    This is a short description about what this "
+                + "is."
+                + "\n");
+
+        // OPTIONS
+        System.out.println(ANSI.HIGH_INTENSITY + "Options" + ANSI.SANE);
+        System.out.println("    " 
+                + ANSI.GREEN + ANSI.HIGH_INTENSITY
+                + "1" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - Create an empty Gradebook.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will create a new instance of"
+                + " a Gradebook that is completely empty."
+                + ANSI.SANE);
+        System.out.println("    "
+                + ANSI.GREEN + ANSI.HIGH_INTENSITY
+                + "2"
+                + ANSI.BLACK + ANSI.SANE
+                + " - Create a Gradebook with a file.");
+        System.out.println(ANSI.LOW_INTESITY
+                + "        This option will create a new instance of"
+                + " a Gradebook with the supplied text file."
+                + "\n        All content found "
+                + "within the file will be put into the Gradebook if "
+                + "properly formatted."
+                + ANSI.SANE);
+        System.out.println("    "
+                + ANSI.GREEN + ANSI.HIGH_INTENSITY 
+                + "3"
+                + ANSI.BLACK + ANSI.SANE
+                + " - Create a Gradebook with a text input.");
+        System.out.println(ANSI.LOW_INTESITY
+                + "        This option will create a new instance of"
+                + "a Gradebook with the supplied text content."
+                + ANSI.SANE);
     }
 
 }
