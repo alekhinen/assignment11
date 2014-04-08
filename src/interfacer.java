@@ -71,6 +71,7 @@ public class Interfacer {
         
         // OPTIONS
         System.out.println(ANSI.HIGH_INTENSITY + "Options" + ANSI.SANE);
+        // COMMAND "1"
         System.out.println("    " 
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY
                 + "1" 
@@ -80,6 +81,7 @@ public class Interfacer {
                 + "        This option will create a new instance of"
                 + " a Gradebook that is completely empty."
                 + ANSI.SANE);
+       // COMMAND "2"
         System.out.println("    "
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY
                 + "2"
@@ -92,6 +94,7 @@ public class Interfacer {
                 + "within the file will be put into the Gradebook if "
                 + "properly formatted."
                 + ANSI.SANE);
+        // COMMAND "3"
         System.out.println("    "
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY 
                 + "3"
@@ -101,6 +104,16 @@ public class Interfacer {
                 + "        This option will create a new instance of"
                 + " a Gradebook with the supplied text content."
                 + ANSI.SANE);
+        // COMMAND "o"
+        System.out.println("    "
+                + ANSI.BLUE + ANSI.HIGH_INTENSITY 
+                + "o"
+                + ANSI.BLACK + ANSI.SANE
+                + " - Return to options menu.");
+        System.out.println(ANSI.LOW_INTESITY
+                + "        This option will return you to the options menu"
+                + ANSI.SANE);
+        // COMMAND "q"
         System.out.println("    "
                 + ANSI.RED + ANSI.HIGH_INTENSITY 
                 + "q"
@@ -120,11 +133,23 @@ public class Interfacer {
         System.out.print("Enter a command: "
                          + ANSI.GREEN + ANSI.HIGH_INTENSITY);
         input = in.nextLine();
-        System.out.println(ANSI.BLACK + ANSI.SANE + "you entered" + input);
+        System.out.print(ANSI.BLACK + ANSI.SANE);
         
         if (input.equals("q")) {
-            System.out.println("Thanks for using Gradebook.");
+            System.out.println("\nThanks for using Gradebook!\n");
             System.exit(0);
+        }
+        else if (input.equals("1")) {
+            System.out.println("\nCreating an empty instance of a "
+                    + "Gradebook...\n");
+        }
+        else if (input.equals("2")) {
+            System.out.println("\nCreating a");
+        }
+        else {
+            System.out.println("\nUnrecognized command. Returning back"
+                    + " to options menu.\n");
+            this.initialInputter();
         }
     }
 
