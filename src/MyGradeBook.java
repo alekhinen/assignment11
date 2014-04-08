@@ -21,8 +21,7 @@ public abstract class MyGradeBook {
      * @return an empty MyGradeBook
      */
     public static MyGradeBook initialize() {
-        // TODO ...
-        return null;
+        return Course.newGradeBook();
     }
 
     

@@ -55,50 +55,51 @@ public class MyGradeBookTest {
     /** Student => Assignments 1 */
     HashMap<Student, ArrayList<Assignment>> map1;
     
-    /** Gradebook 1 */
-    GradeBook gb1;
+    /** Course 1 */
+    Course c1;
     
     /** 
      * To set values to each variable. 
      * */
     public void reset() {
         /** Students */
-        s1 = new Student("chperrone", "Charles", "Haydon", "Perrone", 2017);
-        s2 = new Student("thmyolk", "Thom", "Mearle", "Yorke", 2017);
-        s3 = new Student("nalekhn", "Nick", "Alex", "Alekhine", 2017);
+        this.s1 = 
+                new Student("chperrone", "Charles", "Haydon", "Perrone", 2017);
+        this.s2 = new Student("thmyolk", "Thom", "Mearle", "Yorke", 2017);
+        this.s3 = new Student("nalekhn", "Nick", "Alex", "Alekhine", 2017);
 
         /** Assignments */
-        a1 = new Assignment("Assignment1", 100, 90, .25);
-        a2 = new Assignment("Assignment2", 120, 115, .50);
-        a3 = new Assignment("Assignment1", 100, 45, .25);
-        a4 = new Assignment("Assignment2", 120, 80, .50);
-        a5 = new Assignment("Assignment3", 100, 90, .25);
-        a6 = new Assignment("Assignment1", 100, 96, .25);
-        a7 = new Assignment("Assignment2", 120, 114, .50);
-        a8 = new Assignment("Assignment3", 100, 90, .25);
+        this.a1 = new Assignment("Assignment1", 100, 90, .25);
+        this.a2 = new Assignment("Assignment2", 120, 115, .50);
+        this.a3 = new Assignment("Assignment1", 100, 45, .25);
+        this.a4 = new Assignment("Assignment2", 120, 80, .50);
+        this.a5 = new Assignment("Assignment3", 100, 90, .25);
+        this.a6 = new Assignment("Assignment1", 100, 96, .25);
+        this.a7 = new Assignment("Assignment2", 120, 114, .50);
+        this.a8 = new Assignment("Assignment3", 100, 90, .25);
         
         
         /** Populate Assignment Lists */
-        aList1 = new ArrayList<Assignment>();
-        aList1.add(a1);
-        aList1.add(a2);
+        this.aList1 = new ArrayList<Assignment>();
+        this.aList1.add(this.a1);
+        this.aList1.add(this.a2);
         
-        aList2 = new ArrayList<Assignment>();
-        aList2.add(a3);
-        aList2.add(a4);
-        aList2.add(a5);
+        this.aList2 = new ArrayList<Assignment>();
+        this.aList2.add(this.a3);
+        this.aList2.add(this.a4);
+        this.aList2.add(this.a5);
         
-        aList3 = new ArrayList<Assignment>();
-        aList3.add(a6);
-        aList3.add(a7);
-        aList3.add(a8);
+        this.aList3 = new ArrayList<Assignment>();
+        this.aList3.add(this.a6);
+        this.aList3.add(this.a7);
+        this.aList3.add(this.a8);
         
-        map1 = new HashMap<Student, ArrayList<Assignment>>();
-        map1.put(this.s1, this.aList1);
-        map1.put(this.s2, this.aList2);
-        map1.put(this.s3, this.aList3);
+        this.map1 = new HashMap<Student, ArrayList<Assignment>>();
+        this.map1.put(this.s1, this.aList1);
+        this.map1.put(this.s2, this.aList2);
+        this.map1.put(this.s3, this.aList3);
         
-        gb1 = new GradeBook("GRADEBOOK1", map1);
+        this.c1 = new Course(this.map1);
     }
     
     
@@ -112,7 +113,7 @@ public class MyGradeBookTest {
     public void testChangeGrade() {
         reset();
         assertEquals(this.a1.score, new Double(90));
-        this.gb1.changeGrade("Assignment1", "chperrone", new Double(100));
+        this.c1.changeGrade("Assignment1", "chperrone", new Double(100));
         assertEquals(this.a1.score, new Double(100));
     }
     
@@ -132,7 +133,7 @@ public class MyGradeBookTest {
     @Test
     public void testMakeList() {
         this.reset();
-        assertEquals(gb1.makeList("Assignment1"), Arrays.asList(45.0, 90.0, 96.0));
+        assertEquals(c1.makeList("Assignment1"), Arrays.asList(45.0, 90.0, 96.0));
     }
     
     /**
@@ -141,7 +142,7 @@ public class MyGradeBookTest {
     @Test
     public void testAverage() {
         this.reset();
-        assertEquals(gb1.average("Assignment1"), 77.0, .001);  
+        assertEquals(c1.average("Assignment1"), 77.0, .001);  
     }
     
     /**
@@ -151,11 +152,11 @@ public class MyGradeBookTest {
     public void testMedian() {
         this.reset();
         //list with an even size
-        assertEquals(gb1.median("Assignment1"), 90.0, .001);
+        assertEquals(c1.median("Assignment1"), 90.0, .001);
         
-        System.out.println(gb1.makeList("Assignment2"));
+        System.out.println(c1.makeList("Assignment2"));
         //list with an odd size
-        assertEquals(gb1.median("Assignment3"), 90.0, .001);
+        assertEquals(c1.median("Assignment3"), 90.0, .001);
     }
     
     /**
@@ -164,7 +165,7 @@ public class MyGradeBookTest {
     @Test
     public void testMin() {
         this.reset();
-        assertEquals(gb1.min("Assignment1"), 45.0, .001);
+        assertEquals(c1.min("Assignment1"), 45.0, .001);
     }
 
     /**
@@ -173,7 +174,7 @@ public class MyGradeBookTest {
     @Test
     public void testMax() {
         this.reset();
-        assertEquals(gb1.max("Assignment1"), 96.0, .001);
+        assertEquals(c1.max("Assignment1"), 96.0, .001);
     }
 
     /**
@@ -182,9 +183,9 @@ public class MyGradeBookTest {
     @Test
     public void testGetStudent() {
         this.reset();
-        assertEquals(this.s3, this.gb1.getStudent("nalekhn"));
-        assertEquals(null, this.gb1.getStudent("blah"));
-        assertEquals(this.s1, this.gb1.getStudent("chperrone"));
+        assertEquals(this.s3, this.c1.getStudent("nalekhn"));
+        assertEquals(null, this.c1.getStudent("blah"));
+        assertEquals(this.s1, this.c1.getStudent("chperrone"));
     }
     
     /**
@@ -193,9 +194,9 @@ public class MyGradeBookTest {
     @Test
     public void testCurrentGrade() {
         this.reset();
-        assertEquals(94, this.gb1.currentGrade("nalekhn"), .01);
-        assertEquals(93.89, this.gb1.currentGrade("chperrone"), .01);
-        assertEquals(67.08, this.gb1.currentGrade("thmyolk"), .01);
+        assertEquals(94, this.c1.currentGrade("nalekhn"), .01);
+        assertEquals(93.89, this.c1.currentGrade("chperrone"), .01);
+        assertEquals(67.08, this.c1.currentGrade("thmyolk"), .01);
     }
     
     /**
@@ -208,7 +209,7 @@ public class MyGradeBookTest {
         result.put("chperrone", 93.89);
         result.put("thmyolk", 67.08);
         result.put("nalekhn", (double) 94);
-        assertEquals(result, this.gb1.currentGrades());
+        assertEquals(result, this.c1.currentGrades());
     }
     
     /**
@@ -218,13 +219,13 @@ public class MyGradeBookTest {
     public void testAssignmentGrade() {
         this.reset();
         assertEquals((double) 90, 
-                     this.gb1.assignmentGrade("Assignment1", "chperrone"), 
+                     this.c1.assignmentGrade("Assignment1", "chperrone"), 
                      .01);
         assertEquals(95.83,
-                    this.gb1.assignmentGrade("Assignment2", "chperrone"),
+                    this.c1.assignmentGrade("Assignment2", "chperrone"),
                     .01);
         assertEquals(0, 
-                     this.gb1.assignmentGrade("Assignment3", "chperrone"), 
+                     this.c1.assignmentGrade("Assignment3", "chperrone"), 
                      .01);
     }
 

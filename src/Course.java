@@ -4,42 +4,47 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-/** represents the grade book for each course that an instructor teaches
- * There can be multiple gradebooks for one instructor
- * this contains an arraylist of assignments that are in the course, as well
- * as the list of students assigned to this course
+/** represents the grade book of a course that holds a hashmap of the students
+ * and their respective assignment lists with the contained grades
  * 
  * @author Austin Colcord
  * @author Charles Perrone
  * @version 2014-04-06
  *
  */
-public class GradeBook extends MyGradeBook {
+public class Course extends MyGradeBook {
 
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
-
-    /** The name of the course for this GradeBook */
-    String courseName;
+    
     /** The mapping of students and assignments. */
     HashMap<Student, ArrayList<Assignment>> studAssignMap;
-
-
-
-
 
     ///////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS ///////////////////////////////////////////////////////////
 
-    /**
-     * TODO description of this constructor
-     * @param courseName
+    /** Creates a new instance of a GradeBook that contains a
+     * a hashmap of student as a key and assignment array as val
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * 
      * @param studAssignMap
      */
-    GradeBook(String courseName, 
-              HashMap<Student, ArrayList<Assignment>> studAssignMap) {
-        this.courseName = courseName;
+    Course(HashMap<Student, ArrayList<Assignment>> studAssignMap) {
         this.studAssignMap = studAssignMap;
+    }
+    
+    /** Creates an empty instance of a GradeBook that contains a
+     *  empty hashmap of student as a key and assignment array as val
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * 
+     * @param studAssignMap
+     */
+    Course() {
+        this.studAssignMap = new HashMap<Student, ArrayList<Assignment>>();
     }
 
 
@@ -49,6 +54,17 @@ public class GradeBook extends MyGradeBook {
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
 
+    /** create a new instance of an empty gradeBook (the factory method)
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * 
+     * 
+     */
+    public static Course newGradeBook() {
+        return new Course();
+    }
+    
     /** overriding the equals method for GradeBook class
      * 
      * @author Austin Colcord
@@ -59,9 +75,8 @@ public class GradeBook extends MyGradeBook {
      */
     @Override
     public boolean equals(Object other) {
-        if (other instanceof GradeBook) {
-            return this.courseName.equals(((GradeBook) other).courseName) &&
-                    this.studAssignMap.equals(((GradeBook) other).studAssignMap);
+        if (other instanceof Course) {
+            return this.studAssignMap.equals(((Course) other).studAssignMap);
         }
         else {
             return false;
@@ -78,8 +93,7 @@ public class GradeBook extends MyGradeBook {
      */
     @Override
     public int hashCode() {
-        return this.courseName.hashCode() +
-                this.studAssignMap.hashCode();
+        return this.studAssignMap.hashCode();
     }
 
 
@@ -378,6 +392,6 @@ public class GradeBook extends MyGradeBook {
     
     @Override
     public String toString() {
-        return this.courseName + this.studAssignMap;
+        return this.studAssignMap.toString();
     }
 }
