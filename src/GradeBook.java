@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /** represents the grade book for each course that an instructor teaches
@@ -132,10 +134,32 @@ public class GradeBook extends MyGradeBook {
      */
     public double average(String assignmentName) {
 
-        Set<Student> students = this.studAssignMap.keySet();
-        int totalStudents = students.size();
+        ArrayList<Double> list = this.makeList(assignmentName);
+        double totalStudents = list.size();
         double sum = 0;
+        
+        for (Double d : list) {
+            sum += d;
+        }
+        
+        return sum/totalStudents;
+    }
 
+    /**
+     * Return a sorted ArrayList that contains
+     * all student's grades for the given assignment
+     * 
+     * @author charlesperrone
+     * 
+     * @param assignmentName the assignment we are searching for
+     * @return the sorted ArrayList
+     */
+    public ArrayList<Double> makeList(String assignmentName) {
+
+        Set<Student> students = this.studAssignMap.keySet();
+        
+        ArrayList<Double> result = new ArrayList<Double>();
+        
         for (Student s : students) {
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
 
@@ -143,33 +167,63 @@ public class GradeBook extends MyGradeBook {
                 Assignment current = ass.get(i);
 
                 if (current.name.equals(assignmentName)) {
-                    sum += current.score/current.total;
-                    break;
+                    double percent = 100 * (current.score/current.total);
+                    result.add(percent);
                 }
             }
         }
-        return sum/totalStudents;
+      Collections.sort(result);
+      return result;
     }
-    
-    
-    @Override
+
+
+    /**
+     * Calculates the median across all students for a given assignment
+     * 
+     * @param assignmentName
+     *            name of the assignment
+     * @return the median across all students for assignmentName
+     */
     public double median(String assignmentName) {
-        // TODO Auto-generated method stub
-        return 0;
+        
+        ArrayList<Double> list = this.makeList(assignmentName);
+        
+        //if x is even, take the higher value
+        if (list.size() % 1 == 1) {
+           int x = list.size()/2;
+           return list.get(x + 1);
+        }
+        //else return the middle
+        else return list.get(list.size()/2);
     }
 
 
-    @Override
+    /**
+     * Calculates the min across all students for a given assignment
+     * 
+     * @param assignmentName
+     *            name of the assignment
+     * @return the min across all students for assignmentName
+     */
     public double min(String assignmentName) {
-        // TODO Auto-generated method stub
-        return 0;
+
+        ArrayList<Double> list = this.makeList(assignmentName);
+        
+        return list.get(0);
     }
 
-
-    @Override
+    /**
+     * Calculates the max across all students for a given assignment
+     * 
+     * @param assignmentName
+     *            name of the assignment
+     * @return the max across all students for assignmentName
+     */
     public double max(String assignmentName) {
-        // TODO Auto-generated method stub
-        return 0;
+        
+        ArrayList<Double> list = this.makeList(assignmentName);
+        
+        return list.get(list.size() - 1);
     }
 
     
@@ -228,7 +282,6 @@ public class GradeBook extends MyGradeBook {
                 return s;
             }
         }
-        
         return null;
     }
 
