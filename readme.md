@@ -24,9 +24,9 @@ Need to work on this.
 - [ ] processString(String additionalString) !!!
 - [ ] changeGrade(String assignmentName, String username, double newGrade) AUSTIN
 - [x] average(String assignmentName) CHARLES
-- [x] median(String assignmentName) AUSTIN
-- [x] min(String assignmentName) AUSTIN
-- [x] max(String assignmentName) AUSTIN
+- [x] median(String assignmentName) CHARLES
+- [x] min(String assignmentName) CHARLES
+- [x] max(String assignmentName) CHARLES
 - [x] getStudent(String username) NICK (need to throw exceptions)
 - [x] currentGrade(String username) NICK
 - [x] currentGrades() NICK (need to throw exceptions)
@@ -52,12 +52,12 @@ Need to work on this.
 - Parse files and text inputs
 - Build several methods for Gradebook
     - Average
-
-#### Austin Colcord
-- Work on methods for Gradebook
     - median
     - min
     - max
+
+#### Austin Colcord
+- Work on methods for Gradebook
     - changeGrade
 - Quality Control, Testing.
 - Linking MyGradebook to Gradebook.
