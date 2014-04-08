@@ -22,7 +22,6 @@ Need to work on this.
 - initializeWithString(String startingString)  !!!
 - processFile(String filename) !!!
 - processString(String additionalString) !!!
-
 - changeGrade(String assignmentName, String username, double newGrade) AUSTIN
 - ~~average(String assignmentName)~~ CHARLES
 - ~~median(String assignmentName)~~ AUSTIN
