@@ -8,7 +8,15 @@
  *
  */
 public class interfacer {
-
+    
+    /**
+     * Runs the program
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-08
+     * 
+     * @param args - command line arguments
+     */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
