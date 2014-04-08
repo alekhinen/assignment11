@@ -17,24 +17,24 @@ This is a gradebook system developed for CS3500: Object-Oriented Design.
 Need to work on this.
 
 ### Methods
-- initialize() !!!
-- initializeWithFile(String filename) !!!
-- initializeWithString(String startingString)  !!!
-- processFile(String filename) !!!
-- processString(String additionalString) !!!
-- changeGrade(String assignmentName, String username, double newGrade) AUSTIN
-- ~~average(String assignmentName)~~ CHARLES
-- ~~median(String assignmentName)~~ AUSTIN
-- ~~min(String assignmentName)~~ AUSTIN
-- ~~max(String assignmentName)~~ AUSTIN
-- ~~getStudent(String username)~~ NICK (need to throw exceptions)
-- ~~currentGrade(String username)~~ NICK
-- ~~currentGrades()~~ NICK (need to throw exceptions)
-- ~~assignmentGrade(String assignmentName, String username)~~ NICK (need to throw exceptions)
-- outputCurrentGrades()
-- outputStudentGrades(String username)
-- outputAssignmentGrades(String assignName)
-- outputGradebook()
+- [ ] initialize()
+- [ ] initializeWithFile(String filename) !!!
+- [ ] initializeWithString(String startingString)  !!!
+- [ ] processFile(String filename) !!!
+- [ ] processString(String additionalString) !!!
+- [ ] changeGrade(String assignmentName, String username, double newGrade) AUSTIN
+- [x] average(String assignmentName) CHARLES
+- [x] median(String assignmentName) AUSTIN
+- [x] min(String assignmentName) AUSTIN
+- [x] max(String assignmentName) AUSTIN
+- [x] getStudent(String username) NICK (need to throw exceptions)
+- [x] currentGrade(String username) NICK
+- [x] currentGrades() NICK (need to throw exceptions)
+- [x] assignmentGrade(String assignmentName, String username) NICK (need to throw exceptions)
+- [ ] outputCurrentGrades()
+- [ ] outputStudentGrades(String username)
+- [ ] outputAssignmentGrades(String assignName)
+- [ ] outputGradebook()
 
 ### Distribution of Work
 #### Nick Alekhine
