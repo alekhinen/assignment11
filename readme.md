@@ -66,4 +66,11 @@ Need to work on this.
 #### Chris Clark
 - ???
 
+### Task List
+- Build the interface
+- Build the file / text parser
+- Finish all methods in Gradebook
+- Test every method in Gradebook
+- Create a readme
+
 
