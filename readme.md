@@ -71,5 +71,6 @@ Need to work on this.
 - Finish all methods in Gradebook
 - Test every method in Gradebook
 - Create a readme
+- Seperate interface and MyGradeBook into different packages
 
 
