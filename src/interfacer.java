@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 
 /**
  * This is the main class that users will be able to interface with the 
@@ -19,9 +21,12 @@ public class Interfacer {
      */
     // TODO gotta build this out.
     public static void main(String[] args) {
+        // Create an instance of Interfacer
         Interfacer ui = new Interfacer();
+
         try {
             ui.welcome();
+            ui.inputter();
         }
         catch (Exception e) {
             System.out.println("Something unexpected happened...");
@@ -81,8 +86,29 @@ public class Interfacer {
                 + " - Create a Gradebook with a text input.");
         System.out.println(ANSI.LOW_INTESITY
                 + "        This option will create a new instance of"
-                + "a Gradebook with the supplied text content."
+                + " a Gradebook with the supplied text content."
                 + ANSI.SANE);
+    }
+    
+    
+   /**
+    * The screen that awaits a response from the User.
+    * 
+    *  @author Nick Alekhine
+    *  @version 2014-04-08
+    *  
+    */
+    public void inputter() {
+        // Create an instance of Scanner
+        Scanner in = new Scanner(System.in);
+        // The input from the user
+        int input;
+        
+        System.out.println("\n");
+        System.out.print("Enter a number from one of the 3 options above: "
+                         + ANSI.GREEN + ANSI.HIGH_INTENSITY);
+        input = in.nextInt();
+        System.out.println(ANSI.BLACK + ANSI.SANE + "you entered" + input);
     }
 
 }
