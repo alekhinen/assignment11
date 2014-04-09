@@ -58,6 +58,9 @@ public class MyGradeBookTest {
     
     /** Course 1 */
     Course c1;
+    /** Course 2 */
+    Course c2;
+    
     
     /** 
      * To set values to each variable. 
@@ -103,6 +106,8 @@ public class MyGradeBookTest {
         this.map1.put(this.s3, this.aList3);
         
         this.c1 = new Course(this.map1);
+        
+        this.c2 = new Course(this.map1);
     }
     
     
@@ -112,6 +117,66 @@ public class MyGradeBookTest {
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
 
+    
+    /** test the equals method in gradeBook, assignment, and student 
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * */
+    @Test
+    public void testEquals() {
+        reset();
+        //test for null
+        assertFalse(this.a1.equals(null));
+        assertFalse(this.aList1.equals(null));
+        assertFalse(this.c1.equals(null));
+        assertFalse(this.map1.equals(null));
+        assertFalse(this.s1.equals(null));
+        
+        //test against other object types
+        assertFalse(this.a1.equals("1"));
+        assertFalse(this.aList1.equals(2));
+        assertFalse(this.c1.equals(new Double(4)));
+        assertFalse(this.map1.equals("asd;lfkj"));
+        assertFalse(this.s1.equals(new ArrayList<Integer>()));
+        
+        //test nonequal types
+        assertFalse(this.a1.equals(this.a2));
+        assertFalse(this.a3.equals(this.a2));
+        assertFalse(this.aList1.equals(this.aList2));
+        assertFalse(this.c1.equals(
+                this.c1.changeGrade("Assignment1", "chperrone", 90)));
+        
+        //test equal types
+        assertTrue(this.a1.equals(
+                new Assignment("Assignment1", 100, 90, .25)));
+        assertTrue(this.a2.equals(
+                new Assignment("Assignment2", 120, 115, .50)));
+        assertTrue(this.c1.equals(this.c2));
+        assertTrue(this.s1.equals(
+                new Student(
+                        "chperrone", "Charles", "Haydon", "Perrone", 2017)));
+    }
+    
+    /** test the hashCode method in gradebook, assignment, and student
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     */
+    @Test
+    public void testHashCode() {
+        reset();
+        assertEquals(this.a1.hashCode(), -1943110940);
+        assertEquals(this.a2.hashCode(), -1941325083);
+        assertEquals(this.aList1.hashCode(), -2048221118);
+        assertEquals(this.c1.hashCode(), this.c2.hashCode());
+        assertEquals(this.c1.hashCode(), -371929608);
+        assertEquals(this.map1.hashCode(), -371929608);
+        assertEquals(this.s1.hashCode(), -1409632251);
+    }
+    
+    
+    
     /** test the changeGrade method in GradeBook 
      * 
      * @author Austin Colcord
@@ -278,6 +343,29 @@ public class MyGradeBookTest {
     public void testProcessFile() {
         this.reset();
         System.out.println(this.c1.processFile("addAssignments.txt"));
+        
+    }
+    /** test the newGradeBook method in Course
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     */
+    @Test
+    public void testNewGradeBook() {
+        this.reset();
+        assertEquals(Course.newGradeBook(), new Course());
+    }
+    
+    /** test the initialize method in MyGradeBook
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     */
+    @Test
+    public void testInitialize() {
+        this.reset();
+        assertEquals(MyGradeBook.initialize(), new Course());
+>>>>>>> 10d5066ee37fe574989a53ff75cebdf7c41d88dc
     }
 
 }
