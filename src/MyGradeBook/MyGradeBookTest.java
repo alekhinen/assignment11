@@ -164,7 +164,7 @@ public class MyGradeBookTest {
      * @version 2014-04-08
      */
     @Test
-    public void testHashMap() {
+    public void testHashCode() {
         reset();
         assertEquals(this.a1.hashCode(), -1943110940);
         assertEquals(this.a2.hashCode(), -1941325083);
