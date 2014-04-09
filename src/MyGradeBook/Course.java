@@ -395,8 +395,10 @@ public class Course extends MyGradeBook {
 
     @Override
     public String outputCurrentGrades() {
-        // TODO Auto-generated method stub
-        return null;
+        System.out.println("CURRENT_GRADES");
+        for (Student s : this.studAssignMap.keySet()) {
+            
+        }
     }
 
 
