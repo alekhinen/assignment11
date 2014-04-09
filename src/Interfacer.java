@@ -309,6 +309,7 @@ public class Interfacer {
      * 
      */
     public void gradeBookMenu(MyGradeBook mgb) {
+        this.pause();
 
         System.out.println(ANSI.HIGH_INTENSITY 
                 + "------------------------------\n"
@@ -494,38 +495,159 @@ public class Interfacer {
 
         // CHANGE
         else if (input.equals("c_grade")) {
-            // TODO
             System.out.println("change a grade for a student...");
+            System.out.println("Change Assignment Grade");
+
+            // Assignment Name
+            System.out.print("\nEnter the name of the assignment: ");
+            String assignmentName = this.inputter();
+
+            // Username
+            System.out.print("Enter the username: ");
+            String username = this.inputter();
+
+
+            // Grade
+            // Create an instance of Scanner
+            Scanner in = new Scanner(System.in);
+            // The input from the user
+            Double newGrade = 0.0;
+            System.out.print("Enter the new grade: ");
+            System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
+            try {
+                newGrade = in.nextDouble();
+                System.out.print(ANSI.BLACK + ANSI.SANE);
+            }
+            catch (Exception e) {
+                System.out.print(ANSI.RED);
+                System.out.println("Incorrect input. "
+                        + "Please enter a double next time.");
+                System.out.print(ANSI.BLACK + ANSI.SANE);
+                System.out.println("");
+                this.pause();
+                this.gradeBookMenu(mgb);
+            }
+
+            System.out.print(ANSI.BLACK + ANSI.SANE);
+
+            if (mgb.changeGrade(assignmentName, username, newGrade)) {
+                System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
+                System.out.println("\nAssignment successfully changed for "
+                        + username + "!\n");
+                System.out.print(ANSI.BLACK + ANSI.SANE);
+
+                this.gradeBookMenu(mgb);
+            }
+            else {
+                System.out.print(ANSI.RED + ANSI.HIGH_INTENSITY);
+                System.out.println("\nAssignment unsuccessfully changed for "
+                        + username + "!\n");
+                System.out.print(ANSI.BLACK + ANSI.SANE);
+
+                this.gradeBookMenu(mgb);
+            }
+
+
         }
 
         // STATISTICS
         else if (input.equals("s_average")) {
-            // TODO
+            // TODO fucked up for empty mgb and incorrect assignment
             System.out.println("Assignment Average");
             System.out.print("\nEnter the Assignment name: ");
-            Double avg = mgb.average(this.inputter());
-            System.out.println("The average grade for " 
-                    + this.inputter()
-                    + " is " 
-                    + avg);
+            try {
+                Double avg = mgb.average(this.inputter());
+                System.out.println("The average grade for " 
+                        + this.inputter()
+                        + " is " 
+                        + avg);
+                this.gradeBookMenu(mgb);
+            }
+            catch (Exception e) {
+                System.out.println("An error occurred.");
+                System.out.println(e);
+                this.gradeBookMenu(mgb);
+            }
+
         }
         else if (input.equals("s_median")) {
-            // TODO
-            System.out.println("get the median for an assignment...");
+            System.out.println("Assignment Median");
+            System.out.print("\nEnter the Assignment name: ");
+            try {
+                Double median = mgb.median(this.inputter());
+                System.out.println("The average grade for " 
+                        + this.inputter()
+                        + " is " 
+                        + median);
+                this.gradeBookMenu(mgb);
+            }
+            catch (Exception e) {
+                System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
+                        + "Something unexpected happened.");
+                System.out.println(e 
+                        + "\n" 
+                        + ANSI.SANE + ANSI.BLACK);
+                this.gradeBookMenu(mgb);
+            }
+
         }
         else if (input.equals("s_min")) {
-            // TODO
-            System.out.println("get the minimum grade for an assignment...");
+            System.out.println("Assignment Minimum Grade");
+            System.out.print("\nEnter the Assignment name: ");
+            try {
+                Double min = mgb.min(this.inputter());
+                System.out.println("The average grade for " 
+                        + this.inputter()
+                        + " is " 
+                        + min);
+                this.gradeBookMenu(mgb);
+            }
+            catch (Exception e) {
+                System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
+                        + "Something unexpected happened.");
+                System.out.println(e 
+                        + "\n" 
+                        + ANSI.SANE + ANSI.BLACK);
+                this.gradeBookMenu(mgb);
+            }
         }
         else if (input.equals("s_max")) {
-            // TODO
-            System.out.println("get the maximum grade for an assignment...");
+            System.out.println("Assignment Maximum Grade");
+            System.out.print("\nEnter the Assignment name: ");
+            try {
+                Double max = mgb.max(this.inputter());
+                System.out.println("The average grade for " 
+                        + this.inputter()
+                        + " is " 
+                        + max);
+                this.gradeBookMenu(mgb);
+            }
+            catch (Exception e) {
+                System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
+                        + "Something unexpected happened.");
+                System.out.println(e 
+                        + "\n" 
+                        + ANSI.SANE + ANSI.BLACK);
+                this.gradeBookMenu(mgb);
+            }
         }
 
         // VIEW
         else if (input.equals("v_grades")) {
-            // TODO
-            System.out.println("view all grades...");
+            // TODO need to test on non-empty mgb
+            System.out.println(ANSI.HIGH_INTENSITY
+                    + "\nView all current grades\n"
+                    + ANSI.SANE);
+            try {
+                String cg = mgb.outputCurrentGrades();
+                System.out.println(cg);
+                System.out.println("");
+            }
+            catch (Exception e) {
+                System.out.println("An error occurred.");
+                System.out.println(e);
+                System.out.println("");
+            }
         }
         else if (input.equals("v_student")) {
             // TODO
@@ -539,8 +661,52 @@ public class Interfacer {
             // TODO
             System.out.println("view the entire gradebook...");
         }
+
+        // SAME COMMANDS FROM inputter()
+        // COMMAND "q"
+        else if (input.equals("q")) {
+            System.out.println("\nThanks for using Gradebook!\n");
+            System.exit(0);
+        }
+        // COMMAND "o"
+        else if (input.equals("o")) {
+            System.out.println("\nReturning to options menu.\n");
+            this.optionsMenu();
+        }
+        // COMMAND "1"
+        else if (input.equals("1")) {
+            this.initialize();
+        }
+        // COMMAND "2"
+        else if (input.equals("2")) {
+            this.initializeWithFile();
+        }
+        // COMMAND "3"
+        else if (input.equals("3")) {
+            this.initializeWithString();
+        }
+        // COMMAND UNKNOWN
         else {
-            this.optionsInput(input);
+            System.out.println(ANSI.HIGH_INTENSITY 
+                    + "\nUnrecognized command. Returning back"
+                    + " to the GradeBook Menu.\n"
+                    + ANSI.SANE);
+        }
+
+        this.gradeBookMenu(mgb);
+    }
+
+    /**
+     * To pause the program for 1000 milliseconds.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-09
+     */
+    public void pause() {
+        try {
+            Thread.sleep(1500);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
         }
     }
 
