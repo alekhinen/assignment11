@@ -66,6 +66,18 @@ public class Course extends MyGradeBook {
         return new Course();
     }
     
+    /** create a new instance of a gradeBook with 
+     * the given HashMap<Student, ArrayList<Assignment>> (factory method)
+     * 
+     * @author Chris Clark
+     * @version 2014-04-08
+     * 
+     * 
+     */
+    public static Course newGradeBook(HashMap<Student, ArrayList<Assignment>> map) {
+        return new Course(map);
+    }
+    
     /** overriding the equals method for GradeBook class
      * 
      * @author Austin Colcord
