@@ -487,7 +487,25 @@ public class Interfacer {
         // PROCESS
         if (input.equals("p_file")) {
             // TODO
-            System.out.println("process a file...");
+            System.out.println("Process A File");
+            System.out.print("Enter the filepath: ");
+            System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
+            String fileName = this.inputter();
+            System.out.print(ANSI.BLACK + ANSI.SANE);
+            System.out.println("Processing file...");
+            try {
+                mgb.processFile(fileName);
+                System.out.println("Success!");
+                this.gradeBookMenu(mgb);
+            }
+            catch (Exception e) {
+                System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
+                        + "Something unexpected happened.");
+                System.out.println(e 
+                        + "\n" 
+                        + ANSI.SANE + ANSI.BLACK);
+                this.gradeBookMenu(mgb);
+            }
         }
         else if (input.equals("p_text")) {
             // TODO
@@ -496,7 +514,6 @@ public class Interfacer {
 
         // CHANGE
         else if (input.equals("c_grade")) {
-            System.out.println("change a grade for a student...");
             System.out.println("Change Assignment Grade");
 
             // Assignment Name
