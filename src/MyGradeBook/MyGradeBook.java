@@ -45,10 +45,15 @@ public abstract class MyGradeBook {
      */
     public static MyGradeBook initializeWithFile(String filename) throws FileNotFoundException {
         
+        MyGradeBook blank = MyGradeBook.initialize();
+        HashMap<Student, ArrayList<Assignment>> map = new HashMap<Student, ArrayList<Assignment>>();
+        
+        
         File file = new File(filename);
         Scanner fileSC = new Scanner(file).useDelimiter("\t");
         
-        System.out.println(fileSC.next());
+        fileSC.next();
+        
         String line1 = fileSC.nextLine().trim();
         String line2 = fileSC.nextLine().trim();
         String line3 = fileSC.nextLine().trim();
@@ -57,24 +62,66 @@ public abstract class MyGradeBook {
         Scanner scanLine2 = new Scanner(line2.trim()).useDelimiter("\t");
         Scanner scanLine3 = new Scanner(line3.trim()).useDelimiter("\t");
         
+        //Accumulator lists
         ArrayList<Assignment> assList = new ArrayList<Assignment>();
-        ArrayList<Assignment> studList = new ArrayList<Assignment>();
+        ArrayList<Student> studList = new ArrayList<Student>();
         
         while(scanLine1.hasNext()) {
+            try {
             String assName = scanLine1.next();
             double total = scanLine2.nextDouble();
             double weight = scanLine3.nextDouble();
             
             Assignment ass = new Assignment(assName, total, weight);
             assList.add(ass);
+            }
+            catch(Exception e) {
+                System.out.println("File formatted incorrectly");
+            }
         }
         
-        System.out.println(assList);
-        
-        System.out.println(fileSC.nextLine());
-        
+        // Create student object
+        while(fileSC.hasNextLine()) {
+            ArrayList<Assignment> urList = new ArrayList<Assignment>();
             
-            return MyGradeBook.initialize();
+            String line = fileSC.nextLine();
+            Scanner studScan = new Scanner(line).useDelimiter("\t");
+
+            String user = studScan.next();
+            String first = studScan.next();
+            String last = studScan.next();
+            String advisor = studScan.next();
+            int year = studScan.nextInt();
+            
+            Student stud = new Student(user, first, last, advisor, year);
+            studList.add(stud);
+          
+            
+            int count = 0;
+            while(studScan.hasNextDouble()) {
+                
+                if (count > assList.size()) {
+                    throw new RuntimeException("assignment list number error");
+                }
+                
+                else {
+                double next = studScan.nextDouble();
+                Assignment current = assList.get(count);
+                String name = current.name;
+                double weight = current.weight;
+                double total = current.total;
+                count++;
+                
+                Assignment newass = new Assignment(name, total, next, weight);
+                urList.add(newass);
+                }
+            }
+            map.put(stud, urList);
+        }
+        
+        System.out.println(map);
+        
+        return new Course(map);
         
     }
     
@@ -204,10 +251,8 @@ public abstract class MyGradeBook {
      *            The String will be formatted like addAssignments.txt,
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
-     * @throws FileNotFoundException 
      */
-    public void processString(String additionalString) throws FileNotFoundException {
-        PrintWriter out = new PrintWriter("filename.txt");
+    public void processString(String additionalString) {
         
     }
 
