@@ -1,7 +1,9 @@
 package MyGradeBook;
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 /** represents the grade book of a course that holds a hashmap of the students
@@ -438,9 +440,9 @@ public class Course extends MyGradeBook {
     public String outputStudentGrades(String username) {
         String result = "STUDENT_GRADES\n";
         for (Student s : this.studAssignMap.keySet()) {
-            
+
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
-            
+
             if (s.userName.equals(username)) {
                 String assString = "";
                 for (Assignment a : ass) {
@@ -496,12 +498,12 @@ public class Course extends MyGradeBook {
                 }
             }
         }
-        
+
         result = result + "\n----\n";
-        
+
         for (Student s : this.studAssignMap.keySet()) {
             result = result + s.userName + "\t" +
-            this.assignmentGrade(assignName, s.userName) + "\n";
+                    this.assignmentGrade(assignName, s.userName) + "\n";
         }
         result = result + "----\n" + "STATS\n" + 
                 "Average\t" + this.average(assignName) + 
@@ -529,11 +531,71 @@ public class Course extends MyGradeBook {
     //TODO finish this method
     @Override
     public String outputGradebook() {
+
+        /////PUTTING THE ASSIGNMENT NAMES, WEIGHTS, AND TOTALS INTO SETS///////
+        //using sets so there are no duplicate assignments
+        Set<String> assStringList = new HashSet<String>();
+        Set<String> totalPointStringList = new HashSet<String>();
+        Set<String> weightStringList = new HashSet<String>();
+
+
+        for (Student s : this.studAssignMap.keySet()) {
+            for (Assignment ass : this.studAssignMap.get(s)) {
+                assStringList.add(ass.name);
+                totalPointStringList.add(ass.total.toString());
+                weightStringList.add(ass.weight.toString());
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////
+
+        //////GRABBING THE STUDENT'S INFO WITH RESPECTIVE ASSIGNMENT GRADES///
+        String totalStudInfo = "";
+
+        for (Student s : this.studAssignMap.keySet()) {
+            String thisStudAssInfo = "";
+            for (Assignment ass : this.studAssignMap.get(s)) {
+                thisStudAssInfo = thisStudAssInfo + "\t" + ass.score;
+            }
+
+            totalStudInfo =
+                    totalStudInfo +
+                    s.userName + "\t" + 
+                    s.firstName + "\t" +
+                    s.lastName + "\t" +
+                    s.advisor + "\t" +
+                    s.gradYear + thisStudAssInfo + "/n";
+        }
+
+
+
+
+        //////////////////////////////////////////////////////////////////////
+
+        //////PUTTING THE GENERAL ASSIGNMENT INFO INTO THE RESULT STRING//////
+        String assString = "";
+        String totalPointString = "";
+        String weightString = "";
+        for (String s : assStringList) {
+            assString = assString + s + "\t";
+        }
+        for (String s : totalPointStringList) {
+            totalPointString = totalPointString + s + "\t";
+        }
+        for (String s : weightStringList) {
+            weightString = weightString + s + "\t";
+        }
+
+
+        //////////////////////////////////////////////////////////////////////
+
+        ///PUTTING ALL OF THE INFORMATION INTO THE RESULT STRING, RETURNING///
         String result = "GRADEBOOK\n";
-        //"\t" + "\t" + "\t" + "\t" + "\t" +
-        
-        
-        
+        result = result + "\t" + "\t" + "\t" + "\t" + "\t" + assString + "\n" +
+                "\t" + "\t" + "\t" + "\t" + "\t" + totalPointString + "\n" +
+                "\t" + "\t" + "\t" + "\t" + "\t" + weightString + "\n" +
+                totalStudInfo;
+
         return result;
     }
 
@@ -543,7 +605,8 @@ public class Course extends MyGradeBook {
     }
 
     /**
-     * Add all of the elements in the given arrayList to every student's assignment list
+     * Add all of the elements in the given arrayList to 
+     * every student's assignment list
      * 
      * @author charlesperrone
      * 
