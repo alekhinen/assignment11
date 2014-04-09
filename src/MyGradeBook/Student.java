@@ -42,7 +42,7 @@ public class Student {
 	 * @param lastName
 	 * @param gradYear
 	 */
-	Student(String userName, 
+	public Student(String userName, 
 			String firstName, 
 			String middleName, 
 			String lastName, 

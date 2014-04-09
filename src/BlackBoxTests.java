@@ -5,9 +5,7 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import MyGradeBook.Assignment;
-import MyGradeBook.Course;
-import MyGradeBook.Student;
+import MyGradeBook.*;
 
 
 public class BlackBoxTests {
@@ -194,7 +192,7 @@ public class BlackBoxTests {
 	public void testMin() {
 		reset();
 		assertEquals(c1.min("Assignment1"), 45, 0);
-		
+
 		c1.changeGrade("Assignment1", "thmyolk", 55);
 		assertEquals(c1.min("Assignment1"), 55, .0001);
 	}
@@ -208,24 +206,49 @@ public class BlackBoxTests {
 	public void testMax() {
 		reset();
 		assertEquals(c1.max("Assignment1"), 96, 0);
-		
+
 		c1.changeGrade("Assignment1", "chperrone", 100);
 		assertEquals(c1.max("Assignment1"), 100, .0001);
 	}
 
-	/** test the currentGrade method in Course **/
+	/** test the currentGrade method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
 	@Test
 	public void testCurrentGrade() {
-		//TODO
+		reset();
+		assertEquals(c1.currentGrade("chperrone"), 93.8, 0.1);
+		assertEquals(c1.currentGrade("thmyolk"), 67, 0.1);
+
+		c1.changeGrade("Assignment1", "thmyolk", 100);
+
+		assertEquals(c1.currentGrade("thmyolk"), 80.8, 0.1);
 	}
 
-	/** test the currentGrades method in Course **/
+	/** test the currentGrades method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
 	@Test
 	public void testCurrentGrades() {
-		//TODO
+		reset();
+		HashMap<String, Double> c1CurrentGrades = new HashMap<String, Double>();
+		
+		c1CurrentGrades.put("chperrone", 93.89);
+		c1CurrentGrades.put("thmyolk", 67.08);
+		c1CurrentGrades.put("nalekhn", 94.0);
+		
+		assertEquals(c1.currentGrades(), c1CurrentGrades);
 	}
 
-	/** test the assignmentGrade method in Course **/
+	/** test the assignmentGrade method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
 	@Test
 	public void testAssignmentGrade() {
 		//TODO
