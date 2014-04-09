@@ -467,7 +467,7 @@ public class Interfacer {
 
         String input = this.inputter();
 
-        this.gradeBookInput(input);
+        this.gradeBookInput(input, mgb);
 
     }
 
@@ -479,7 +479,7 @@ public class Interfacer {
      * @version 2014-04-08
      * 
      */
-    public void gradeBookInput(String input) {
+    public void gradeBookInput(String input, MyGradeBook mgb) {
 
         // PROCESS
         if (input.equals("p_file")) {
