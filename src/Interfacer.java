@@ -321,8 +321,8 @@ public class Interfacer {
         System.out.println(ANSI.HIGH_INTENSITY 
                 + "GradeBook Options" 
                 + ANSI.SANE);
-        
-        
+
+
         // PROCESSING OPTIONS /////////////////////////////////////////////////
         System.out.println(ANSI.HIGH_INTENSITY + ANSI.BLUE
                 + "Processing Options"
@@ -335,7 +335,9 @@ public class Interfacer {
                 + " - Process a file.");
         System.out.println(ANSI.LOW_INTESITY 
                 + "        This option will process a file"
-                + " and add its content to the current GradeBook."
+                + " and add its content to the current GradeBook.\n"
+                + "        This will overwrite any duplicate "
+                + "assignments/students."
                 + ANSI.SANE);
         // COMMAND "p_string"
         System.out.println("    " 
@@ -345,11 +347,76 @@ public class Interfacer {
                 + " - Process a text input.");
         System.out.println(ANSI.LOW_INTESITY 
                 + "        This option will process a text input"
-                + " and add its content to the current GradeBook."
+                + " and add its content to the current GradeBook.\n"
+                + "        This will overwrite any duplicate "
+                + "assignments/students."
                 + ANSI.SANE);
-        System.out.println("\n");
-        
-        
+        System.out.println("");
+
+
+        // CHANGE OPTIONS /////////////////////////////////////////////////////
+        System.out.println(ANSI.HIGH_INTENSITY + ANSI.MAGENTA
+                + "Change Options"
+                + ANSI.SANE + ANSI.BLACK);
+        // COMMAND "c_grade"
+        System.out.println("    " 
+                + ANSI.MAGENTA + ANSI.HIGH_INTENSITY
+                + "c_grade" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - Change a grade for a particular assignment.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will change the grade "
+                + "of a particular assignment for a student."
+                + ANSI.SANE);
+
+
+        // STATISTICS /////////////////////////////////////////////////////////
+        System.out.println(ANSI.HIGH_INTENSITY + ANSI.CYAN
+                + "Statistics"
+                + ANSI.SANE + ANSI.BLACK);
+        // COMMAND "s_average"
+        System.out.println("    " 
+                + ANSI.CYAN + ANSI.HIGH_INTENSITY
+                + "s_average" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - To get the average grade of an assignment.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will display the average grade of "
+                + "a particular assignment across all students."
+                + ANSI.SANE);
+        // COMMAND "s_median"
+        System.out.println("    " 
+                + ANSI.CYAN + ANSI.HIGH_INTENSITY
+                + "s_median" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - To get the median grade of an assignment.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will display the median grade of "
+                + "a particular assignment across all students."
+                + ANSI.SANE);
+        // COMMAND "s_min"
+        System.out.println("    " 
+                + ANSI.CYAN + ANSI.HIGH_INTENSITY
+                + "s_min" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - To get the minimum grade of an assignment.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will display the minimum grade of "
+                + "a particular assignment across all students."
+                + ANSI.SANE);
+        // COMMAND "s_max"
+        System.out.println("    " 
+                + ANSI.CYAN + ANSI.HIGH_INTENSITY
+                + "s_max" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - To get the maximum grade of an assignment.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will display the maximum grade of "
+                + "a particular assignment across all students."
+                + ANSI.SANE);
+
+
+
         // VIEWING ////////////////////////////////////////////////////////////
         System.out.println(ANSI.HIGH_INTENSITY + ANSI.GREEN
                 + "Viewing Options"
@@ -400,7 +467,7 @@ public class Interfacer {
 
         String input = this.inputter();
 
-        this.gradeBookInput(input);
+        this.gradeBookInput(input, mgb);
 
     }
 
@@ -412,8 +479,44 @@ public class Interfacer {
      * @version 2014-04-08
      * 
      */
-    public void gradeBookInput(String input) {
-        if (input.equals("v_grades")) {
+    public void gradeBookInput(String input, MyGradeBook mgb) {
+
+        // PROCESS
+        if (input.equals("p_file")) {
+            // TODO
+            System.out.println("process a file...");
+        }
+        else if (input.equals("p_text")) {
+            // TODO
+            System.out.println("process a text input...");
+        }
+
+        // CHANGE
+        else if (input.equals("c_grade")) {
+            // TODO
+            System.out.println("change a grade for a student...");
+        }
+
+        // STATISTICS
+        else if (input.equals("s_average")) {
+            // TODO
+            System.out.println("get the average for an assignment...");
+        }
+        else if (input.equals("s_median")) {
+            // TODO
+            System.out.println("get the median for an assignment...");
+        }
+        else if (input.equals("s_min")) {
+            // TODO
+            System.out.println("get the minimum grade for an assignment...");
+        }
+        else if (input.equals("s_max")) {
+            // TODO
+            System.out.println("get the maximum grade for an assignment...");
+        }
+
+        // VIEW
+        else if (input.equals("v_grades")) {
             // TODO
             System.out.println("view all grades...");
         }
