@@ -127,7 +127,7 @@ public class Interfacer {
                 + ANSI.SANE);
 
 
-
+        System.out.print("Enter a command: ");
         this.optionsInput(this.inputter());
     }
 
@@ -145,9 +145,9 @@ public class Interfacer {
         // The input from the user
         String input;
 
-        System.out.println("\n");
-        System.out.print("Enter a command: "
-                + ANSI.GREEN + ANSI.HIGH_INTENSITY);
+        //        System.out.println("\n");
+        //        System.out.print("Enter a command: ");
+        System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
         input = in.nextLine();
         System.out.print(ANSI.BLACK + ANSI.SANE);
 
@@ -465,6 +465,7 @@ public class Interfacer {
                 + ANSI.SANE);
 
 
+        System.out.print("\nEnter a command: ");
         String input = this.inputter();
 
         this.gradeBookInput(input, mgb);
@@ -500,7 +501,13 @@ public class Interfacer {
         // STATISTICS
         else if (input.equals("s_average")) {
             // TODO
-            System.out.println("get the average for an assignment...");
+            System.out.println("Assignment Average");
+            System.out.print("\nEnter the Assignment name: ");
+            Double avg = mgb.average(this.inputter());
+            System.out.println("The average grade for " 
+                    + this.inputter()
+                    + " is " 
+                    + avg);
         }
         else if (input.equals("s_median")) {
             // TODO
