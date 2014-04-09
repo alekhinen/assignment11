@@ -31,8 +31,6 @@ Need to work on this.
 - [x] currentGrade(String username) NICK
 - [x] currentGrades() NICK (need to throw exceptions)
 - [x] assignmentGrade(String assignmentName, String username) NICK (need to throw exceptions)
-
-THESE BELOW NEED TO BE TESTED AND ALPHABETIZED
 - [x] outputCurrentGrades() AUSTIN
 - [x] outputStudentGrades(String username) AUSTIN 
 - [x] outputAssignmentGrades(String assignName) AUSTIN
