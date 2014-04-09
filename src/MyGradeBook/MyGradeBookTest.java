@@ -288,6 +288,7 @@ public class MyGradeBookTest {
     /** test the getStudent method in GradeBook
      * 
      * @author Nick Alekhine
+     * @version 2014-04-07
      */
     @Test
     public void testGetStudent() {
@@ -300,6 +301,7 @@ public class MyGradeBookTest {
     /** test the currentGrade method in GradeBook
      * 
      * @author Nick Alekhine
+     * @version 2014-04-07
      */
     @Test
     public void testCurrentGrade() {
@@ -309,8 +311,10 @@ public class MyGradeBookTest {
         assertEquals(67.08, this.c1.currentGrade("thmyolk"), .01);
     }
     
-    /**
-     * To test the currentGrades method in GradeBook
+    /** test the currentGrades method in GradeBook
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-07
      */
     @Test
     public void testCurrentGrades() {
@@ -322,8 +326,10 @@ public class MyGradeBookTest {
         assertEquals(result, this.c1.currentGrades());
     }
     
-    /**
-     * To test the assignmentGrade method in GradeBook
+    /** test the assignmentGrade method in GradeBook
+     *
+     * @author Nick Alekhine
+     * @version 2014-04-07
      */
     @Test
     public void testAssignmentGrade() {
