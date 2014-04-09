@@ -695,10 +695,8 @@ public class Interfacer {
             System.out.print("\nEnter the username: ");
             String username = this.inputter();
             try {
-                Double cg = mgb.currentGrade(username);
                 String cgs = mgb.outputStudentGrades(username);
                 
-                System.out.println(username + "average: " + cg);
                 System.out.println(username + "current grades:");
                 System.out.println(cgs + "\n");
             }
