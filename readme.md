@@ -32,7 +32,7 @@ Need to work on this.
 - [x] currentGrades() NICK (need to throw exceptions)
 - [x] assignmentGrade(String assignmentName, String username) NICK (need to throw exceptions)
 - [x] outputCurrentGrades() AUSTIN
-- [ ] outputStudentGrades(String username)
+- [x] outputStudentGrades(String username)
 - [ ] outputAssignmentGrades(String assignName)
 - [ ] outputGradebook()
 
