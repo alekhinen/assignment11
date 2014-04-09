@@ -433,4 +433,24 @@ public class Course extends MyGradeBook {
     public String toString() {
         return this.studAssignMap.toString();
     }
+
+    /**
+     * Add all of the elements in the given arrayList to every student's assignment list
+     * 
+     * @param assList
+     */
+    public void addGrades(ArrayList<Assignment> assList) {
+        HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
+        Set<Student> studs = this.studAssignMap.keySet();
+        
+        for(Student s : studs) {
+            ArrayList<Assignment> current = map.get(s);
+            ArrayList<Assignment> result = new ArrayList<Assignment>();
+            result.addAll(current);
+            result.addAll(assList);
+            
+            this.studAssignMap.put(s, result);
+        }
+    }
+    
 }
