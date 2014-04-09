@@ -322,6 +322,34 @@ public class Interfacer {
                 + "GradeBook Options" 
                 + ANSI.SANE);
         
+        
+        // PROCESSING OPTIONS /////////////////////////////////////////////////
+        System.out.println(ANSI.HIGH_INTENSITY + ANSI.BLUE
+                + "Processing Options"
+                + ANSI.SANE + ANSI.BLACK);
+        // COMMAND "p_file"
+        System.out.println("    " 
+                + ANSI.BLUE + ANSI.HIGH_INTENSITY
+                + "p_file" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - Process a file.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will process a file"
+                + " and add its content to the current GradeBook."
+                + ANSI.SANE);
+        // COMMAND "p_string"
+        System.out.println("    " 
+                + ANSI.BLUE + ANSI.HIGH_INTENSITY
+                + "p_string" 
+                + ANSI.BLACK + ANSI.SANE
+                + " - Process a text input.");
+        System.out.println(ANSI.LOW_INTESITY 
+                + "        This option will process a text input"
+                + " and add its content to the current GradeBook."
+                + ANSI.SANE);
+        System.out.println("\n");
+        
+        
         // VIEWING ////////////////////////////////////////////////////////////
         System.out.println(ANSI.HIGH_INTENSITY + ANSI.GREEN
                 + "Viewing Options"
