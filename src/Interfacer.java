@@ -650,8 +650,24 @@ public class Interfacer {
             }
         }
         else if (input.equals("v_student")) {
-            // TODO
-            System.out.println("view student-specific grades...");
+            // TODO outputs a null when given empty or non-existent student
+            // for method outputStudentGrades.
+            System.out.println("View Current Grade For Student");
+            System.out.print("\nEnter the username: ");
+            String username = this.inputter();
+            try {
+                Double cg = mgb.currentGrade(username);
+                String cgs = mgb.outputStudentGrades(username);
+                
+                System.out.println(username + "average: " + cg);
+                System.out.println(username + "current grades: \n");
+                System.out.println(cgs + "\n");
+            }
+            catch (Exception e) {
+                System.out.println("An error occurred.");
+                System.out.println(e);
+                System.out.println("");
+            }
         }
         else if (input.equals("v_assignment")) {
             // TODO
