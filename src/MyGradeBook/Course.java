@@ -424,7 +424,7 @@ public class Course extends MyGradeBook {
      * Provide a String that contains the current grades of the given student
      * 
      * @author Austin Colcord
-     * @version 2014-08-09
+     * @version 2014-04-09
      * 
      * @param username
      *            username for student
@@ -472,7 +472,7 @@ public class Course extends MyGradeBook {
      * the course for the given assignment
      * 
      * @author Austin Colcord
-     * @version 2014-08-09
+     * @version 2014-04-09
      * 
      * @param assignName
      *            name of the assignment
@@ -514,11 +514,27 @@ public class Course extends MyGradeBook {
 
 
 
-
+    /**
+     * Provide a String that contains the current grade book. This String could
+     * be used to initialize a new grade book.
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-09
+     * 
+     * @return a String that contains the current grade book. This String could
+     *         be used to initialize a new grade book. The String should be
+     *         formatted like gradebook.txt. The usernames will be listed
+     *         alphabetically.
+     */
+    //TODO finish this method
     @Override
     public String outputGradebook() {
-        // TODO Auto-generated method stub
-        return null;
+        String result = "GRADEBOOK\n";
+        //"\t" + "\t" + "\t" + "\t" + "\t" +
+        
+        
+        
+        return result;
     }
 
     @Override
