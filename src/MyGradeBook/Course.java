@@ -409,8 +409,14 @@ public class Course extends MyGradeBook {
      */
     @Override
     public String outputCurrentGrades() {
+        
         String result = "CURRENT_GRADES\n";
-        for (Student s : this.studAssignMap.keySet()) {
+        
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+        Collections.sort(studList, new StudentComparator());
+        
+        for (Student s : studList) {
             result = result +
                     s.userName + 
                     "\t" + 
@@ -439,7 +445,13 @@ public class Course extends MyGradeBook {
     @Override
     public String outputStudentGrades(String username) {
         String result = "STUDENT_GRADES\n";
-        for (Student s : this.studAssignMap.keySet()) {
+        
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+        
+        Collections.sort(studList, new StudentComparator());
+        
+        for (Student s : studList) {
 
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
 
@@ -489,7 +501,13 @@ public class Course extends MyGradeBook {
     @Override
     public String outputAssignmentGrades(String assignName) {
         String result = "ASSIGNMENT_GRADES\n";
-        for (Student s : this.studAssignMap.keySet()) {
+        
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+        
+        Collections.sort(studList, new StudentComparator());
+        
+        for (Student s : studList) {
             ArrayList<Assignment> assTemp = this.studAssignMap.get(s);
             for (Assignment a : assTemp) {
                 if (a.name.equals(assignName)) {
@@ -538,8 +556,12 @@ public class Course extends MyGradeBook {
         Set<String> totalPointStringList = new HashSet<String>();
         Set<String> weightStringList = new HashSet<String>();
 
-
-        for (Student s : this.studAssignMap.keySet()) {
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+        
+        Collections.sort(studList, new StudentComparator());
+        
+        for (Student s : studList) {
             for (Assignment ass : this.studAssignMap.get(s)) {
                 assStringList.add(ass.name);
                 totalPointStringList.add(ass.total.toString());
@@ -552,7 +574,7 @@ public class Course extends MyGradeBook {
         //////GRABBING THE STUDENT'S INFO WITH RESPECTIVE ASSIGNMENT GRADES///
         String totalStudInfo = "";
 
-        for (Student s : this.studAssignMap.keySet()) {
+        for (Student s : studList) {
             String thisStudAssInfo = "";
             for (Assignment ass : this.studAssignMap.get(s)) {
                 thisStudAssInfo = thisStudAssInfo + "\t" + ass.score;
