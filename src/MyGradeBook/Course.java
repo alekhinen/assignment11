@@ -225,9 +225,9 @@ public class Course extends MyGradeBook {
     public double median(String assignmentName) {
 
         ArrayList<Double> list = this.makeList(assignmentName);
-        
+
         list.removeAll(Collections.singleton(null));
-        
+
         //if x is even, take the higher value
         if (list.size() % 1 == 1) {
             int x = list.size()/2;
@@ -251,9 +251,9 @@ public class Course extends MyGradeBook {
     public double min(String assignmentName) {
 
         ArrayList<Double> list = this.makeList(assignmentName);
-        
+
         list.removeAll(Collections.singleton(null));
-        
+
         return list.get(0);
     }
 
@@ -272,7 +272,7 @@ public class Course extends MyGradeBook {
         ArrayList<Double> list = this.makeList(assignmentName);
 
         list.removeAll(Collections.singleton(null));
-        
+
         return list.get(list.size() - 1);
     }
 
@@ -392,13 +392,29 @@ public class Course extends MyGradeBook {
 
 
 
-
+    /**
+     * Provide a String that contains the current grades of all students in the
+     * course
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * 
+     * @return a String that contains the current grades of all students in the
+     *         course. The String should be formatted like
+     *         currentGrades.txt---CURRENT_GRADES heading and each row: username
+     *         followed by tab and current grade. The usernames will be listed
+     *         alphabetically.
+     */
     @Override
     public String outputCurrentGrades() {
-        System.out.println("CURRENT_GRADES");
+        String result = "CURRENT_GRADES\n";
         for (Student s : this.studAssignMap.keySet()) {
-            
+            result = result +
+                    s.userName + 
+                    "\t" + 
+                    this.currentGrade(s.userName) + "\n";
         }
+        return result;
     }
 
 
@@ -444,15 +460,15 @@ public class Course extends MyGradeBook {
     public void addGrades(ArrayList<Assignment> assList) {
         HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
         Set<Student> studs = this.studAssignMap.keySet();
-        
+
         for(Student s : studs) {
             ArrayList<Assignment> current = map.get(s);
             ArrayList<Assignment> result = new ArrayList<Assignment>();
             result.addAll(current);
             result.addAll(assList);
-            
+
             this.studAssignMap.put(s, result);
         }
     }
-    
+
 }
