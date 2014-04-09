@@ -2,6 +2,7 @@ package MyGradeBook;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -365,6 +366,15 @@ public class MyGradeBookTest {
             }
         
     }
+    
+    /**
+     * To test the addGrades method
+     */
+    @Test
+    public void testAddGrades() {
+        MyGradeBook book = MyGradeBook.initialize();
+    }
+    
     /** test the newGradeBook method in Course
      * 
      * @author Austin Colcord
@@ -386,5 +396,14 @@ public class MyGradeBookTest {
         this.reset();
         assertEquals(MyGradeBook.initialize(), new Course());
     }
-
+    
+    @Test
+    public void testInitializeFile() {
+        this.reset();
+        try {
+            MyGradeBook.initializeWithFile("initial.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found");
+        }
+    }
 }

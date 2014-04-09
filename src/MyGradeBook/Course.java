@@ -545,6 +545,8 @@ public class Course extends MyGradeBook {
     /**
      * Add all of the elements in the given arrayList to every student's assignment list
      * 
+     * @author charlesperrone
+     * 
      * @param assList
      */
     public void addGrades(ArrayList<Assignment> assList) {
@@ -561,4 +563,11 @@ public class Course extends MyGradeBook {
         }
     }
 
+    @Override
+    public void addStudents(ArrayList<Student> studList) {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    
 }
