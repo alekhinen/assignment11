@@ -56,9 +56,9 @@ public class Assignment {
     public boolean equals(Object other) {
         if (other instanceof Assignment) {
             return this.name.equals(((Assignment) other).name) &&
-                    this.total == ((Assignment) other).total &&
-                    this.weight == ((Assignment) other).weight &&
-                    this.score == ((Assignment) other).score;
+                    this.total.equals(((Assignment) other).total) &&
+                    this.weight.equals(((Assignment) other).weight) &&
+                    this.score.equals(((Assignment) other).score);
         }
         else {
             return false;
