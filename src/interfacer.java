@@ -69,7 +69,8 @@ public class Interfacer {
     */
     public void initialInputter() {
         
-        // OPTIONS
+        ///////////////////////////////////////////////////////////////////////
+        // OPTIONS ////////////////////////////////////////////////////////////
         System.out.println(ANSI.HIGH_INTENSITY + "Options" + ANSI.SANE);
         // COMMAND "1"
         System.out.println("    " 
@@ -124,6 +125,10 @@ public class Interfacer {
                 + ANSI.SANE);
         
         
+        
+        
+        ///////////////////////////////////////////////////////////////////////
+        // USER INPUT /////////////////////////////////////////////////////////
         // Create an instance of Scanner
         Scanner in = new Scanner(System.in);
         // The input from the user
@@ -135,22 +140,58 @@ public class Interfacer {
         input = in.nextLine();
         System.out.print(ANSI.BLACK + ANSI.SANE);
         
+        // COMMAND "q"
         if (input.equals("q")) {
             System.out.println("\nThanks for using Gradebook!\n");
             System.exit(0);
         }
+        // COMMAND "o"
+        if (input.equals("o")) {
+            System.out.println("\nReturning to options menu.\n");
+            this.initialInputter();
+        }
+        // COMMAND "1"
         else if (input.equals("1")) {
             System.out.println("\nCreating an empty instance of a "
                     + "Gradebook...\n");
         }
+        // COMMAND "2"
         else if (input.equals("2")) {
-            System.out.println("\nCreating a");
+            this.initializeWithFile();
         }
+        // COMMAND UNKNOWN
         else {
             System.out.println("\nUnrecognized command. Returning back"
                     + " to options menu.\n");
             this.initialInputter();
         }
+    }
+    
+    
+    /**
+     * To initialize an instance of a Gradebook with a file.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-08
+     */
+    public void initializeWithFile() {
+        // Create an instance of Scanner
+        Scanner in = new Scanner(System.in);
+        // The input from the user
+        String input;
+        
+        System.out.println(ANSI.HIGH_INTENSITY 
+                + "\nGradebook with File"
+                + ANSI.SANE);
+        System.out.println("Creating an instance of a Gradebook "
+                + "with a file...\n");
+        System.out.print("Please enter a filepath: "
+                + ANSI.GREEN + ANSI.HIGH_INTENSITY);
+        input = in.nextLine();
+        System.out.print(ANSI.BLACK + ANSI.SANE);
+        
+        System.out.println("\nThanks! Your file is currently being "
+                + "processed.\n");
     }
 
 }
