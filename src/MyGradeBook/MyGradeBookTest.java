@@ -336,6 +336,15 @@ public class MyGradeBookTest {
                      this.c1.assignmentGrade("Assignment3", "chperrone"), .01);
     }
     
+    /**
+     * To test the processFile method
+     */
+    @Test
+    public void testProcessFile() {
+        this.reset();
+        System.out.println(this.c1.processFile("addAssignments.txt"));
+        
+    }
     /** test the newGradeBook method in Course
      * 
      * @author Austin Colcord
@@ -356,6 +365,7 @@ public class MyGradeBookTest {
     public void testInitialize() {
         this.reset();
         assertEquals(MyGradeBook.initialize(), new Course());
+>>>>>>> 10d5066ee37fe574989a53ff75cebdf7c41d88dc
     }
 
 }
