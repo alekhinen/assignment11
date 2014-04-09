@@ -134,7 +134,8 @@ public class Course extends MyGradeBook {
             if (s.userName.equals(username)) {
                 //for every assignment in assignmentlist of the student
                 for (Assignment a : this.studAssignMap.get(s)) {
-                    //if the given assignmentname equals this current name, change it
+                    //if the given assignmentname 
+                    //equals this current name, change it
                     // and break
                     if (a.name.equals(assignmentName)) {
                         a.changeScore(newGrade);
