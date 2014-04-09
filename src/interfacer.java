@@ -69,8 +69,10 @@ public class Interfacer {
     */
     public void initialInputter() {
         
-        // OPTIONS
+        ///////////////////////////////////////////////////////////////////////
+        // OPTIONS ////////////////////////////////////////////////////////////
         System.out.println(ANSI.HIGH_INTENSITY + "Options" + ANSI.SANE);
+        // COMMAND "1"
         System.out.println("    " 
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY
                 + "1" 
@@ -80,6 +82,7 @@ public class Interfacer {
                 + "        This option will create a new instance of"
                 + " a Gradebook that is completely empty."
                 + ANSI.SANE);
+       // COMMAND "2"
         System.out.println("    "
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY
                 + "2"
@@ -92,6 +95,7 @@ public class Interfacer {
                 + "within the file will be put into the Gradebook if "
                 + "properly formatted."
                 + ANSI.SANE);
+        // COMMAND "3"
         System.out.println("    "
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY 
                 + "3"
@@ -101,6 +105,16 @@ public class Interfacer {
                 + "        This option will create a new instance of"
                 + " a Gradebook with the supplied text content."
                 + ANSI.SANE);
+        // COMMAND "o"
+        System.out.println("    "
+                + ANSI.BLUE + ANSI.HIGH_INTENSITY 
+                + "o"
+                + ANSI.BLACK + ANSI.SANE
+                + " - Return to options menu.");
+        System.out.println(ANSI.LOW_INTESITY
+                + "        This option will return you to the options menu"
+                + ANSI.SANE);
+        // COMMAND "q"
         System.out.println("    "
                 + ANSI.RED + ANSI.HIGH_INTENSITY 
                 + "q"
@@ -111,6 +125,10 @@ public class Interfacer {
                 + ANSI.SANE);
         
         
+        
+        
+        ///////////////////////////////////////////////////////////////////////
+        // USER INPUT /////////////////////////////////////////////////////////
         // Create an instance of Scanner
         Scanner in = new Scanner(System.in);
         // The input from the user
@@ -120,12 +138,60 @@ public class Interfacer {
         System.out.print("Enter a command: "
                          + ANSI.GREEN + ANSI.HIGH_INTENSITY);
         input = in.nextLine();
-        System.out.println(ANSI.BLACK + ANSI.SANE + "you entered" + input);
+        System.out.print(ANSI.BLACK + ANSI.SANE);
         
+        // COMMAND "q"
         if (input.equals("q")) {
-            System.out.println("Thanks for using Gradebook.");
+            System.out.println("\nThanks for using Gradebook!\n");
             System.exit(0);
         }
+        // COMMAND "o"
+        if (input.equals("o")) {
+            System.out.println("\nReturning to options menu.\n");
+            this.initialInputter();
+        }
+        // COMMAND "1"
+        else if (input.equals("1")) {
+            System.out.println("\nCreating an empty instance of a "
+                    + "Gradebook...\n");
+        }
+        // COMMAND "2"
+        else if (input.equals("2")) {
+            this.initializeWithFile();
+        }
+        // COMMAND UNKNOWN
+        else {
+            System.out.println("\nUnrecognized command. Returning back"
+                    + " to options menu.\n");
+            this.initialInputter();
+        }
+    }
+    
+    
+    /**
+     * To initialize an instance of a Gradebook with a file.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-08
+     */
+    public void initializeWithFile() {
+        // Create an instance of Scanner
+        Scanner in = new Scanner(System.in);
+        // The input from the user
+        String input;
+        
+        System.out.println(ANSI.HIGH_INTENSITY 
+                + "\nGradebook with File"
+                + ANSI.SANE);
+        System.out.println("Creating an instance of a Gradebook "
+                + "with a file...\n");
+        System.out.print("Please enter a filepath: "
+                + ANSI.GREEN + ANSI.HIGH_INTENSITY);
+        input = in.nextLine();
+        System.out.print(ANSI.BLACK + ANSI.SANE);
+        
+        System.out.println("\nThanks! Your file is currently being "
+                + "processed.\n");
     }
 
 }
