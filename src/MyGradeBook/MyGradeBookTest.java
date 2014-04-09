@@ -335,5 +335,27 @@ public class MyGradeBookTest {
         assertEquals(0, 
                      this.c1.assignmentGrade("Assignment3", "chperrone"), .01);
     }
+    
+    /** test the newGradeBook method in Course
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     */
+    @Test
+    public void testNewGradeBook() {
+        this.reset();
+        assertEquals(Course.newGradeBook(), new Course());
+    }
+    
+    /** test the initialize method in MyGradeBook
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     */
+    @Test
+    public void testInitialize() {
+        this.reset();
+        assertEquals(MyGradeBook.initialize(), new Course());
+    }
 
 }
