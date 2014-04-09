@@ -1,4 +1,6 @@
 package MyGradeBook;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -76,24 +78,24 @@ public abstract class MyGradeBook {
      *            students, new grades. The file will be formatted like
      *            addAssignments.txt, addStudents.txt, gradesForAssignment1.txt,
      *            and gradesForStudent.txt.
+     * @throws FileNotFoundException 
      */
-    public ArrayList<Assignment> processFile(String filename) {
-        Scanner sc = new Scanner(filename).useDelimiter("\n");
-        String first = sc.next(); 
+    public void processFile(String filename) throws FileNotFoundException {
         
-        ArrayList<Assignment> assignList = new ArrayList<Assignment>();
+        // load the file
+        File file = new File(filename);
+        Scanner sc = new Scanner(file).useDelimiter("\n");
+        
+        // Pick the first String
+        
+        String first = sc.next();
             
-            while(sc.hasNext()) {
-                String name = sc.next();
-                double total = sc.nextDouble();
-                double weight = sc.nextDouble();
+        
+                System.out.println(sc.next());
+                System.out.println(sc.nextDouble());
+                System.out.println(sc.nextDouble());
+
                 
-                Assignment neu = new Assignment(name, total, weight);
-                assignList.add(neu);
-                
-                sc.nextLine();
-            }
-            return assignList;
     }
 
     
