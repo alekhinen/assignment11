@@ -165,48 +165,6 @@ public class Interfacer {
     public void optionsInput(String input) {
         ///////////////////////////////////////////////////////////////////////
         // USER INPUT /////////////////////////////////////////////////////////
-    
-        // COMMAND "q"
-        if (input.equals("q")) {
-            System.out.println("\nThanks for using Gradebook!\n");
-            System.exit(0);
-        }
-        // COMMAND "o"
-        if (input.equals("o")) {
-            System.out.println("\nReturning to options menu.\n");
-            this.optionsMenu();
-        }
-        // COMMAND "1"
-        else if (input.equals("1")) {
-            this.initialize();
-        }
-        // COMMAND "2"
-        else if (input.equals("2")) {
-            this.initializeWithFile();
-        }
-        // COMMAND "3"
-        else if (input.equals("3")) {
-            this.initializeWithString();
-        }
-        // COMMAND UNKNOWN
-        else {
-            System.out.println("\nUnrecognized command. Returning back"
-                    + " to options menu.\n");
-            this.optionsMenu();
-        }
-    }
-
-
-    /**
-     * The options inputs available to users.
-     * 
-     * @author Nick Alehine
-     * @version 2014-04-08
-     * 
-     */
-    public void optionsInput(String input) {
-        ///////////////////////////////////////////////////////////////////////
-        // USER INPUT /////////////////////////////////////////////////////////
 
         // COMMAND "q"
         if (input.equals("q")) {
