@@ -270,5 +270,14 @@ public class MyGradeBookTest {
         assertEquals(0, 
                      this.c1.assignmentGrade("Assignment3", "chperrone"), .01);
     }
+    
+    /**
+     * To test the processFile method
+     */
+    @Test
+    public void testProcessFile() {
+        this.reset();
+        System.out.println(this.c1.processFile("addAssignments.txt"));
+    }
 
 }

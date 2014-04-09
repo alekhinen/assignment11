@@ -1,6 +1,7 @@
 package MyGradeBook;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -39,10 +40,8 @@ public abstract class MyGradeBook {
      * @return a MyGradebook that contains the grade book from filename
      */
     public static MyGradeBook initializeWithFile(String filename) {
-        // TODO ...
         return null;
     }
-
     
     /**
      * Factory method to construct a MyGradebook that contains the grade book
@@ -78,8 +77,23 @@ public abstract class MyGradeBook {
      *            addAssignments.txt, addStudents.txt, gradesForAssignment1.txt,
      *            and gradesForStudent.txt.
      */
-    public void processFile(String filename) {
-        // TODO ...
+    public ArrayList<Assignment> processFile(String filename) {
+        Scanner sc = new Scanner(filename).useDelimiter("\n");
+        String first = sc.next(); 
+        
+        ArrayList<Assignment> assignList = new ArrayList<Assignment>();
+            
+            while(sc.hasNext()) {
+                String name = sc.next();
+                double total = sc.nextDouble();
+                double weight = sc.nextDouble();
+                
+                Assignment neu = new Assignment(name, total, weight);
+                assignList.add(neu);
+                
+                sc.nextLine();
+            }
+            return assignList;
     }
 
     

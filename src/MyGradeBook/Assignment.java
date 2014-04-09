@@ -26,14 +26,30 @@ public class Assignment {
 
     
     ///////////////////////////////////////////////////////////////////////////
-    // CONSTRUCTORS ///////////////////////////////////////////////////////////    
+    // CONSTRUCTORS ///////////////////////////////////////////////////////////   
+    
+    /**
+     * The constructor for Assignment that does not accept a score
+     * @param name the name of the assignment
+     * @param total the total points possible for the student to get
+     * @param weight the weight of this assignment on
+     *               the overall grade of the student
+     * The score will be set when the instructor changes the student's grade
+     */
+    Assignment(String name, double total, double weight) {
+        this.name = name;
+        this.total = total;
+        this.weight = weight;
+        this.score = 0.0;
+    }
+    
     /**
      * The constructor for Assignment that accepts a score
      * @param name the name of the assignment
      * @param total the total points possible for the student to get
      * @param weight the weight of this assignment on
      *               the overall grade of the student
-     * The score will be set when the instructor changes the student's grade
+     * @param score the scored grade for the assignment
      */
     Assignment(String name, double total, double score, double weight) {
         this.name = name;
