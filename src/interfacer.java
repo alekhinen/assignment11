@@ -321,7 +321,11 @@ public class Interfacer {
         System.out.println(ANSI.HIGH_INTENSITY 
                 + "GradeBook Options" 
                 + ANSI.SANE);
-
+        
+        // VIEWING ////////////////////////////////////////////////////////////
+        System.out.println(ANSI.HIGH_INTENSITY + ANSI.GREEN
+                + "Viewing Options"
+                + ANSI.SANE + ANSI.BLACK);
         // COMMAND "v_grades"
         System.out.println("    " 
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY
