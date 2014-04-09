@@ -507,9 +507,27 @@ public class Interfacer {
                 this.gradeBookMenu(mgb);
             }
         }
-        else if (input.equals("p_text")) {
+        else if (input.equals("p_string")) {
             // TODO
-            System.out.println("process a text input...");
+            System.out.println("Process A String Input");
+            System.out.println("Enter the string input: ");
+            System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
+            String textInput = this.inputter();
+            System.out.print(ANSI.BLACK + ANSI.SANE);
+            System.out.println("Processing input...");
+            try {
+                mgb.processString(textInput);
+                System.out.println("Success!");
+                this.gradeBookMenu(mgb);
+            }
+            catch (Exception e) {
+                System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
+                        + "Something unexpected happened.");
+                System.out.println(e 
+                        + "\n" 
+                        + ANSI.SANE + ANSI.BLACK);
+                this.gradeBookMenu(mgb);
+            }
         }
 
         // CHANGE
