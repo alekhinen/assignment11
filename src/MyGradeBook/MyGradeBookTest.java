@@ -348,12 +348,21 @@ public class MyGradeBookTest {
     @Test
     public void testProcessFile() {
         this.reset();
+        
         try {
-        this.c1.processFile("addAssignments.txt");
+        MyGradeBook.initialize().processFile("addAssignments.txt");
         }
         catch(Exception e) {
-            System.out.println("You Fucked up");
+            System.out.println("File not found");
         }
+        
+        
+        try {
+            this.c1.processFile("addStudents.txt");
+            }
+            catch(Exception e) {
+                System.out.println("File not Found");
+            }
         
     }
     /** test the newGradeBook method in Course

@@ -40,7 +40,7 @@ public class Assignment {
         this.name = name;
         this.total = total;
         this.weight = weight;
-        this.score = 0.0;
+        this.score = null;
     }
     
     /**
