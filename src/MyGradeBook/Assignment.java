@@ -14,7 +14,7 @@ public class Assignment {
 
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
-   
+
     /** The name of this assignment */
     String name;
     /** The total points of this assignment */
@@ -24,10 +24,10 @@ public class Assignment {
     /** The score received on this assignment */
     Double score;
 
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS ///////////////////////////////////////////////////////////   
-    
+
     /**
      * The constructor for Assignment that does not accept a score
      * @param name the name of the assignment
@@ -42,7 +42,7 @@ public class Assignment {
         this.weight = weight;
         this.score = null;
     }
-    
+
     /**
      * The constructor for Assignment that accepts a score
      * @param name the name of the assignment
@@ -60,7 +60,7 @@ public class Assignment {
 
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
-    
+
     /** overriding the equals method for assignment class
      * 
      * @author Austin Colcord
@@ -80,7 +80,7 @@ public class Assignment {
             return false;
         }
     }
-    
+
     /** override the hashcode method for student class
      * 
      * @author Austin Colcord
@@ -89,12 +89,19 @@ public class Assignment {
      */
     @Override
     public int hashCode() {
-        return this.name.hashCode() +
-                this.total.hashCode() +
-                this.weight.hashCode() +
-                this.score.hashCode();
+        if (this.score.equals(null)) {
+            return this.name.hashCode() +
+                    this.total.hashCode() +
+                    this.weight.hashCode();
+        }
+        else {
+            return this.name.hashCode() +
+                    this.total.hashCode() +
+                    this.weight.hashCode() +
+                    this.score.hashCode();
+        }
     }
-    
+
     /**
      * override the toString method
      * 
@@ -106,7 +113,7 @@ public class Assignment {
     public String toString() {
         return this.name;
     }
-    
+
     /** write the method that changes the grade of this assignment to the given
      * score that the student receives
      * 

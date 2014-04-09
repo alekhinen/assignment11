@@ -2,7 +2,6 @@ package MyGradeBook;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 /** represents the grade book of a course that holds a hashmap of the students
@@ -17,7 +16,7 @@ public class Course extends MyGradeBook {
 
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
-    
+
     /** The mapping of students and assignments. */
     HashMap<Student, ArrayList<Assignment>> studAssignMap;
 
@@ -35,7 +34,7 @@ public class Course extends MyGradeBook {
     Course(HashMap<Student, ArrayList<Assignment>> studAssignMap) {
         this.studAssignMap = studAssignMap;
     }
-    
+
     /** Creates an empty instance of a GradeBook that contains a
      *  empty hashmap of student as a key and assignment array as val
      * 
@@ -65,19 +64,21 @@ public class Course extends MyGradeBook {
     public static Course newGradeBook() {
         return new Course();
     }
-    
+
     /** create a new instance of a gradeBook with 
      * the given HashMap<Student, ArrayList<Assignment>> (factory method)
      * 
      * @author Chris Clark
      * @version 2014-04-08
      * 
-     * 
+     * @param map the HashMap<Student, ArrayList <Assignment>>
+     *               to create the course with
      */
-    public static Course newGradeBook(HashMap<Student, ArrayList<Assignment>> map) {
+    public static Course newGradeBook(
+            HashMap<Student, ArrayList<Assignment>> map) {
         return new Course(map);
     }
-    
+
     /** overriding the equals method for GradeBook class
      * 
      * @author Austin Colcord
@@ -96,7 +97,7 @@ public class Course extends MyGradeBook {
         }
     }
 
-    
+
     /** override the hashcode method for student class
      * 
      * @author Austin Colcord
@@ -115,7 +116,7 @@ public class Course extends MyGradeBook {
      * username is equal to username) to newGrade
      * 
      * @author Austin Colcord
-     * @version 2014-04-06 TESTED
+     * @version 2014-04-08 TESTED
      * 
      * @param assignmentName - name of the assignment
      * @param username - username for the student
@@ -129,7 +130,7 @@ public class Course extends MyGradeBook {
         boolean result = false;
 
         Set<Student> students = this.studAssignMap.keySet();
-        
+
         for (Student s : students) {
             if (s.userName.equals(username)) {
                 //for every assignment in assignmentlist of the student
@@ -138,8 +139,14 @@ public class Course extends MyGradeBook {
                     //equals this current name, change it
                     // and break
                     if (a.name.equals(assignmentName)) {
-                        a.changeScore(newGrade);
-                        result = true;
+                        if (a.score.equals(newGrade)) {
+                            a.changeScore(newGrade);
+                            result = false;
+                        }
+                        else {
+                            a.changeScore(newGrade);
+                            result = true;
+                        }
                     }
                 }
             }
@@ -152,7 +159,8 @@ public class Course extends MyGradeBook {
      * Calculates the average across all students for a given assignment
      * 
      * @author Charles Perrone
-     * @version 2014-04-06 TESTED
+     * @author Austin Colcord
+     * @version 2014-04-08 TESTED
      * 
      * @param assignmentName - name of the assignment
      * @return the average across all students for assignmentName
@@ -162,11 +170,12 @@ public class Course extends MyGradeBook {
         ArrayList<Double> list = this.makeList(assignmentName);
         double totalStudents = list.size();
         double sum = 0;
-        
+
         for (Double d : list) {
-            sum += d;
+            if (!d.equals(null)) {
+                sum += d;
+            }
         }
-        
         return sum/totalStudents;
     }
 
@@ -183,9 +192,9 @@ public class Course extends MyGradeBook {
     public ArrayList<Double> makeList(String assignmentName) {
 
         Set<Student> students = this.studAssignMap.keySet();
-        
+
         ArrayList<Double> result = new ArrayList<Double>();
-        
+
         for (Student s : students) {
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
 
@@ -198,8 +207,8 @@ public class Course extends MyGradeBook {
                 }
             }
         }
-      Collections.sort(result);
-      return result;
+        Collections.sort(result);
+        return result;
     }
 
 
@@ -214,13 +223,15 @@ public class Course extends MyGradeBook {
      * @return the median across all students for assignmentName
      */
     public double median(String assignmentName) {
-        
+
         ArrayList<Double> list = this.makeList(assignmentName);
+        
+        list.removeAll(Collections.singleton(null));
         
         //if x is even, take the higher value
         if (list.size() % 1 == 1) {
-           int x = list.size()/2;
-           return list.get(x + 1);
+            int x = list.size()/2;
+            return list.get(x + 1);
         }
         //else return the middle
         else return list.get(list.size()/2);
@@ -241,6 +252,8 @@ public class Course extends MyGradeBook {
 
         ArrayList<Double> list = this.makeList(assignmentName);
         
+        list.removeAll(Collections.singleton(null));
+        
         return list.get(0);
     }
 
@@ -255,13 +268,15 @@ public class Course extends MyGradeBook {
      * @return the max across all students for assignmentName
      */
     public double max(String assignmentName) {
-        
+
         ArrayList<Double> list = this.makeList(assignmentName);
+
+        list.removeAll(Collections.singleton(null));
         
         return list.get(list.size() - 1);
     }
 
-    
+
     /**
      * Calculates the current grade for the given student
      * 
@@ -287,7 +302,7 @@ public class Course extends MyGradeBook {
         ArrayList<Assignment> assignments = this.studAssignMap.get(s);
         double result = 0; 
         double weight = 0;
-        
+
         // If the user exists, total the grade.
         if (s != null) {
             for (Assignment a : assignments) {
@@ -295,12 +310,12 @@ public class Course extends MyGradeBook {
                 result += (((a.score / a.total) * 100) * a.weight);
             }
         }
-        
+
         result = result / weight;
         result = Math.round( result * 100.0 ) / 100.0;
         return result;
     }
-    
+
     /** 
      * To get the Student with the given username from the student mapping.
      * 
@@ -313,7 +328,7 @@ public class Course extends MyGradeBook {
     public Student getStudent(String username) {
         // Get all students 
         Set<Student> students = this.studAssignMap.keySet();
-        
+
         // Go through each element of the keySet and check if there is a match.
         for (Student s : students) {
             if (s.userName.equals(username)) {
@@ -323,7 +338,7 @@ public class Course extends MyGradeBook {
         return null;
     }
 
-    
+
     /**
      * To return a mapping of all students and their grade
      * 
@@ -358,10 +373,10 @@ public class Course extends MyGradeBook {
         double result = 0;
         ArrayList<Assignment> assignments = new ArrayList<Assignment>();
         Student s = this.getStudent(username);
-        
+
         if (s != null) {
             assignments = this.studAssignMap.get(s);
-            
+
             for (Assignment a : assignments) {
                 if (a.name.equals(assignmentName)) {
                     result = ((a.score / a.total) * 100);
@@ -369,7 +384,7 @@ public class Course extends MyGradeBook {
                 }
             }
         }
-        
+
         result = Math.round( result * 100.0 ) / 100.0;
         return result;
     }
@@ -413,7 +428,7 @@ public class Course extends MyGradeBook {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     @Override
     public String toString() {
         return this.studAssignMap.toString();
