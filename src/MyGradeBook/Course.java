@@ -420,11 +420,48 @@ public class Course extends MyGradeBook {
 
 
 
-
+    /**
+     * Provide a String that contains the current grades of the given student
+     * 
+     * @author Austin Colcord
+     * @version 2014-08-09
+     * 
+     * @param username
+     *            username for student
+     * @return a String that contains the current grades of username. The String
+     *         should be formatted like studentGrades.txt---STUDENT_GRADES
+     *         heading, student info, dividers, each assignment (assignment name
+     *         followed by tab and assignment grade), and current grade.
+     *         Assignments are to remain in the same order as given.
+     */
     @Override
     public String outputStudentGrades(String username) {
-        // TODO Auto-generated method stub
-        return null;
+        String result = "STUDENT_GRADES\n";
+        for (Student s : this.studAssignMap.keySet()) {
+            
+            ArrayList<Assignment> ass = this.studAssignMap.get(s);
+            
+            if (s.userName.equals(username)) {
+                String assString = "";
+                for (Assignment a : ass) {
+                    assString = assString + a.name + "\t" + a.score + "\n";
+                }
+                result = 
+                        result + 
+                        s.userName + "\n" +
+                        s.firstName + "\n" +
+                        s.lastName + "\n" +
+                        s.advisor + "\n" +
+                        s.gradYear + "\n" +
+                        "----\n" +
+                        assString +
+                        "----" +
+                        "CURRENT GRADE" + "\t" + 
+                        this.currentGrade(s.userName) + "\n";
+                break;
+            }
+        }
+        return result;
     }
 
 

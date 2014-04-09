@@ -302,6 +302,9 @@ public abstract class MyGradeBook {
     /**
      * Provide a String that contains the current grades of the given student
      * 
+     * @author Austin Colcord
+     * @version 2014-08-09
+     * 
      * @param username
      *            username for student
      * @return a String that contains the current grades of username. The String
@@ -310,7 +313,6 @@ public abstract class MyGradeBook {
      *         followed by tab and assignment grade), and current grade.
      *         Assignments are to remain in the same order as given.
      */
-    // TODO ...
     public abstract String outputStudentGrades(String username);
 
     
