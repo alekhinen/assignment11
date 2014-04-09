@@ -481,6 +481,7 @@ public class Interfacer {
      * @version 2014-04-08
      * 
      */
+    // TODO need to test on non-empty mgb
     public void gradeBookInput(String input, MyGradeBook mgb) {
 
         // PROCESS
@@ -634,7 +635,6 @@ public class Interfacer {
 
         // VIEW
         else if (input.equals("v_grades")) {
-            // TODO need to test on non-empty mgb
             System.out.println(ANSI.HIGH_INTENSITY
                     + "\nView all current grades\n"
                     + ANSI.SANE);
@@ -660,7 +660,7 @@ public class Interfacer {
                 String cgs = mgb.outputStudentGrades(username);
                 
                 System.out.println(username + "average: " + cg);
-                System.out.println(username + "current grades: \n");
+                System.out.println(username + "current grades:");
                 System.out.println(cgs + "\n");
             }
             catch (Exception e) {
@@ -670,12 +670,34 @@ public class Interfacer {
             }
         }
         else if (input.equals("v_assignment")) {
-            // TODO
-            System.out.println("view assignment-specific grades...");
+            // TODO returns null for empty and when aname doesn't exist.
+            System.out.println("View Grades For Assignment");
+            System.out.print("\nEnter the assignment name: ");
+            String aname = this.inputter();
+            try {
+                String output = mgb.outputAssignmentGrades(aname);
+                System.out.println(output);
+                System.out.println("\n\n");
+            }
+            catch (Exception e) {
+                System.out.println("An error occurred.");
+                System.out.println(e);
+                System.out.println("");
+            }
         }
         else if (input.equals("v_gradebook")) {
-            // TODO
+            // TODO outputs null when empty.
             System.out.println("view the entire gradebook...");
+            System.out.println("View Entire Gradebook");
+            try {
+                String output = mgb.outputGradebook();
+                System.out.println(output + "\n");
+            }
+            catch (Exception e) {
+                System.out.println("An error occurred.");
+                System.out.println(e);
+                System.out.println("");
+            }
         }
 
         // SAME COMMANDS FROM inputter()
