@@ -81,24 +81,80 @@ public abstract class MyGradeBook {
      * @throws FileNotFoundException 
      */
     public void processFile(String filename) throws FileNotFoundException {
-        
+
         // load the file
         File file = new File(filename);
         Scanner sc = new Scanner(file).useDelimiter("\n");
-        
-        // Pick the first String
-        
-        String first = sc.next();
-            
-        
-                System.out.println(sc.next());
-                System.out.println(sc.nextDouble());
-                System.out.println(sc.nextDouble());
 
+        ArrayList<Assignment> assList = new ArrayList<Assignment>();
+        ArrayList<Student> studList = new ArrayList<Student>();
+
+        // Pick the first String (the type of processing)
+        String type = sc.next();
+
+        if (type.equals("ASSIGNMENT")) {
+
+            while(sc.hasNext()) {
+                String name = sc.next();
+                double total = sc.nextDouble();
+                double weight = sc.nextDouble();
+
+                Assignment made = new Assignment(name, total, weight);
+                assList.add(made);
+
+                try {
+                    sc.next();
+                }
+                catch(Exception e) { }
+            }
+          
+        }
+
+        if (type.equals("STUDENT")) {
+            
+            while(sc.hasNext()) {
+                String username = sc.next();
+                String firstName = sc.next();
+                String middleName = sc.next();
+                String lastName = sc.next();
+                int year = sc.nextInt();
+
+                Student stud = new Student(username, firstName,
+                        middleName, lastName, year);
+
+                studList.add(stud);
+
+                try {
+                    sc.next(); 
+                }
+                catch(Exception e) { }
+            }
+        }
+        
+        if (type.equals("GRADES_FOR_STUDENT")) {
+            String username = sc.next();
+            
+            while(sc.hasNext()) {
+                String assName = sc.next();
+                double grade = sc.nextInt();
                 
+                this.changeGrade(assName, username, grade);
+            }
+        }
+        
+        if (type.equals("GRADES_FOR_ASSIGNMENT")) {
+            String assName = sc.next();
+            
+            while(sc.hasNext()) {
+                String username = sc.next();
+                double grade = sc.nextInt();
+                
+                this.changeGrade(assName, username, grade);
+            }
+        }
     }
 
-    
+
     /**
      * Add to the state of this grade book---new assignments, new students, new
      * grades---by processing additionalString
