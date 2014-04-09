@@ -111,7 +111,7 @@ public class Assignment {
      */
     @Override
     public String toString() {
-        return this.name;
+        return this.name + this.total + this.weight;
     }
 
     /** write the method that changes the grade of this assignment to the given

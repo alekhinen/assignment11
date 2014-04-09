@@ -1,6 +1,7 @@
 package MyGradeBook;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -43,7 +44,38 @@ public abstract class MyGradeBook {
      * @throws FileNotFoundException 
      */
     public static MyGradeBook initializeWithFile(String filename) throws FileNotFoundException {
-        return null;
+        
+        File file = new File(filename);
+        Scanner fileSC = new Scanner(file).useDelimiter("\t");
+        
+        System.out.println(fileSC.next());
+        String line1 = fileSC.nextLine().trim();
+        String line2 = fileSC.nextLine().trim();
+        String line3 = fileSC.nextLine().trim();
+        
+        Scanner scanLine1 = new Scanner(line1.trim()).useDelimiter("\t");
+        Scanner scanLine2 = new Scanner(line2.trim()).useDelimiter("\t");
+        Scanner scanLine3 = new Scanner(line3.trim()).useDelimiter("\t");
+        
+        ArrayList<Assignment> assList = new ArrayList<Assignment>();
+        ArrayList<Assignment> studList = new ArrayList<Assignment>();
+        
+        while(scanLine1.hasNext()) {
+            String assName = scanLine1.next();
+            double total = scanLine2.nextDouble();
+            double weight = scanLine3.nextDouble();
+            
+            Assignment ass = new Assignment(assName, total, weight);
+            assList.add(ass);
+        }
+        
+        System.out.println(assList);
+        
+        System.out.println(fileSC.nextLine());
+        
+            
+            return MyGradeBook.initialize();
+        
     }
     
     /**
@@ -172,9 +204,11 @@ public abstract class MyGradeBook {
      *            The String will be formatted like addAssignments.txt,
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
+     * @throws FileNotFoundException 
      */
-    public void processString(String additionalString) {
-        //FileUtils.writeStringToFile(new File("test.txt"), "Hello File");
+    public void processString(String additionalString) throws FileNotFoundException {
+        PrintWriter out = new PrintWriter("filename.txt");
+        
     }
 
     

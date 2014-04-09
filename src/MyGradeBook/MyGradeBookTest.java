@@ -2,6 +2,7 @@ package MyGradeBook;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -399,5 +400,10 @@ public class MyGradeBookTest {
     @Test
     public void testInitializeFile() {
         this.reset();
+        try {
+            MyGradeBook.initializeWithFile("initial.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found");
+        }
     }
 }
