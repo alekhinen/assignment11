@@ -365,7 +365,6 @@ public class MyGradeBookTest {
     public void testInitialize() {
         this.reset();
         assertEquals(MyGradeBook.initialize(), new Course());
->>>>>>> 10d5066ee37fe574989a53ff75cebdf7c41d88dc
     }
 
 }
