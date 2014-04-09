@@ -437,6 +437,8 @@ public class Course extends MyGradeBook {
     /**
      * Add all of the elements in the given arrayList to every student's assignment list
      * 
+     * @author charlesperrone
+     * 
      * @param assList
      */
     public void addGrades(ArrayList<Assignment> assList) {
@@ -452,5 +454,37 @@ public class Course extends MyGradeBook {
             this.studAssignMap.put(s, result);
         }
     }
+
+    @Override
+    public void addStudents(ArrayList<Student> studList) {
+        // TODO Auto-generated method stub
+        
+    }
+
     
+    /**
+     * 
+     */
+    /*
+    @Override
+    public void addStudents(ArrayList<Student> studList) {
+        HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
+        
+        if (map.size() == 0) {
+            for (Student s : studList) {
+                map.put(s, new ArrayList<Assignment>());
+            }
+        }
+        else {
+            for  {
+                ;
+                break;
+            }
+            
+            for (Student s : studList) {
+                
+            }
+        }
+    }
+    */
 }

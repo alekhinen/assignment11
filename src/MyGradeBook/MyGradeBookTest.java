@@ -365,6 +365,15 @@ public class MyGradeBookTest {
             }
         
     }
+    
+    /**
+     * To test the addGrades method
+     */
+    @Test
+    public void testAddGrades() {
+        MyGradeBook book = MyGradeBook.initialize();
+    }
+    
     /** test the newGradeBook method in Course
      * 
      * @author Austin Colcord
@@ -386,5 +395,9 @@ public class MyGradeBookTest {
         this.reset();
         assertEquals(MyGradeBook.initialize(), new Course());
     }
-
+    
+    @Test
+    public void testInitializeFile() {
+        this.reset();
+    }
 }

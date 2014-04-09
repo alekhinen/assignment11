@@ -40,8 +40,9 @@ public abstract class MyGradeBook {
      *            the filename for the file that contains the initial grade
      *            book, which is formatted like initial.txt
      * @return a MyGradebook that contains the grade book from filename
+     * @throws FileNotFoundException 
      */
-    public static MyGradeBook initializeWithFile(String filename) {
+    public static MyGradeBook initializeWithFile(String filename) throws FileNotFoundException {
         return null;
     }
     
@@ -92,6 +93,7 @@ public abstract class MyGradeBook {
         // Pick the first String (the type of processing)
         String type = sc.next();
 
+        //Add a list of grades to GradeBook
         if (type.equals("ASSIGNMENT")) {
 
             while(sc.hasNext()) {
@@ -107,10 +109,11 @@ public abstract class MyGradeBook {
                 }
                 catch(Exception e) { }
             }
-          
+          this.addGrades(assList);
         }
 
-        if (type.equals("STUDENT")) {
+        //Add a list of students to the GradeBook
+        else if (type.equals("STUDENT")) {
             
             while(sc.hasNext()) {
                 String username = sc.next();
@@ -131,7 +134,7 @@ public abstract class MyGradeBook {
             }
         }
         
-        if (type.equals("GRADES_FOR_STUDENT")) {
+        else if (type.equals("GRADES_FOR_STUDENT")) {
             String username = sc.next();
             
             while(sc.hasNext()) {
@@ -142,7 +145,7 @@ public abstract class MyGradeBook {
             }
         }
         
-        if (type.equals("GRADES_FOR_ASSIGNMENT")) {
+        else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
             String assName = sc.next();
             
             while(sc.hasNext()) {
@@ -152,8 +155,11 @@ public abstract class MyGradeBook {
                 this.changeGrade(assName, username, grade);
             }
         }
+        else throw new RuntimeException();
     }
 
+    
+    
 
     /**
      * Add to the state of this grade book---new assignments, new students, new
@@ -168,7 +174,7 @@ public abstract class MyGradeBook {
      *            gradesForStudent.txt.
      */
     public void processString(String additionalString) {
-        // TODO ...
+        //FileUtils.writeStringToFile(new File("test.txt"), "Hello File");
     }
 
     
@@ -341,4 +347,14 @@ public abstract class MyGradeBook {
      */
     // TODO ...
     public abstract String outputGradebook(); 
-}
+    
+    /**
+     * Add a list of Assignments to every student's list of assignments
+     */
+    public abstract void addGrades(ArrayList<Assignment> aList);
+    
+    /**
+     * 
+     */
+    public abstract void addStudents(ArrayList<Student> studList);
+    }
