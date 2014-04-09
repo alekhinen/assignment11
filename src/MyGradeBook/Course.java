@@ -424,7 +424,7 @@ public class Course extends MyGradeBook {
      * Provide a String that contains the current grades of the given student
      * 
      * @author Austin Colcord
-     * @version 2014-08-09
+     * @version 2014-04-09
      * 
      * @param username
      *            username for student
@@ -467,21 +467,74 @@ public class Course extends MyGradeBook {
 
 
 
-
+    /**
+     * Provide a String that contains the assignment grades of all students in
+     * the course for the given assignment
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-09
+     * 
+     * @param assignName
+     *            name of the assignment
+     * @return a String that contains the assignment grades of all students in
+     *         the course for assignName. The String should be formatted like
+     *         assignmentGrade.txt---ASSIGNMENT_GRADES heading, assignment info,
+     *         dividers, each student (username followed by tab and assignment
+     *         grade), and assignment stats. The usernames will be listed
+     *         alphabetically while assignments are to remain in the same 
+     *         order as given.
+     */
     @Override
     public String outputAssignmentGrades(String assignName) {
-        // TODO Auto-generated method stub
-        return null;
+        String result = "ASSIGNMENT_GRADES\n";
+        for (Student s : this.studAssignMap.keySet()) {
+            ArrayList<Assignment> assTemp = this.studAssignMap.get(s);
+            for (Assignment a : assTemp) {
+                if (a.name.equals(assignName)) {
+                    result = result + a.name + "\n" + a.total + "\n" + a.weight;
+                    break;
+                }
+            }
+        }
+        
+        result = result + "\n----\n";
+        
+        for (Student s : this.studAssignMap.keySet()) {
+            result = result + s.userName + "\t" +
+            this.assignmentGrade(assignName, s.userName) + "\n";
+        }
+        result = result + "----\n" + "STATS\n" + 
+                "Average\t" + this.average(assignName) + 
+                "Median\t" + this.median(assignName) +
+                "Max\t" + this.max(assignName) +
+                "Min\t" + this.min(assignName);
+        return result;
     }
 
 
 
 
-
+    /**
+     * Provide a String that contains the current grade book. This String could
+     * be used to initialize a new grade book.
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-09
+     * 
+     * @return a String that contains the current grade book. This String could
+     *         be used to initialize a new grade book. The String should be
+     *         formatted like gradebook.txt. The usernames will be listed
+     *         alphabetically.
+     */
+    //TODO finish this method
     @Override
     public String outputGradebook() {
-        // TODO Auto-generated method stub
-        return null;
+        String result = "GRADEBOOK\n";
+        //"\t" + "\t" + "\t" + "\t" + "\t" +
+        
+        
+        
+        return result;
     }
 
     @Override
