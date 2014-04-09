@@ -1,6 +1,7 @@
 package MyGradeBook;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -40,9 +41,41 @@ public abstract class MyGradeBook {
      *            the filename for the file that contains the initial grade
      *            book, which is formatted like initial.txt
      * @return a MyGradebook that contains the grade book from filename
+     * @throws FileNotFoundException 
      */
-    public static MyGradeBook initializeWithFile(String filename) {
-        return null;
+    public static MyGradeBook initializeWithFile(String filename) throws FileNotFoundException {
+        
+        File file = new File(filename);
+        Scanner fileSC = new Scanner(file).useDelimiter("\t");
+        
+        System.out.println(fileSC.next());
+        String line1 = fileSC.nextLine().trim();
+        String line2 = fileSC.nextLine().trim();
+        String line3 = fileSC.nextLine().trim();
+        
+        Scanner scanLine1 = new Scanner(line1.trim()).useDelimiter("\t");
+        Scanner scanLine2 = new Scanner(line2.trim()).useDelimiter("\t");
+        Scanner scanLine3 = new Scanner(line3.trim()).useDelimiter("\t");
+        
+        ArrayList<Assignment> assList = new ArrayList<Assignment>();
+        ArrayList<Assignment> studList = new ArrayList<Assignment>();
+        
+        while(scanLine1.hasNext()) {
+            String assName = scanLine1.next();
+            double total = scanLine2.nextDouble();
+            double weight = scanLine3.nextDouble();
+            
+            Assignment ass = new Assignment(assName, total, weight);
+            assList.add(ass);
+        }
+        
+        System.out.println(assList);
+        
+        System.out.println(fileSC.nextLine());
+        
+            
+            return MyGradeBook.initialize();
+        
     }
     
     /**
@@ -92,6 +125,7 @@ public abstract class MyGradeBook {
         // Pick the first String (the type of processing)
         String type = sc.next();
 
+        //Add a list of grades to GradeBook
         if (type.equals("ASSIGNMENT")) {
 
             while(sc.hasNext()) {
@@ -107,10 +141,11 @@ public abstract class MyGradeBook {
                 }
                 catch(Exception e) { }
             }
-          
+          this.addGrades(assList);
         }
 
-        if (type.equals("STUDENT")) {
+        //Add a list of students to the GradeBook
+        else if (type.equals("STUDENT")) {
             
             while(sc.hasNext()) {
                 String username = sc.next();
@@ -131,7 +166,7 @@ public abstract class MyGradeBook {
             }
         }
         
-        if (type.equals("GRADES_FOR_STUDENT")) {
+        else if (type.equals("GRADES_FOR_STUDENT")) {
             String username = sc.next();
             
             while(sc.hasNext()) {
@@ -142,7 +177,7 @@ public abstract class MyGradeBook {
             }
         }
         
-        if (type.equals("GRADES_FOR_ASSIGNMENT")) {
+        else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
             String assName = sc.next();
             
             while(sc.hasNext()) {
@@ -152,8 +187,11 @@ public abstract class MyGradeBook {
                 this.changeGrade(assName, username, grade);
             }
         }
+        else throw new RuntimeException();
     }
 
+    
+    
 
     /**
      * Add to the state of this grade book---new assignments, new students, new
@@ -166,9 +204,11 @@ public abstract class MyGradeBook {
      *            The String will be formatted like addAssignments.txt,
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
+     * @throws FileNotFoundException 
      */
-    public void processString(String additionalString) {
-        // TODO ...
+    public void processString(String additionalString) throws FileNotFoundException {
+        PrintWriter out = new PrintWriter("filename.txt");
+        
     }
 
     
@@ -349,4 +389,14 @@ public abstract class MyGradeBook {
      *         alphabetically.
      */
     public abstract String outputGradebook(); 
-}
+    
+    /**
+     * Add a list of Assignments to every student's list of assignments
+     */
+    public abstract void addGrades(ArrayList<Assignment> aList);
+    
+    /**
+     * 
+     */
+    public abstract void addStudents(ArrayList<Student> studList);
+    }
