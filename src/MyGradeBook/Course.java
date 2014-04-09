@@ -507,29 +507,33 @@ public class Course extends MyGradeBook {
 
         Collections.sort(studList, new StudentComparator());
 
-        String studentInfo = "";
-        for (Student s : studList) {
-            ArrayList<Assignment> assTemp = this.studAssignMap.get(s);
-            for (Assignment a : assTemp) {
-                if (a.name.equals(assignName)) {
-                    studentInfo = 
-                            studentInfo + a.name + "\n" +
-                                    a.total + "\n" + a.weight;
-                    break;
-                }
+        Student firstStudent = studList.get(0);
+
+        ArrayList<Assignment> firstAssignList = 
+                this.studAssignMap.get(firstStudent);
+
+        String assignInfo = "";
+
+        for (Assignment a : firstAssignList) {
+            if (a.name.equals(assignName)) {
+                assignInfo = 
+                        assignInfo + a.name + "\n" +
+                                a.total + "\n" +
+                                a.weight;
             }
         }
 
-        result = result + studentInfo + "\n----\n";
 
-        for (Student s : this.studAssignMap.keySet()) {
+        result = result + assignInfo + "\n----\n";
+
+        for (Student s : studList) {
             result = result + s.userName + "\t" +
                     this.assignmentGrade(assignName, s.userName) + "\n";
         }
         result = result + "----\n" + "STATS\n" + 
-                "Average\t" + this.average(assignName) + 
-                "Median\t" + this.median(assignName) +
-                "Max\t" + this.max(assignName) +
+                "Average\t" + this.average(assignName) + "\n" +
+                "Median\t" + this.median(assignName) + "\n" +
+                "Max\t" + this.max(assignName) + "\n" +
                 "Min\t" + this.min(assignName);
         return result;
     }
@@ -549,34 +553,38 @@ public class Course extends MyGradeBook {
      *         formatted like gradebook.txt. The usernames will be listed
      *         alphabetically.
      */
-    //TODO finish this method
     @Override
     public String outputGradebook() {
 
-        /////PUTTING THE ASSIGNMENT NAMES, WEIGHTS, AND TOTALS INTO SETS///////
-        //using sets so there are no duplicate assignments
-        Set<String> assStringList = new HashSet<String>();
-        Set<String> totalPointStringList = new HashSet<String>();
-        Set<String> weightStringList = new HashSet<String>();
+        ///GETTING THE ASSIGNMENT NAMES, TOTALS, AND WEIGHTS FOR TOP ROW//////
 
         ArrayList<Student> studList =
                 new ArrayList<Student>(this.studAssignMap.keySet());
 
-        Collections.sort(studList, new StudentComparator());
+        Student firstStudent = studList.get(0);
 
-        for (Student s : studList) {
-            for (Assignment ass : this.studAssignMap.get(s)) {
-                assStringList.add(ass.name);
-                totalPointStringList.add(ass.total.toString());
-                weightStringList.add(ass.weight.toString());
-            }
+        ArrayList<Assignment> firstAssignList = 
+                this.studAssignMap.get(firstStudent);
+
+        String assigns = "";
+        String totals = "";
+        String weights = "";
+
+
+        for (Assignment a : firstAssignList) {
+            assigns = assigns + "\t" + a.name;
+            totals = totals + "\t" + a.total;
+            weights = weights + "\t" + a.weight;
         }
+
 
         //////////////////////////////////////////////////////////////////////
 
         //////GRABBING THE STUDENT'S INFO WITH RESPECTIVE ASSIGNMENT GRADES///
+        Collections.sort(studList, new StudentComparator());
+        
         String totalStudInfo = "";
-
+        
         for (Student s : studList) {
             String thisStudAssInfo = "";
             for (Assignment ass : this.studAssignMap.get(s)) {
@@ -589,36 +597,19 @@ public class Course extends MyGradeBook {
                     s.firstName + "\t" +
                     s.lastName + "\t" +
                     s.advisor + "\t" +
-                    s.gradYear + thisStudAssInfo + "/n";
+                    s.gradYear + thisStudAssInfo + "\n";
         }
 
 
-
-
-        //////////////////////////////////////////////////////////////////////
-
-        //////PUTTING THE GENERAL ASSIGNMENT INFO INTO THE RESULT STRING//////
-        String assString = "";
-        String totalPointString = "";
-        String weightString = "";
-        for (String s : assStringList) {
-            assString = assString + s + "\t";
-        }
-        for (String s : totalPointStringList) {
-            totalPointString = totalPointString + s + "\t";
-        }
-        for (String s : weightStringList) {
-            weightString = weightString + s + "\t";
-        }
 
 
         //////////////////////////////////////////////////////////////////////
 
         ///PUTTING ALL OF THE INFORMATION INTO THE RESULT STRING, RETURNING///
         String result = "GRADEBOOK\n";
-        result = result + "\t" + "\t" + "\t" + "\t" + "\t" + assString + "\n" +
-                "\t" + "\t" + "\t" + "\t" + "\t" + totalPointString + "\n" +
-                "\t" + "\t" + "\t" + "\t" + "\t" + weightString + "\n" +
+        result = result + "\t" + "\t" + "\t" + "\t" + assigns + "\n" +
+                "\t" + "\t" + "\t" + "\t" + totals + "\n" +
+                "\t" + "\t" + "\t" + "\t" + weights + "\n" +
                 totalStudInfo;
 
         return result;
