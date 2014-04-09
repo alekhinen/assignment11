@@ -573,8 +573,9 @@ public class Interfacer {
             // TODO fucked up for empty mgb and incorrect assignment
             System.out.println("Assignment Average");
             System.out.print("\nEnter the Assignment name: ");
+            String aname = this.inputter();
             try {
-                Double avg = mgb.average(this.inputter());
+                Double avg = mgb.average(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
                         + " is " 
@@ -591,8 +592,9 @@ public class Interfacer {
         else if (input.equals("s_median")) {
             System.out.println("Assignment Median");
             System.out.print("\nEnter the Assignment name: ");
+            String aname = this.inputter();
             try {
-                Double median = mgb.median(this.inputter());
+                Double median = mgb.median(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
                         + " is " 
@@ -612,8 +614,9 @@ public class Interfacer {
         else if (input.equals("s_min")) {
             System.out.println("Assignment Minimum Grade");
             System.out.print("\nEnter the Assignment name: ");
+            String aname = this.inputter();
             try {
-                Double min = mgb.min(this.inputter());
+                Double min = mgb.min(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
                         + " is " 
@@ -632,8 +635,9 @@ public class Interfacer {
         else if (input.equals("s_max")) {
             System.out.println("Assignment Maximum Grade");
             System.out.print("\nEnter the Assignment name: ");
+            String aname = this.inputter();
             try {
-                Double max = mgb.max(this.inputter());
+                Double max = mgb.max(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
                         + " is " 
