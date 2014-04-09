@@ -26,14 +26,30 @@ public class Assignment {
 
     
     ///////////////////////////////////////////////////////////////////////////
-    // CONSTRUCTORS ///////////////////////////////////////////////////////////    
+    // CONSTRUCTORS ///////////////////////////////////////////////////////////   
+    
+    /**
+     * The constructor for Assignment that does not accept a score
+     * @param name the name of the assignment
+     * @param total the total points possible for the student to get
+     * @param weight the weight of this assignment on
+     *               the overall grade of the student
+     * The score will be set when the instructor changes the student's grade
+     */
+    Assignment(String name, double total, double weight) {
+        this.name = name;
+        this.total = total;
+        this.weight = weight;
+        this.score = 0.0;
+    }
+    
     /**
      * The constructor for Assignment that accepts a score
      * @param name the name of the assignment
      * @param total the total points possible for the student to get
      * @param weight the weight of this assignment on
      *               the overall grade of the student
-     * The score will be set when the instructor changes the student's grade
+     * @param score the scored grade for the assignment
      */
     Assignment(String name, double total, double score, double weight) {
         this.name = name;
@@ -56,9 +72,9 @@ public class Assignment {
     public boolean equals(Object other) {
         if (other instanceof Assignment) {
             return this.name.equals(((Assignment) other).name) &&
-                    this.total == ((Assignment) other).total &&
-                    this.weight == ((Assignment) other).weight &&
-                    this.score == ((Assignment) other).score;
+                    this.total.equals(((Assignment) other).total) &&
+                    this.weight.equals(((Assignment) other).weight) &&
+                    this.score.equals(((Assignment) other).score);
         }
         else {
             return false;

@@ -58,7 +58,7 @@ public class Course extends MyGradeBook {
     /** create a new instance of an empty gradeBook (the factory method)
      * 
      * @author Austin Colcord
-     * @version 2014-04-08
+     * @version 2014-04-08 TESTED
      * 
      * 
      */
@@ -81,7 +81,7 @@ public class Course extends MyGradeBook {
     /** overriding the equals method for GradeBook class
      * 
      * @author Austin Colcord
-     * @version 2014-04-07
+     * @version 2014-04-07 TESTED
      * 
      * @param other the object to compare to this gradebook
      * @return boolean true if the other object is equal to this gradebook
@@ -100,7 +100,7 @@ public class Course extends MyGradeBook {
     /** override the hashcode method for student class
      * 
      * @author Austin Colcord
-     * @version 2014-04-07
+     * @version 2014-04-07 TESTED
      * 
      * @return int the hashcode for this student
      */
@@ -115,7 +115,7 @@ public class Course extends MyGradeBook {
      * username is equal to username) to newGrade
      * 
      * @author Austin Colcord
-     * @version 2014-04-06
+     * @version 2014-04-06 TESTED
      * 
      * @param assignmentName - name of the assignment
      * @param username - username for the student
@@ -141,12 +141,9 @@ public class Course extends MyGradeBook {
                         result = true;
                     }
                 }
-
             }
-
         }
         return result;
-
     }
 
 
@@ -154,7 +151,7 @@ public class Course extends MyGradeBook {
      * Calculates the average across all students for a given assignment
      * 
      * @author Charles Perrone
-     * @version 2014-04-06
+     * @version 2014-04-06 TESTED
      * 
      * @param assignmentName - name of the assignment
      * @return the average across all students for assignmentName
@@ -176,7 +173,8 @@ public class Course extends MyGradeBook {
      * Return a sorted ArrayList that contains
      * all student's grades for the given assignment
      * 
-     * @author charlesperrone
+     * @author Charles Perrone
+     * @version 2014-04-07 TESTED
      * 
      * @param assignmentName the assignment we are searching for
      * @return the sorted ArrayList
@@ -207,6 +205,9 @@ public class Course extends MyGradeBook {
     /**
      * Calculates the median across all students for a given assignment
      * 
+     * @author Charles Perrone
+     * @version 2014-04-07 TESTED
+     * 
      * @param assignmentName
      *            name of the assignment
      * @return the median across all students for assignmentName
@@ -228,6 +229,9 @@ public class Course extends MyGradeBook {
     /**
      * Calculates the min across all students for a given assignment
      * 
+     * @author Charles Perrone
+     * @version 2014-04-07 TESTED
+     * 
      * @param assignmentName
      *            name of the assignment
      * @return the min across all students for assignmentName
@@ -241,6 +245,9 @@ public class Course extends MyGradeBook {
 
     /**
      * Calculates the max across all students for a given assignment
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-07 TESTED
      * 
      * @param assignmentName
      *            name of the assignment
@@ -256,6 +263,9 @@ public class Course extends MyGradeBook {
     
     /**
      * Calculates the current grade for the given student
+     * 
+     * @author Nick Alekhine
+     * @version 2012-04-06 TESTED
      * 
      * @param username
      *            username for the student
@@ -294,7 +304,7 @@ public class Course extends MyGradeBook {
      * To get the Student with the given username from the student mapping.
      * 
      * @author Nick Alekhine
-     * @version 2014-04-07
+     * @version 2014-04-07 TESTED
      * @param username
      * @return
      */
@@ -317,7 +327,8 @@ public class Course extends MyGradeBook {
      * To return a mapping of all students and their grade
      * 
      * @author Nick Alekhine
-     * @version 2014-04-07
+     * @version 2014-04-07 TESTED
+     * 
      * @return a mapping of all students and their grades.
      */
     public HashMap<String, Double> currentGrades() {
@@ -326,7 +337,6 @@ public class Course extends MyGradeBook {
         for (Student s : this.studAssignMap.keySet()) {
             result.put(s.userName, this.currentGrade(s.userName));
         }
-        
         return result;
     }
 
@@ -335,7 +345,7 @@ public class Course extends MyGradeBook {
      * Provides the grade earned by the given student for the given assignment
      * 
      * @author Nick Alekhine
-     * @version 2014-04-07
+     * @version 2014-04-07 TESTED
      * 
      * @param assignmentName - name of the assignment
      * @param username - username for the student

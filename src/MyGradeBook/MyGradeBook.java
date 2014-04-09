@@ -1,6 +1,9 @@
 package MyGradeBook;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -39,10 +42,8 @@ public abstract class MyGradeBook {
      * @return a MyGradebook that contains the grade book from filename
      */
     public static MyGradeBook initializeWithFile(String filename) {
-        // TODO ...
         return null;
     }
-
     
     /**
      * Factory method to construct a MyGradebook that contains the grade book
@@ -77,9 +78,24 @@ public abstract class MyGradeBook {
      *            students, new grades. The file will be formatted like
      *            addAssignments.txt, addStudents.txt, gradesForAssignment1.txt,
      *            and gradesForStudent.txt.
+     * @throws FileNotFoundException 
      */
-    public void processFile(String filename) {
-        // TODO ...
+    public void processFile(String filename) throws FileNotFoundException {
+        
+        // load the file
+        File file = new File(filename);
+        Scanner sc = new Scanner(file).useDelimiter("\n");
+        
+        // Pick the first String
+        
+        String first = sc.next();
+            
+        
+                System.out.println(sc.next());
+                System.out.println(sc.nextDouble());
+                System.out.println(sc.nextDouble());
+
+                
     }
 
     

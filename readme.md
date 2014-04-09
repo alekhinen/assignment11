@@ -17,7 +17,7 @@ This is a gradebook system developed for CS3500: Object-Oriented Design.
 Need to work on this.
 
 ### Methods
-- [ ] initialize()
+- [x] initialize() AUSTIN
 - [ ] initializeWithFile(String filename) !!!
 - [ ] initializeWithString(String startingString)  !!!
 - [ ] processFile(String filename) !!!
