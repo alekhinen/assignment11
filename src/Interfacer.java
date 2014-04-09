@@ -165,6 +165,48 @@ public class Interfacer {
     public void optionsInput(String input) {
         ///////////////////////////////////////////////////////////////////////
         // USER INPUT /////////////////////////////////////////////////////////
+    
+        // COMMAND "q"
+        if (input.equals("q")) {
+            System.out.println("\nThanks for using Gradebook!\n");
+            System.exit(0);
+        }
+        // COMMAND "o"
+        if (input.equals("o")) {
+            System.out.println("\nReturning to options menu.\n");
+            this.optionsMenu();
+        }
+        // COMMAND "1"
+        else if (input.equals("1")) {
+            this.initialize();
+        }
+        // COMMAND "2"
+        else if (input.equals("2")) {
+            this.initializeWithFile();
+        }
+        // COMMAND "3"
+        else if (input.equals("3")) {
+            this.initializeWithString();
+        }
+        // COMMAND UNKNOWN
+        else {
+            System.out.println("\nUnrecognized command. Returning back"
+                    + " to options menu.\n");
+            this.optionsMenu();
+        }
+    }
+
+
+    /**
+     * The options inputs available to users.
+     * 
+     * @author Nick Alehine
+     * @version 2014-04-08
+     * 
+     */
+    public void optionsInput(String input) {
+        ///////////////////////////////////////////////////////////////////////
+        // USER INPUT /////////////////////////////////////////////////////////
 
         // COMMAND "q"
         if (input.equals("q")) {
@@ -507,9 +549,27 @@ public class Interfacer {
                 this.gradeBookMenu(mgb);
             }
         }
-        else if (input.equals("p_text")) {
+        else if (input.equals("p_string")) {
             // TODO
-            System.out.println("process a text input...");
+            System.out.println("Process A String Input");
+            System.out.println("Enter the string input: ");
+            System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
+            String textInput = this.inputter();
+            System.out.print(ANSI.BLACK + ANSI.SANE);
+            System.out.println("Processing input...");
+            try {
+                mgb.processString(textInput);
+                System.out.println("Success!");
+                this.gradeBookMenu(mgb);
+            }
+            catch (Exception e) {
+                System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
+                        + "Something unexpected happened.");
+                System.out.println(e 
+                        + "\n" 
+                        + ANSI.SANE + ANSI.BLACK);
+                this.gradeBookMenu(mgb);
+            }
         }
 
         // CHANGE

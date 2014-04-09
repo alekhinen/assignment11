@@ -17,10 +17,10 @@ import java.util.Set;
  */
 
 public abstract class MyGradeBook {
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // STATIC METHODS /////////////////////////////////////////////////////////
-    
+
     /**Factory method to construct an empty MyGradebook 
      * 
      * @author Austin Colcord
@@ -32,7 +32,7 @@ public abstract class MyGradeBook {
         return Course.newGradeBook();
     }
 
-    
+
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from filename
@@ -43,47 +43,49 @@ public abstract class MyGradeBook {
      * @return a MyGradebook that contains the grade book from filename
      * @throws FileNotFoundException 
      */
-    public static MyGradeBook initializeWithFile(String filename) throws FileNotFoundException {
-        
+    public static MyGradeBook initializeWithFile(String filename) 
+            throws FileNotFoundException {
+
         MyGradeBook blank = MyGradeBook.initialize();
-        HashMap<Student, ArrayList<Assignment>> map = new HashMap<Student, ArrayList<Assignment>>();
-        
-        
+        HashMap<Student, ArrayList<Assignment>> map 
+        = new HashMap<Student, ArrayList<Assignment>>();
+
+
         File file = new File(filename);
         Scanner fileSC = new Scanner(file).useDelimiter("\t");
-        
+
         fileSC.next();
-        
+
         String line1 = fileSC.nextLine().trim();
         String line2 = fileSC.nextLine().trim();
         String line3 = fileSC.nextLine().trim();
-        
+
         Scanner scanLine1 = new Scanner(line1.trim()).useDelimiter("\t");
         Scanner scanLine2 = new Scanner(line2.trim()).useDelimiter("\t");
         Scanner scanLine3 = new Scanner(line3.trim()).useDelimiter("\t");
-        
+
         //Accumulator lists
         ArrayList<Assignment> assList = new ArrayList<Assignment>();
         ArrayList<Student> studList = new ArrayList<Student>();
-        
+
         while(scanLine1.hasNext()) {
             try {
-            String assName = scanLine1.next();
-            double total = scanLine2.nextDouble();
-            double weight = scanLine3.nextDouble();
-            
-            Assignment ass = new Assignment(assName, total, weight);
-            assList.add(ass);
+                String assName = scanLine1.next();
+                double total = scanLine2.nextDouble();
+                double weight = scanLine3.nextDouble();
+
+                Assignment ass = new Assignment(assName, total, weight);
+                assList.add(ass);
             }
             catch(Exception e) {
                 System.out.println("File formatted incorrectly");
             }
         }
-        
+
         // Create student object
         while(fileSC.hasNextLine()) {
             ArrayList<Assignment> urList = new ArrayList<Assignment>();
-            
+
             String line = fileSC.nextLine();
             Scanner studScan = new Scanner(line).useDelimiter("\t");
 
@@ -92,39 +94,39 @@ public abstract class MyGradeBook {
             String last = studScan.next();
             String advisor = studScan.next();
             int year = studScan.nextInt();
-            
+
             Student stud = new Student(user, first, last, advisor, year);
             studList.add(stud);
-          
-            
+
+
             int count = 0;
             while(studScan.hasNextDouble()) {
-                
+
                 if (count > assList.size()) {
                     throw new RuntimeException("assignment list number error");
                 }
-                
+
                 else {
-                double next = studScan.nextDouble();
-                Assignment current = assList.get(count);
-                String name = current.name;
-                double weight = current.weight;
-                double total = current.total;
-                count++;
-                
-                Assignment newass = new Assignment(name, total, next, weight);
-                urList.add(newass);
+                    double next = studScan.nextDouble();
+                    Assignment current = assList.get(count);
+                    String name = current.name;
+                    double weight = current.weight;
+                    double total = current.total;
+                    count++;
+
+                    Assignment newass = new Assignment(name, total, next, weight);
+                    urList.add(newass);
                 }
             }
             map.put(stud, urList);
         }
-        
+
         System.out.println(map);
-        
+
         return new Course(map);
-        
+
     }
-    
+
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from startingString
@@ -140,13 +142,13 @@ public abstract class MyGradeBook {
         return null;
     }
 
-    
-    
-    
-    
+
+
+
+
     ///////////////////////////////////////////////////////////////////////////
     // DYNAMIC METHODS ////////////////////////////////////////////////////////
-    
+
     /**
      * Add to the state of this grade book---new assignments, new students, new
      * grades---by processing filename
@@ -188,12 +190,12 @@ public abstract class MyGradeBook {
                 }
                 catch(Exception e) { }
             }
-          this.addGrades(assList);
+            this.addGrades(assList);
         }
 
         //Add a list of students to the GradeBook
         else if (type.equals("STUDENT")) {
-            
+
             while(sc.hasNext()) {
                 String username = sc.next();
                 String firstName = sc.next();
@@ -212,33 +214,33 @@ public abstract class MyGradeBook {
                 catch(Exception e) { }
             }
         }
-        
+
         else if (type.equals("GRADES_FOR_STUDENT")) {
             String username = sc.next();
-            
+
             while(sc.hasNext()) {
                 String assName = sc.next();
                 double grade = sc.nextInt();
-                
+
                 this.changeGrade(assName, username, grade);
             }
         }
-        
+
         else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
             String assName = sc.next();
-            
+
             while(sc.hasNext()) {
                 String username = sc.next();
                 double grade = sc.nextInt();
-                
+
                 this.changeGrade(assName, username, grade);
             }
         }
         else throw new RuntimeException();
     }
 
-    
-    
+
+
 
     /**
      * Add to the state of this grade book---new assignments, new students, new
@@ -253,10 +255,10 @@ public abstract class MyGradeBook {
      *            gradesForStudent.txt.
      */
     public void processString(String additionalString) {
-        
+
     }
 
-    
+
     /**
      * Changes the assignment (named assignmentName) grade for student (whose
      * username is equal to username) to newGrade
@@ -274,7 +276,7 @@ public abstract class MyGradeBook {
     public abstract boolean changeGrade(String assignmentName,
             String username, double newGrade);
 
-    
+
     /**
      * Calculates the average across all students for a given assignment
      * 
@@ -285,7 +287,7 @@ public abstract class MyGradeBook {
     // TODO ...
     public abstract double average(String assignmentName);
 
-    
+
     /**
      * Calculates the median across all students for a given assignment
      * 
@@ -296,7 +298,7 @@ public abstract class MyGradeBook {
     // TODO ...
     public abstract double median(String assignmentName);
 
-    
+
     /**
      * Calculates the min across all students for a given assignment
      * 
@@ -307,7 +309,7 @@ public abstract class MyGradeBook {
     // TODO ...
     public abstract double min(String assignmentName);
 
-    
+
     /**
      * Calculates the max across all students for a given assignment
      * 
@@ -318,7 +320,7 @@ public abstract class MyGradeBook {
     // TODO ...
     public abstract double max(String assignmentName);
 
-    
+
     /**
      * Calculates the current grade for the given student
      * 
@@ -336,7 +338,7 @@ public abstract class MyGradeBook {
      */
     public abstract double currentGrade(String username);
 
-    
+
     /**
      * Calculates the current grade for all students
      * 
@@ -354,7 +356,7 @@ public abstract class MyGradeBook {
      */
     public abstract HashMap<String, Double> currentGrades(); 
 
-    
+
     /**
      * Provides the grade earned by the given student for the given assignment
      * 
@@ -367,7 +369,7 @@ public abstract class MyGradeBook {
     public abstract double assignmentGrade(String assignmentName,
             String username);
 
-    
+
     /**
      * Provide a String that contains the current grades of all students in the
      * course
@@ -383,7 +385,7 @@ public abstract class MyGradeBook {
      */
     public abstract String outputCurrentGrades();
 
-    
+
     /**
      * Provide a String that contains the current grades of the given student
      * 
@@ -400,7 +402,7 @@ public abstract class MyGradeBook {
      */
     public abstract String outputStudentGrades(String username);
 
-    
+
     /**
      * Provide a String that contains the assignment grades of all students in
      * the course for the given assignment
@@ -420,7 +422,7 @@ public abstract class MyGradeBook {
      */
     public abstract String outputAssignmentGrades(String assignName);
 
-    
+
     /**
      * Provide a String that contains the current grade book. This String could
      * be used to initialize a new grade book.
@@ -434,14 +436,14 @@ public abstract class MyGradeBook {
      *         alphabetically.
      */
     public abstract String outputGradebook(); 
-    
+
     /**
      * Add a list of Assignments to every student's list of assignments
      */
     public abstract void addGrades(ArrayList<Assignment> aList);
-    
+
     /**
      * 
      */
     public abstract void addStudents(ArrayList<Student> studList);
-    }
+}
