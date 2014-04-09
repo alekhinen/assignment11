@@ -320,6 +320,9 @@ public abstract class MyGradeBook {
      * Provide a String that contains the assignment grades of all students in
      * the course for the given assignment
      * 
+     * @author Austin Colcord
+     * @version 2014-08-09
+     * 
      * @param assignName
      *            name of the assignment
      * @return a String that contains the assignment grades of all students in
