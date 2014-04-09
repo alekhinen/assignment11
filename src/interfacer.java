@@ -131,7 +131,7 @@ public class Interfacer {
         this.optionsInput(this.inputter());
     }
 
-    
+
     /**
      * To create an instance of a scanner and return the input of the user.
      * 
@@ -154,7 +154,7 @@ public class Interfacer {
         return input;
     }
 
-    
+
     /**
      * The options inputs available to users.
      * 
@@ -184,6 +184,10 @@ public class Interfacer {
         else if (input.equals("2")) {
             this.initializeWithFile();
         }
+        // COMMAND "3"
+        else if (input.equals("3")) {
+            this.initializeWithString();
+        }
         // COMMAND UNKNOWN
         else {
             System.out.println("\nUnrecognized command. Returning back"
@@ -202,13 +206,20 @@ public class Interfacer {
     public void initialize() {
         System.out.println("\nCreating an empty instance of a "
                 + "Gradebook...");
+        try {
+            // Create an empty instance of MyGradeBook
+            MyGradeBook mgb = MyGradeBook.initialize();
+            System.out.println(ANSI.GREEN + "Success!\n" + ANSI.BLACK);
+            // Go to GradeBook Menu.
+            this.gradeBookMenu(mgb);
+        }
+        catch (Exception e) {
+            // An error occurred.
+            System.out.println("Something unexpected happened.");
+            System.out.println(e);
+            this.optionsMenu();
+        }
 
-        // Create an empty instance of MyGradeBook
-        MyGradeBook mgb = MyGradeBook.initialize();
-
-        System.out.println(ANSI.GREEN + "Success!\n" + ANSI.BLACK);
-
-        this.gradeBookMenu(mgb);
     }
 
 
@@ -220,19 +231,73 @@ public class Interfacer {
      * 
      */
     public void initializeWithFile() {
+        // Create an instance of Scanner
+        Scanner in = new Scanner(System.in);
+        // The input from the user
+        String input;
 
         System.out.println(ANSI.HIGH_INTENSITY 
-                + "\nGradebook with File"
+                + "\nGradebook With File"
                 + ANSI.SANE);
         System.out.println("Creating an instance of a Gradebook "
                 + "with a file...\n");
         System.out.print("Please enter a filepath: "
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY);
-        String input = this.inputter();
+        input = in.nextLine();
         System.out.print(ANSI.BLACK + ANSI.SANE);
-
         System.out.println("\nThanks! Your file is currently being "
                 + "processed.\n");
+        try {
+            // Create an instance of MyGradeBook with file input.
+            MyGradeBook mgb = MyGradeBook.initializeWithFile(input);
+            System.out.println(ANSI.GREEN + "Success!\n" + ANSI.BLACK);
+            // Go to GradeBook Menu
+            this.gradeBookMenu(mgb);
+        }
+        catch (Exception e) {
+            // An error occurred.
+            System.out.println("Something unexpected happened.");
+            System.out.println(e);
+            this.optionsMenu();
+        }
+    }
+
+
+    /**
+     * To initialize an instance of Gradebook with a string input.
+     * 
+     * @author Nick Alekhine
+     * @version 2014-04-08
+     */
+    public void initializeWithString() {
+        // Create an instance of Scanner
+        Scanner in = new Scanner(System.in);
+        // The input from the user
+        String input;
+
+        System.out.println(ANSI.HIGH_INTENSITY 
+                + "\nGradebook With Text Input"
+                + ANSI.SANE);
+        System.out.println("Please input a GradeBook: "
+                + ANSI.GREEN + ANSI.HIGH_INTENSITY);
+        input = in.nextLine();
+        System.out.print(ANSI.BLACK + ANSI.SANE);
+        System.out.println("\nThanks! Your request is being processed.\n");
+
+        try {
+            // Create an instance of MyGradeBook with text input.
+            MyGradeBook mgb = MyGradeBook.initializeWithString(input);
+            System.out.println(ANSI.GREEN + "Success!\n" + ANSI.BLACK);
+            // Go to GradeBook Menu
+            this.gradeBookMenu(mgb);
+        }
+        catch (Exception e) {
+            // An error occurred.
+            System.out.println("Something unexpected happened.");
+            System.out.println(e);
+            this.optionsMenu();
+        }
+
     }
 
 
@@ -302,12 +367,12 @@ public class Interfacer {
 
 
         String input = this.inputter();
-        
+
         this.gradeBookInput(input);
 
     }
-    
-    
+
+
     /**
      * The inputs available to the user when in the GradeBook menu.
      * 
