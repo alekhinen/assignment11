@@ -51,7 +51,7 @@ public class Assignment {
      *               the overall grade of the student
      * @param score the scored grade for the assignment
      */
-    Assignment(String name, double total, double score, double weight) {
+    public Assignment(String name, double total, double score, double weight) {
         this.name = name;
         this.total = total;
         this.weight = weight;
