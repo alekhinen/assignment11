@@ -225,9 +225,9 @@ public class Course extends MyGradeBook {
     public double median(String assignmentName) {
 
         ArrayList<Double> list = this.makeList(assignmentName);
-        
+
         list.removeAll(Collections.singleton(null));
-        
+
         //if x is even, take the higher value
         if (list.size() % 1 == 1) {
             int x = list.size()/2;
@@ -251,9 +251,9 @@ public class Course extends MyGradeBook {
     public double min(String assignmentName) {
 
         ArrayList<Double> list = this.makeList(assignmentName);
-        
+
         list.removeAll(Collections.singleton(null));
-        
+
         return list.get(0);
     }
 
@@ -272,7 +272,7 @@ public class Course extends MyGradeBook {
         ArrayList<Double> list = this.makeList(assignmentName);
 
         list.removeAll(Collections.singleton(null));
-        
+
         return list.get(list.size() - 1);
     }
 
@@ -392,21 +392,76 @@ public class Course extends MyGradeBook {
 
 
 
-
+    /**
+     * Provide a String that contains the current grades of all students in the
+     * course
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * 
+     * @return a String that contains the current grades of all students in the
+     *         course. The String should be formatted like
+     *         currentGrades.txt---CURRENT_GRADES heading and each row: username
+     *         followed by tab and current grade. The usernames will be listed
+     *         alphabetically.
+     */
     @Override
     public String outputCurrentGrades() {
-        // TODO Auto-generated method stub
-        return null;
+        String result = "CURRENT_GRADES\n";
+        for (Student s : this.studAssignMap.keySet()) {
+            result = result +
+                    s.userName + 
+                    "\t" + 
+                    this.currentGrade(s.userName) + "\n";
+        }
+        return result;
     }
 
 
 
 
-
+    /**
+     * Provide a String that contains the current grades of the given student
+     * 
+     * @author Austin Colcord
+     * @version 2014-08-09
+     * 
+     * @param username
+     *            username for student
+     * @return a String that contains the current grades of username. The String
+     *         should be formatted like studentGrades.txt---STUDENT_GRADES
+     *         heading, student info, dividers, each assignment (assignment name
+     *         followed by tab and assignment grade), and current grade.
+     *         Assignments are to remain in the same order as given.
+     */
     @Override
     public String outputStudentGrades(String username) {
-        // TODO Auto-generated method stub
-        return null;
+        String result = "STUDENT_GRADES\n";
+        for (Student s : this.studAssignMap.keySet()) {
+            
+            ArrayList<Assignment> ass = this.studAssignMap.get(s);
+            
+            if (s.userName.equals(username)) {
+                String assString = "";
+                for (Assignment a : ass) {
+                    assString = assString + a.name + "\t" + a.score + "\n";
+                }
+                result = 
+                        result + 
+                        s.userName + "\n" +
+                        s.firstName + "\n" +
+                        s.lastName + "\n" +
+                        s.advisor + "\n" +
+                        s.gradYear + "\n" +
+                        "----\n" +
+                        assString +
+                        "----" +
+                        "CURRENT GRADE" + "\t" + 
+                        this.currentGrade(s.userName) + "\n";
+                break;
+            }
+        }
+        return result;
     }
 
 
@@ -444,13 +499,13 @@ public class Course extends MyGradeBook {
     public void addGrades(ArrayList<Assignment> assList) {
         HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
         Set<Student> studs = this.studAssignMap.keySet();
-        
+
         for(Student s : studs) {
             ArrayList<Assignment> current = map.get(s);
             ArrayList<Assignment> result = new ArrayList<Assignment>();
             result.addAll(current);
             result.addAll(assList);
-            
+
             this.studAssignMap.put(s, result);
         }
     }
@@ -460,31 +515,6 @@ public class Course extends MyGradeBook {
         // TODO Auto-generated method stub
         
     }
-
     
-    /**
-     * 
-     */
-    /*
-    @Override
-    public void addStudents(ArrayList<Student> studList) {
-        HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
-        
-        if (map.size() == 0) {
-            for (Student s : studList) {
-                map.put(s, new ArrayList<Assignment>());
-            }
-        }
-        else {
-            for  {
-                ;
-                break;
-            }
-            
-            for (Student s : studList) {
-                
-            }
-        }
-    }
-    */
+    
 }

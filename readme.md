@@ -31,7 +31,7 @@ Need to work on this.
 - [x] currentGrade(String username) NICK
 - [x] currentGrades() NICK (need to throw exceptions)
 - [x] assignmentGrade(String assignmentName, String username) NICK (need to throw exceptions)
-- [ ] outputCurrentGrades()
+- [x] outputCurrentGrades() AUSTIN
 - [ ] outputStudentGrades(String username)
 - [ ] outputAssignmentGrades(String assignName)
 - [ ] outputGradebook()
@@ -61,9 +61,10 @@ Need to work on this.
     - changeGrade
 - Quality Control, Testing.
 - Linking MyGradebook to Gradebook.
+- Output Methods
 
 #### Chris Clark
-- ???
+- BlackBox Testing
 
 ### Task List
 - Build the interface

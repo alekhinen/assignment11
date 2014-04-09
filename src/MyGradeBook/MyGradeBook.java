@@ -293,18 +293,23 @@ public abstract class MyGradeBook {
      * Provide a String that contains the current grades of all students in the
      * course
      * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     * 
      * @return a String that contains the current grades of all students in the
      *         course. The String should be formatted like
      *         currentGrades.txt---CURRENT_GRADES heading and each row: username
      *         followed by tab and current grade. The usernames will be listed
      *         alphabetically.
      */
-    // TODO ...
     public abstract String outputCurrentGrades();
 
     
     /**
      * Provide a String that contains the current grades of the given student
+     * 
+     * @author Austin Colcord
+     * @version 2014-08-09
      * 
      * @param username
      *            username for student
@@ -314,7 +319,6 @@ public abstract class MyGradeBook {
      *         followed by tab and assignment grade), and current grade.
      *         Assignments are to remain in the same order as given.
      */
-    // TODO ...
     public abstract String outputStudentGrades(String username);
 
     
