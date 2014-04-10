@@ -2,10 +2,12 @@ package gradebook;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -292,7 +294,8 @@ public class MyGradeBookTest {
     public void testMin() {
         this.reset();
         assertEquals(c1.min("Assignment1"), 45.0, .001);
-        assertEquals(c1.min("Assignment2"), 66.6, .066666666666666);
+        assertEquals(c1.min("Assignment2"), 66.6, .067);
+        assertEquals(c1.min("Assignment3"), 90.0, .000);
     }
 
     /** test the max method
@@ -304,6 +307,8 @@ public class MyGradeBookTest {
     public void testMax() {
         this.reset();
         assertEquals(c1.max("Assignment1"), 96.0, .001);
+        assertEquals(c1.max("Assignment2"), 95.8, .034);
+        assertEquals(c1.max("Assignment3"), 90.0, .000);
     }
 
     /** test the getStudent method in GradeBook
@@ -317,6 +322,7 @@ public class MyGradeBookTest {
         assertEquals(this.s3, this.c1.getStudent("nalekhn"));
         assertEquals(null, this.c1.getStudent("blah"));
         assertEquals(this.s1, this.c1.getStudent("chperrone"));
+        assertEquals(this.s2, this.c1.getStudent("thmyolk"));
     }
 
     /** test the currentGrade method in GradeBook
@@ -330,6 +336,7 @@ public class MyGradeBookTest {
         assertEquals(94, this.c1.currentGrade("nalekhn"), .01);
         assertEquals(93.89, this.c1.currentGrade("chperrone"), .01);
         assertEquals(67.08, this.c1.currentGrade("thmyolk"), .01);
+        assertEquals(0, this.c1.currentGrade("a;ldfjk"), .00);
     }
 
     /** test the currentGrades method in GradeBook
@@ -345,6 +352,7 @@ public class MyGradeBookTest {
         result.put("thmyolk", 67.08);
         result.put("nalekhn", (double) 94);
         assertEquals(result, this.c1.currentGrades());
+        assertEquals(this.c1.currentGrades(), this.c2.currentGrades());
     }
 
     /** test the assignmentGrade method in GradeBook
@@ -355,12 +363,14 @@ public class MyGradeBookTest {
     @Test
     public void testAssignmentGrade() {
         this.reset();
-        assertEquals((double) 90, 
+        assertEquals(90, 
                 this.c1.assignmentGrade("Assignment1", "chperrone"), .01);
         assertEquals(95.83,
                 this.c1.assignmentGrade("Assignment2", "chperrone"), .01);
         assertEquals(0, 
                 this.c1.assignmentGrade("Assignment3", "chperrone"), .01);
+        assertEquals(this.c1.assignmentGrade("asldfjk", "chperrone"), 0, .00);
+        assertEquals(this.c1.assignmentGrade("Assignment1", "als;dkjf"), 0, .0);
     }
 
     /**
@@ -396,28 +406,67 @@ public class MyGradeBookTest {
     }
 
     
-    /**
-     * To test the addStudents method
+    /** To test the addStudents method
+     * 
+     * @author Austin Colcord
+     * @author Charles Perrone
+     * @version 2014-04-09
      */
     @Test
     public void testAddStudents() {
         this.reset();
         
         ArrayList<Student> stud = new ArrayList<Student>();
-        stud.add(this.s1);
         stud.add(this.s2);
+        stud.add(this.s1);
+        
+        Course testCourse = new Course();
+        
+        testCourse.addStudents(stud);
+        
+        Set<Student> tCourseSet = testCourse.studAssignMap.keySet();
+        List<Student> tCourseList = new ArrayList<Student>(tCourseSet);
+        
+        Set<Student> c1CourseSet = this.c1.studAssignMap.keySet();
+        List<Student> c1CourseList = new ArrayList<Student>(c1CourseSet);
+        
+        assertEquals(tCourseList, stud);
+        assertFalse(c1CourseList.equals(stud));
+        assertTrue(tCourseList.equals(stud));
+        
         
         MyGradeBook mtbook = MyGradeBook.initialize();
         try {
             MyGradeBook notmt = MyGradeBook.initializeWithFile("initial.txt");
             notmt.addStudents(stud);
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             System.out.println("this test failed");
         }
         
         mtbook.addStudents(stud);
+        
+        
+    }
+    
+    /** test the addgrades method in course
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-09
+     */
+    @Test
+    public void testAddGrades() {
+        this.reset();
+        ArrayList<Assignment> testAssignment = new ArrayList<Assignment>();
+        testAssignment.add(new Assignment("TestAssignment", 100, .50));
+        assertEquals(this.c1.studAssignMap.get(this.s1).size(), 2);
+        assertEquals(this.c1.studAssignMap.get(this.s2).size(), 3);
+        assertEquals(this.c1.studAssignMap.get(this.s3).size(), 3);
+        assertEquals(this.c1, this.c2);
+        this.c1.addGrades(testAssignment);
+        assertEquals(this.c1.studAssignMap.get(this.s1).size(), 3);
+        assertEquals(this.c1.studAssignMap.get(this.s2).size(), 4);
+        assertEquals(this.c1.studAssignMap.get(this.s3).size(), 4);
     }
 
     /** test the newGradeBook method in Course

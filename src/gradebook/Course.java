@@ -786,7 +786,8 @@ public class Course extends MyGradeBook {
      * Add all of the elements in the given arrayList to 
      * every student's assignment list
      * 
-     * @author charlesperrone
+     * @author Charles Perrone
+     * @version 2014-04-09
      * 
      * @param assList the assignment list to add grades from
      */
@@ -803,7 +804,14 @@ public class Course extends MyGradeBook {
             this.studAssignMap.put(s, result);
         }
     }
-
+    
+    /** adds an arrayList of students to the current course
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-09
+     * 
+     * @param studList the arraylist of students to add
+     */
     @Override
     public void addStudents(ArrayList<Student> studList) {
         Set<Student> studSet = this.studAssignMap.keySet();
