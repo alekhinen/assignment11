@@ -26,7 +26,7 @@ public class Assignment {
 
 
     ///////////////////////////////////////////////////////////////////////////
-    // CONSTRUCTORS ///////////////////////////////////////////////////////////   
+    // CONSTRUCTORS /////////////////////////////////////////////////////////// 
 
     /**
      * The constructor for Assignment that does not accept a score
@@ -71,10 +71,18 @@ public class Assignment {
     @Override
     public boolean equals(Object other) {
         if (other instanceof Assignment) {
-            return this.name.equals(((Assignment) other).name) &&
-                    this.total.equals(((Assignment) other).total) &&
-                    this.weight.equals(((Assignment) other).weight) &&
-                    this.score.equals(((Assignment) other).score);
+            if (this.score == null) {
+                return this.name.equals(((Assignment) other).name) &&
+                        this.total.equals(((Assignment) other).total) &&
+                        this.weight.equals(((Assignment) other).weight) &&
+                        ((Assignment) other).score == null;
+            }
+            else {
+                return this.name.equals(((Assignment) other).name) &&
+                        this.total.equals(((Assignment) other).total) &&
+                        this.weight.equals(((Assignment) other).weight) &&
+                        this.score.equals(((Assignment) other).score);
+            }
         }
         else {
             return false;
@@ -89,7 +97,7 @@ public class Assignment {
      */
     @Override
     public int hashCode() {
-        if (this.score.equals(null)) {
+        if (this.score == null) {
             return this.name.hashCode() +
                     this.total.hashCode() +
                     this.weight.hashCode();
