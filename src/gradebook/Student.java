@@ -1,6 +1,4 @@
 package gradebook;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /** represents a student in the schoool that contains a name and a hashmap/map
  * of the assignments that the student has assigned to him
@@ -34,13 +32,14 @@ public class Student {
     ///////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS ///////////////////////////////////////////////////////////
 
-    /**
+    /** creates a new student with username, firstname, lastname, advisor, and
+     * gradyear
      * 
-     * @param userName
-     * @param firstName
-     * @param lastName
-     * @param advisor
-     * @param gradYear
+     * @param userName the username for the student
+     * @param firstName the first name for the student
+     * @param lastName the last name for the student
+     * @param advisor the student's advisor
+     * @param gradYear the student's graduation year
      */
     public Student(String userName, 
             String firstName, 
@@ -74,7 +73,7 @@ public class Student {
             return this.userName.equals(((Student) other).userName) &&
                     this.firstName.equals(((Student) other).firstName) &&
                     this.lastName.equals(((Student) other).lastName) &&
-                    this.advisor.equals(((Student) other).advisor)&&
+                    this.advisor.equals(((Student) other).advisor) &&
                     this.gradYear == ((Student) other).gradYear;
         }
         else {
