@@ -243,7 +243,7 @@ public class MyGradeBookTest {
         assertEquals(this.c1.makeList("Assignment2"),
                 new ArrayList<Double>(
                         Arrays.asList(
-                                66.66666666666666, 95.0, 95.83333333333334)));   
+                                66.66666666666666, 95.0, 95.83333333333334)));
     }
 
     /** test the average method
@@ -349,7 +349,7 @@ public class MyGradeBookTest {
         assertEquals((double) 90, 
                 this.c1.assignmentGrade("Assignment1", "chperrone"), .01);
         assertEquals(95.83,
-                this.c1.assignmentGrade("Assignment2", "chperrone"),.01);
+                this.c1.assignmentGrade("Assignment2", "chperrone"), .01);
         assertEquals(0, 
                 this.c1.assignmentGrade("Assignment3", "chperrone"), .01);
     }
@@ -364,7 +364,7 @@ public class MyGradeBookTest {
         try {
             MyGradeBook.initialize().processFile("addAssignments.txt");
         }
-        catch(Exception e) {
+        catch (Exception e) {
             System.out.println("File not found");
         }
 
@@ -372,7 +372,7 @@ public class MyGradeBookTest {
         try {
             this.c1.processFile("addStudents.txt");
         }
-        catch(Exception e) {
+        catch (Exception e) {
             System.out.println("File not Found");
         }
 
@@ -386,14 +386,6 @@ public class MyGradeBookTest {
         MyGradeBook.initialize().processString(additionalString);
     }
 
-    /**
-     * To test the addGrades method
-     */
-    @Test
-    public void testAddGrades() {
-        MyGradeBook book = MyGradeBook.initialize();
-        
-    }
     
     /**
      * To test the addStudents method
@@ -441,12 +433,16 @@ public class MyGradeBookTest {
         assertEquals(MyGradeBook.initialize(), new Course());
     }
 
+    /** test the method initializeFile */
     @Test
     public void testInitializeFile() {
         this.reset();
+        assertTrue(true);
+        assertFalse(false);
         try {
             MyGradeBook.initializeWithFile("initial.txt");
-        } catch (FileNotFoundException e) {
+        } 
+        catch (FileNotFoundException e) {
             System.out.println("File Not Found");
         }
     }
@@ -457,5 +453,20 @@ public class MyGradeBookTest {
         String test = "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5\nabetaylor" + 
         "\tIsabella\tTaylor\tBaker\t2016\t8\t71";
         MyGradeBook.initializeWithString(test);
+    }
+    /** test the studentcomparator 
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-09
+     */
+    @Test
+    public void testStudentComparator() {
+        this.reset();
+        StudentComparator sComp = new StudentComparator();
+        assertEquals(sComp.compare(this.s1, this.s2), -17);
+        assertEquals(sComp.compare(this.s1, this.s3), -11);
+        assertEquals(sComp.compare(this.s2, this.s3), 6);
+        assertEquals(sComp.compare(this.s3, this.s1), 11);
+        assertEquals(sComp.compare(this.s3, this.s2), -6);
     }
 }

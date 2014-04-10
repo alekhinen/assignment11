@@ -708,7 +708,6 @@ public class Course extends MyGradeBook {
             for (Student s : studList) {
                 this.studAssignMap.put(s, new ArrayList<Assignment>());
             }
-            //System.out.println(this.studAssignMap);
         }
         
         else {
@@ -723,7 +722,6 @@ public class Course extends MyGradeBook {
             for (Student s : studList) {
                 this.studAssignMap.put(s, newStudList);
             }
-            System.out.println(this.studAssignMap);
         }
         
     }
