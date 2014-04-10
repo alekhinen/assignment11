@@ -423,4 +423,20 @@ public class MyGradeBookTest {
             System.out.println("File Not Found");
         }
     }
+    
+    /** test the studentcomparator 
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-09
+     */
+    @Test
+    public void testStudentComparator() {
+        this.reset();
+        StudentComparator sComp = new StudentComparator();
+        assertEquals(sComp.compare(this.s1, this.s2), -17);
+        assertEquals(sComp.compare(this.s1, this.s3), -11);
+        assertEquals(sComp.compare(this.s2, this.s3), 6);
+        assertEquals(sComp.compare(this.s3, this.s1), 11);
+        assertEquals(sComp.compare(this.s3, this.s2), -6);
+    }
 }
