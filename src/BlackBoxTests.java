@@ -148,13 +148,13 @@ public class BlackBoxTests {
     @Test
     public void testProcessFile() {
         reset();
-//        try {
-//            testBook.processFile("addStudents.txt");
-//            System.out.print(testBook.outputGradebook());
-//        } catch (FileNotFoundException e) {
-//         // To catch/test expected exceptions
-//            e.printStackTrace();
-//        }
+        try {
+            testBook.processFile("addStudents.txt");
+            System.out.print(testBook.outputGradebook());
+        } catch (Exception e) {
+         // To catch/test expected exceptions
+            e.printStackTrace();
+        }
     }
 
     /** test the processString method in Course **/

@@ -254,7 +254,7 @@ public class MyGradeBookTest {
         assertEquals(this.c1.makeList("Assignment2"),
                 new ArrayList<Double>(
                         Arrays.asList(
-                                66.66666666666666, 95.0, 95.83333333333334)));
+                                80.0, 114.0, 115.0)));
     }
 
     /** test the average method
@@ -267,7 +267,7 @@ public class MyGradeBookTest {
     public void testAverage() {
         this.reset();
         assertEquals(c1.average("Assignment1"), 77.0, .001);
-        assertEquals(c1.average("Assignment2"), 85.833, .001);
+        assertEquals(c1.average("Assignment2"), 103.0, .001);
         assertEquals(c1.average("Assignment3"), 90.0, .001);
         try {
             Course.newGradeBook().average("TEST");
@@ -311,8 +311,8 @@ public class MyGradeBookTest {
         //list with an even size
         assertEquals(c1.median("Assignment1"), 90.0, .001);
         assertEquals(c1.median("Assignment3"), 90.0, .001);
-        assertEquals(c1.median("Assignment2"), 95.0, .001);
         assertEquals(newCourse.median("Assignment1"), 90, .00);
+        assertEquals(c1.median("Assignment2"), 114.0, .001);
         
         try {
             Course.newGradeBook().median("TEST");
@@ -346,7 +346,7 @@ public class MyGradeBookTest {
     public void testMin() {
         this.reset();
         assertEquals(c1.min("Assignment1"), 45.0, .001);
-        assertEquals(c1.min("Assignment2"), 66.6, .067);
+        assertEquals(c1.min("Assignment2"), 80.0, .067);
         assertEquals(c1.min("Assignment3"), 90.0, .000);
         
         try {
@@ -381,7 +381,7 @@ public class MyGradeBookTest {
     public void testMax() {
         this.reset();
         assertEquals(c1.max("Assignment1"), 96.0, .001);
-        assertEquals(c1.max("Assignment2"), 95.8, .034);
+        assertEquals(c1.max("Assignment2"), 115.0, .034);
         assertEquals(c1.max("Assignment3"), 90.0, .000);
         
         try {
@@ -492,11 +492,11 @@ public class MyGradeBookTest {
 
         try {
             this.c1.processFile("addStudents.txt");
+            System.out.println(this.c1);
         }
         catch (Exception e) {
             System.out.println("File not Found");
         }
-
     }
 
     /** test the processString method
@@ -507,9 +507,15 @@ public class MyGradeBookTest {
     @Test
     public void testProcessString() {
         this.reset();
-        String additionalString = "ASSIGNMENT\nFirst Group Project\n150\n10\nASSIGNMENT\nTest\n100\n25";
+        String additionalAssignment = "ASSIGNMENT\nFirst Group Project\n150\n10\nASSIGNMENT\nTest\n100\n25";
+        String additionalStudent = "";
 
-        MyGradeBook.initialize().processString(additionalString);
+        MyGradeBook test = MyGradeBook.initializeWithFile("initial.txt");
+        
+        test.processString(additionalAssignment);
+        System.out.println(test);
+        
+        
     }
 
 

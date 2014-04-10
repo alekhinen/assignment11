@@ -233,7 +233,7 @@ public class Course extends MyGradeBook {
                 Assignment current = ass.get(i);
 
                 if (current.name.equals(assignmentName)) {
-                    double percent = 100 * (current.score / current.total);
+                    double percent = current.score;
                     result.add(percent);
                 }
             }
