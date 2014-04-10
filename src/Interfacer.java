@@ -283,14 +283,17 @@ public class Interfacer {
                 + ANSI.SANE);
         System.out.println("Please input a GradeBook: "
                 + ANSI.GREEN + ANSI.HIGH_INTENSITY);
-        input = in.nextLine();
+        input = in.next();
         System.out.print(ANSI.BLACK + ANSI.SANE);
         System.out.println("\nThanks! Your request is being processed.\n");
-
+        
+        System.out.println("\n\n\n" + input + "\n\n\n");
+        
         try {
             // Create an instance of MyGradeBook with text input.
             MyGradeBook mgb = MyGradeBook.initializeWithString(input);
             System.out.println(ANSI.GREEN + "Success!\n" + ANSI.BLACK);
+            
             // Go to GradeBook Menu
             this.gradeBookMenu(mgb);
         }
