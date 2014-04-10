@@ -30,6 +30,8 @@ public class MyGradeBookTest {
     /** Student 3 */
     Student s3;
 
+    /** Assignment 0  (empty assignment score) */
+    Assignment a0;
     /** Assignment 1 */
     Assignment a1;
     /** Assignment 2 */
@@ -47,6 +49,7 @@ public class MyGradeBookTest {
     /** Assignment 8 */
     Assignment a8;
 
+    
     /** Assignments List 1 */
     ArrayList<Assignment> aList1;
     /** Assignments List 2 */
@@ -74,6 +77,8 @@ public class MyGradeBookTest {
         this.s3 = new Student("nalekhn", "Nick", "Alex", "Alekhine", 2017);
 
         /** Assignments */
+        this.a0 = new Assignment("Assignment0", 100, .25);
+        
         this.a1 = new Assignment("Assignment1", 100, 90, .25);
         this.a2 = new Assignment("Assignment2", 120, 115, .50);
 
@@ -216,6 +221,9 @@ public class MyGradeBookTest {
     @Test
     public void testChangeScore() {
         this.reset();
+        assertEquals(this.a0.score, null);
+        this.a0.changeScore(new Double(100));
+        assertEquals(this.a0.score, 100, .0);
         assertEquals(this.a1.score, new Double(90));
         this.a1.changeScore(new Double(9));
         assertEquals(this.a1.score, new Double(9));
@@ -397,6 +405,10 @@ public class MyGradeBookTest {
     public void testNewGradeBook() {
         this.reset();
         assertEquals(Course.newGradeBook(), new Course());
+        assertFalse(Course.newGradeBook().equals(this.c1));
+        assertEquals(Course.newGradeBook(this.map1), this.c1);
+        assertFalse(Course.newGradeBook(this.map1).equals(
+                Course.newGradeBook()));
     }
 
     /** test the initialize method in MyGradeBook
