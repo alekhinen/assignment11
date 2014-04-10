@@ -202,7 +202,7 @@ public class Course extends MyGradeBook {
         double sum = 0;
 
         for (Double d : list) {
-            if (!(d == null)) {
+            if (d != null) {
                 sum += d;
             }
         }

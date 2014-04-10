@@ -64,5 +64,15 @@ public final class ANSI {
 
     /** Disable automatic constructor */
     private ANSI() { }
+    
+    /** create a new ANSI (to fix webcat testing issue)
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-10
+     */
+    public static ANSI newANSI() {
+        return new ANSI();
+    }
+    
 
 }

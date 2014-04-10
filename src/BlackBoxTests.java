@@ -24,6 +24,9 @@ public class BlackBoxTests {
     MyGradeBook mtBook;
     MyGradeBook book1;
     MyGradeBook testBook;
+    
+    
+    ANSI ansi = ANSI.newANSI();
 
     /** 
      * To set values to each variable. 

@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.junit.Test;
@@ -268,6 +269,26 @@ public class MyGradeBookTest {
         assertEquals(c1.average("Assignment1"), 77.0, .001);
         assertEquals(c1.average("Assignment2"), 85.833, .001);
         assertEquals(c1.average("Assignment3"), 90.0, .001);
+        try {
+            Course.newGradeBook().average("TEST");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
+        try {
+            this.c1.average("NOT HERE");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
     }
 
     /** test the median method
@@ -279,10 +300,40 @@ public class MyGradeBookTest {
     @Test
     public void testMedian() {
         this.reset();
+        
+        HashMap<Student, ArrayList<Assignment>> newHash = 
+                new HashMap<Student, ArrayList<Assignment>>();
+        newHash.put(this.s1, this.aList1);
+        newHash.put(this.s2, this.aList1);
+        
+        Course newCourse = Course.newGradeBook(newHash);
+        
         //list with an even size
         assertEquals(c1.median("Assignment1"), 90.0, .001);
         assertEquals(c1.median("Assignment3"), 90.0, .001);
         assertEquals(c1.median("Assignment2"), 95.0, .001);
+        assertEquals(newCourse.median("Assignment1"), 90, .00);
+        
+        try {
+            Course.newGradeBook().median("TEST");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
+        try {
+            this.c1.median("NOT HERE");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
     }
 
     /** test the min method
@@ -297,6 +348,27 @@ public class MyGradeBookTest {
         assertEquals(c1.min("Assignment1"), 45.0, .001);
         assertEquals(c1.min("Assignment2"), 66.6, .067);
         assertEquals(c1.min("Assignment3"), 90.0, .000);
+        
+        try {
+            Course.newGradeBook().min("TEST");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
+        try {
+            this.c1.min("NOT HERE");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
     }
 
     /** test the max method
@@ -311,6 +383,27 @@ public class MyGradeBookTest {
         assertEquals(c1.max("Assignment1"), 96.0, .001);
         assertEquals(c1.max("Assignment2"), 95.8, .034);
         assertEquals(c1.max("Assignment3"), 90.0, .000);
+        
+        try {
+            Course.newGradeBook().max("TEST");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
+        try {
+            this.c1.max("NOT HERE");
+            System.out.println("Should throw an exception.");
+            assertTrue(false);
+        }
+        catch (NoSuchElementException e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
+        }
     }
 
     /** test the getStudent method in GradeBook
