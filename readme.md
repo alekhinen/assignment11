@@ -38,17 +38,15 @@ Need to work on this.
 
 ### Testing CheckList
 #### MyGradeBookTest.java
-##### AUSTIN
-- [ ] MyGradeBook
+- [ ] MyGradeBook AUSTIN
 	- These both may be able to be covered in BlackBox Testing
-		- [ ] initialize methods need to be tested
-		- [ ] processing methods need to be testing
+		- [ ] initialize methods need to be tested CHARLES
+		- [ ] processing methods need to be testing CHARLES
 - [x] Course AUSTIN
 - [x] Assignment AUSTIN
 - [x] Student AUSTIN
 #### BlackBoxTests.java
-##### CHRIS
-- [ ] MyGradeBook
+- [ ] MyGradeBook CHRIS
 
 
 ### Distribution of Work
