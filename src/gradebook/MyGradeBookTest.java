@@ -3,7 +3,6 @@ package gradebook;
 import static org.junit.Assert.*;
 
 import java.util.List;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -484,7 +483,6 @@ public class MyGradeBookTest {
         try {
             MyGradeBook blank = MyGradeBook.initialize();
             blank.processFile("addAssignments.txt");
-            
         }
         catch (Exception e) {
             System.out.println("File not found");
@@ -497,6 +495,15 @@ public class MyGradeBookTest {
         catch (Exception e) {
             System.out.println("File not Found");
         }
+        this.reset();
+        try {
+            MyGradeBook blank = MyGradeBook.initializeWithFile("initial.txt");
+            blank.processFile("gradesForStudent.txt");
+            System.out.println(blank);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /** test the processString method
@@ -507,8 +514,9 @@ public class MyGradeBookTest {
     @Test
     public void testProcessString() {
         this.reset();
-        String additionalAssignment = "ASSIGNMENT\nFirst Group Project\n150\n10\nASSIGNMENT\nTest\n100\n25";
-        String additionalStudent = "";
+        String additionalAssignment = 
+                "ASSIGNMENT\nFirst Group Project\n150"
+                + "\n10\nASSIGNMENT\nTest\n100\n25";
 
         MyGradeBook test = MyGradeBook.initializeWithFile("initial.txt");
         
@@ -550,11 +558,17 @@ public class MyGradeBookTest {
 
         MyGradeBook mtbook = MyGradeBook.initialize();
         try {
+            System.out.println("Should throw an exception.");
             MyGradeBook notmt = MyGradeBook.initializeWithFile("initial.txt");
             notmt.addStudents(stud);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+        } 
+        catch (Exception e) {
+            assertTrue(true);
+            System.out.println("Correctly throws exception.");
+            System.out.println(e);
         }
+        
+       
 
         mtbook.addStudents(stud);
 
@@ -615,6 +629,7 @@ public class MyGradeBookTest {
     @Test
     public void testInitializeFile() {
         this.reset();
+        assertTrue(true);
 
         try {
             MyGradeBook.initializeWithFile("initial.txt");
@@ -632,7 +647,10 @@ public class MyGradeBookTest {
     @Test
     public void testInitializeString() {
         this.reset();
-        String test = "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5\nabetaylor\tIsabella\tTaylor\tBaker\t2016\t8\t71";
+        assertTrue(true);
+        String test = 
+                "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100"
+                + "\n1\t5\nabetaylor\tIsabella\tTaylor\tBaker\t2016\t8\t71";
         
         MyGradeBook.initializeWithString(test);
     }
@@ -652,10 +670,4 @@ public class MyGradeBookTest {
         assertEquals(sComp.compare(this.s3, this.s2), -6);
     }
     
-    @Test
-    public void testThis() {
-        this.reset();
-        
-        
-    }
 }
