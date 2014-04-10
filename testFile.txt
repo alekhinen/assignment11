@@ -1,0 +1,7 @@
+GRADEBOOK
+					A1	A2
+					100	100
+					5	5
+chperrone	Charles	Haydon	Perrone	2017	80	71
+thmyolk	Thom	Mearle	Yorke	2017	60	90
+nalekhn	Nick	Alex	Alekhine	2017	80	79

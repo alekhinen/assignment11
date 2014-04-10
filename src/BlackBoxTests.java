@@ -1,278 +1,261 @@
 import static org.junit.Assert.*;
-import gradebook.*;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import org.junit.Test;
 
-/** represents the black box tests for MyGradeBook
- * 
- * @author Austin Colcord
- * @author Chris Clark
- * @version 2014-04-09
- */
+import gradebook.*;
+
+
 public class BlackBoxTests {
 
-    ///////////////////////////////////////////////////////////////////////////
-    // FIELDS /////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	// FIELDS /////////////////////////////////////////////////////////////////
 
-    /** Student 1 */
-    Student s1;
-    /** Student 2 */
-    Student s2;
-    /** Student 3 */
-    Student s3;
+	/**
+	 * MyGradeBook Instances
+	 */
+	MyGradeBook mtBook;
+	MyGradeBook book1;
+	MyGradeBook testBook;
 
-    /** Assignment 1 */
-    Assignment a1;
-    /** Assignment 2 */
-    Assignment a2;
-    /** Assignment 3 */
-    Assignment a3;
-    /** Assignment 4 */
-    Assignment a4;
-    /** Assignment 5 */
-    Assignment a5;
-    /** Assignment 6 */
-    Assignment a6;
-    /** Assignment 7 */
-    Assignment a7;
-    /** Assignment 8 */
-    Assignment a8;
-
-    /** Assignments List 1 */
-    ArrayList<Assignment> aList1;
-    /** Assignments List 2 */
-    ArrayList<Assignment> aList2;
-    /** Assignments List 3 */
-    ArrayList<Assignment> aList3;
-
-    /** Student => Assignments 1 */
-    HashMap<Student, ArrayList<Assignment>> map1;
-
-    /** Course 1 */
-    Course c1;
-
-    /** Course 1 studAssignMap **/
-
-    /** 
-     * To set values to each variable. 
-     * */
-    public void reset() {
-        /** Students */
-        this.s1 = 
-                new Student("chperrone", "Charles", "Haydon", "Perrone", 2017);
-        this.s2 = new Student("thmyolk", "Thom", "Mearle", "Yorke", 2017);
-        this.s3 = new Student("nalekhn", "Nick", "Alex", "Alekhine", 2017);
-
-        /** Assignments */
-        this.a1 = new Assignment("Assignment1", 100, 90, .25);
-        this.a2 = new Assignment("Assignment2", 120, 115, .50);
-
-        this.a3 = new Assignment("Assignment1", 100, 45, .25);
-        this.a4 = new Assignment("Assignment2", 120, 80, .50);
-        this.a5 = new Assignment("Assignment3", 100, 90, .25);
-
-        this.a6 = new Assignment("Assignment1", 100, 96, .25);
-        this.a7 = new Assignment("Assignment2", 120, 114, .50);
-        this.a8 = new Assignment("Assignment3", 100, 90, .25);
-
-        /** Populate Assignment Lists */
-        this.aList1 = new ArrayList<Assignment>();
-        this.aList1.add(this.a1);
-        this.aList1.add(this.a2);
-
-        this.aList2 = new ArrayList<Assignment>();
-        this.aList2.add(this.a3);
-        this.aList2.add(this.a4);
-        this.aList2.add(this.a5);
-
-        this.aList3 = new ArrayList<Assignment>();
-        this.aList3.add(this.a6);
-        this.aList3.add(this.a7);
-        this.aList3.add(this.a8);
-
-        this.map1 = new HashMap<Student, ArrayList<Assignment>>();
-        this.map1.put(this.s1, this.aList1);
-        this.map1.put(this.s2, this.aList2);
-        this.map1.put(this.s3, this.aList3);
-
-        this.c1 = this.c1.newGradeBook(map1);
-    }
+	/** 
+	 * To set values to each variable. 
+	 * */
+	public void reset() {
+		mtBook = MyGradeBook.initialize();
+		try {
+			book1 = MyGradeBook.initializeWithFile("initial.txt");
+			testBook = MyGradeBook.initializeWithFile("testFile.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 
+	///////////////////////////////////////////////////////////////////////////
+	// METHODS ////////////////////////////////////////////////////////////////
 
+	/** test the initialize method in Course 
+	 * 
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testInitialize() {
+		reset();
+		assertEquals(MyGradeBook.initialize(), mtBook);
+		assertFalse(MyGradeBook.initialize().equals(book1));
+	}
 
-    ///////////////////////////////////////////////////////////////////////////
-    // METHODS ////////////////////////////////////////////////////////////////
+	/** test the initializeWithFile method in Course **/
+	@Test
+	public void testInitializeWithFile() {
+		reset();
+	}
 
-    /** test the initialize method in Course 
-     * 
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testInitialize() {
-        this.c1 = this.c1.newGradeBook();
-        assertEquals(Course.initialize(), c1);
-    }
+	/** test the initializeWithString method in Course **/
+	@Test
+	public void testInitializeWithString() {
+		//TODO
+	}
 
-    /** test the initializeWithFile method in Course **/
-    @Test
-    public void testInitializeWithFile() {
-        //TODO
-    }
+	/** test the processFile method in Course **/
+	@Test
+	public void testProcessFile() {
+		//TODO
+	}
 
-    /** test the initializeWithString method in Course **/
-    @Test
-    public void testInitializeWithString() {
-        //TODO
-    }
+	/** test the processString method in Course **/
+	@Test
+	public void testProcessString() {
+		//TODO
+	}
 
-    /** test the processFile method in Course **/
-    @Test
-    public void testProcessFile() {
-        //TODO
-    }
+	/** test the changeGrade method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testChangeGrade() {
+		reset();
+		assertTrue(book1.changeGrade("A2", "enwilson", 95));
+		assertFalse(book1.changeGrade("A3", "enwilson", 10));
+		assertFalse(book1.changeGrade("A2", "clarkch", 100));
+	}
 
-    /** test the processString method in Course **/
-    @Test
-    public void testProcessString() {
-        //TODO
-    }
+	/** test the average method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testAverage() {
+		reset();
+		assertEquals(book1.average("Opening Assignment"), 73.52, 0.01);
+		assertEquals(book1.average("A2"), 81.82, 0.01);
 
-    /** test the changeGrade method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testChangeGrade() {
-        reset();
-        assertTrue(c1.changeGrade("Assignment1", "chperrone", 95));
-        assertFalse(c1.changeGrade("Assignment4", "chperrone", 10));
-        assertFalse(c1.changeGrade("Assignment1", "joeblo", 100));
-    }
+		book1.changeGrade("A2", "enwilson", 0);
+		assertFalse(book1.average("A2") == 80);
+	}
 
-    /** test the average method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testAverage() {
-        reset();
-        assertEquals(c1.average("Assignment1"), 77.0, 0);
-        assertEquals(c1.average("Assignment2"), 85.83, 0.01);
-        assertEquals(c1.average("Assignment3"), 90.0, 0);
-    }
+	/** test the median method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testMedian() {
+		reset();
+		assertEquals(book1.median("Opening Assignment"), 80, .0);
+		assertEquals(book1.median("A2"), 83, .0);
 
-    /** test the median method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testMedian() {
-        reset();
-        assertEquals(c1.median("Assignment1"), 90, .0);
-        assertEquals(c1.median("Assignment2"), 95, .0);
-        assertEquals(c1.median("Assignment3"), 90, .0);
+		book1.changeGrade("A2", "enwilson", 25);
+		assertFalse(book1.median("A2") == 80);
+	}
 
-        c1.changeGrade("Assignment1", "chperrone", 25);
+	/** test the min method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testMin() {
+		reset();
+		reset();
+		assertEquals(testBook.min("A1"), 60, 0);
 
-        assertEquals(c1.median("Assignment1"), 90, .0);
-        assertEquals(c1.median("Assignment1"), 45, .0);
-    }
+		testBook.changeGrade("A1", "thmyolk", 99);
+		assertEquals(testBook.min("A1"), 80, 0);
+	}
 
-    /** test the min method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testMin() {
-        reset();
-        assertEquals(c1.min("Assignment1"), 45, 0);
+	/** test the max method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testMax() {
+		reset();
+		assertEquals(testBook.max("A1"), 80, 0);
 
-        c1.changeGrade("Assignment1", "thmyolk", 55);
-        assertEquals(c1.min("Assignment1"), 55, .0001);
-    }
+		testBook.changeGrade("A1", "chperrone", 100);
+		assertEquals(testBook.max("A1"), 100, 0);
+	}
 
-    /** test the max method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testMax() {
-        reset();
-        assertEquals(c1.max("Assignment1"), 96, 0);
+	/** test the currentGrade method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testCurrentGrade() {
+		reset();
+		assertEquals(book1.currentGrade("enwilson"), 82.5, 0.001);
+		assertEquals(book1.currentGrade("onon"), 84.17, 0.001);
 
-        c1.changeGrade("Assignment1", "chperrone", 100);
-        assertEquals(c1.max("Assignment1"), 100, .0001);
-    }
+		book1.changeGrade("A2", "enwilson", 100);
 
-    /** test the currentGrade method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testCurrentGrade() {
-        reset();
-        assertEquals(c1.currentGrade("chperrone"), 93.8, 0.1);
-        assertEquals(c1.currentGrade("thmyolk"), 67, 0.1);
+		assertEquals(book1.currentGrade("enwilson"), 96.6, 0.1);
+	}
 
-        c1.changeGrade("Assignment1", "thmyolk", 100);
+	/** test the currentGrades method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testCurrentGrades() {
+		reset();
+		HashMap<String, Double> testBookCurrentGrades = 
+				new HashMap<String, Double>();
 
-        assertEquals(c1.currentGrade("thmyolk"), 80.8, 0.1);
-    }
+		testBookCurrentGrades.put("chperrone", 75.5);
+		testBookCurrentGrades.put("thmyolk", 75.0);
+		testBookCurrentGrades.put("nalekhn", 79.5);
 
-    /** test the currentGrades method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testCurrentGrades() {
-        reset();
-        HashMap<String, Double> c1CurrentGrades = new HashMap<String, Double>();
+		assertEquals(testBook.currentGrades(), testBookCurrentGrades);
+	}
 
-        c1CurrentGrades.put("chperrone", 93.89);
-        c1CurrentGrades.put("thmyolk", 67.08);
-        c1CurrentGrades.put("nalekhn", 94.0);
+	/** test the assignmentGrade method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-08
+	 */
+	@Test
+	public void testAssignmentGrade() {
+		reset();
+		assertEquals(testBook.assignmentGrade("A1", "chperrone"), 80, 0);
+		assertEquals(testBook.assignmentGrade("A2", "chperrone"), 71, 0);
+	}
 
-        assertEquals(c1.currentGrades(), c1CurrentGrades);
-    }
+	/** test the outputCurrentGrades method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-09
+	 */
+	@Test
+	public void testOutputCurrentGrades() {
+		reset();
+		String outputCurrent = "CURRENT_GRADES\n"
+				+ "chperrone\t" + "75.5\n"
+				+ "nalekhn\t" + "79.5\n"
+				+ "thmyolk\t" + "75.0\n";
+		assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+	}
 
-    /** test the assignmentGrade method in Course
-     *
-     * @author Chris Clark
-     * @version 2014-04-08
-     */
-    @Test
-    public void testAssignmentGrade() {
-        //TODO
-    }
+	/** test the outputAssignmentGrades method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-09
+	 */
+	@Test
+	public void testOutputAssignmentGrades() {
+		reset();
+		String a1OutputCurrent = "ASSIGNMENT_GRADES\n"
+				+ "A1\n"
+				+ "100.0\n"
+				+ "5.0\n"
+				+ "----\n"
+				+ "chperrone\t" + "80.0\n"
+				+ "nalekhn\t" + "80.0\n"
+				+ "thmyolk\t" + "60.0\n"
+				+ "----\n"
+				+ "STATS\n"
+				+ "Average\t" + "73.33333333333333\n"
+				+ "Median\t" + "80.0\n"
+				+ "Max\t" + "80.0\n"
+				+ "Min\t" + "60.0";
 
-    /** test the outputCurrentGrades method in Course **/
-    @Test
-    public void testOutputCurrentGrades() {
-        //TODO
-    }
+		assertEquals(testBook.outputAssignmentGrades("A1"), a1OutputCurrent);
+	}
 
-    /** test the outputAssignmentGrades method in Course **/
-    @Test
-    public void testOutputAssignmentGrades() {
-        //TODO
-    }
+	/** test the outputGradebook method in Course
+	 *
+	 * @author Chris Clark
+	 * @version 2014-04-09
+	 */
+	@Test
+	public void testOutputGradebook() {
+		reset();
+		String outputTestBook = "GRADEBOOK\n"
+				+ "\t\t\t\t\t"
+				+ "A1\t" + "A2\n"
+				+ "\t\t\t\t\t"
+				+ "100.0\t" + "100.0\n"
+				+ "\t\t\t\t\t"
+				+ "5.0\t" + "5.0\n"
+				+ "chperrone\t" + "Charles\t" + "Haydon\t" + "Perrone\t"
+				+ "2017\t" + "80.0\t" + "71.0\n"
+				+ "nalekhn\t" + "Nick\t" + "Alex\t" + "Alekhine\t"
+				+ "2017\t" + "80.0\t" + "79.0\n"
+				+ "thmyolk\t" + "Thom\t" + "Mearle\t" + "Yorke\t"
+				+ "2017\t" + "60.0\t" + "90.0\n";
 
-    /** test the outputGradebook method in Course **/
-    @Test
-    public void testOutputGradebook() {
-        //TODO
-    }
+		assertEquals(testBook.outputGradebook(), outputTestBook);
+	}
 }
