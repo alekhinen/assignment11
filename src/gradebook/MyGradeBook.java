@@ -1,5 +1,8 @@
 package gradebook;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,12 +45,14 @@ public abstract class MyGradeBook {
      * @throws FileNotFoundException 
      */
     public static MyGradeBook initializeWithFile(
-            String filename) throws RuntimeException, FileNotFoundException {
+            String filename) {
 
         HashMap<Student, ArrayList<Assignment>> map = 
                 new HashMap<Student, ArrayList<Assignment>>();
 
 
+        try {
+            
         File file = new File(filename);
         Scanner fileSC = new Scanner(file).useDelimiter("\t");
 
@@ -65,6 +70,7 @@ public abstract class MyGradeBook {
         ArrayList<Assignment> assList = new ArrayList<Assignment>();
         ArrayList<Student> studList = new ArrayList<Student>();
 
+        //build the list of assignments
         while (scanLine1.hasNext()) {
             try {
                 String assName = scanLine1.next();
@@ -75,7 +81,7 @@ public abstract class MyGradeBook {
                 assList.add(ass);
             }
             catch (Exception e) {
-                throw new RuntimeException("File formatted incorrectly");
+                System.out.println("File formatted incorrectly");
             }
         }
 
@@ -118,10 +124,13 @@ public abstract class MyGradeBook {
             }
             map.put(stud, urList);
         }
-
-
+        
+        }
+        
+        catch(FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
         return new Course(map);
-
     }
 
     /**
@@ -139,17 +148,18 @@ public abstract class MyGradeBook {
         HashMap<Student, ArrayList<Assignment>> map = 
                 new HashMap<Student, ArrayList<Assignment>>();
 
-        Scanner strSC = new Scanner(startingString).useDelimiter("\t");
+        Scanner fileSC = new Scanner(startingString).useDelimiter("\t");
 
-        strSC.next();
+        fileSC.next();
+        
+        if (fileSC.hasNextLine()) {
+        String line1 = fileSC.nextLine().trim();
+        String line2 = fileSC.nextLine().trim();
+        String line3 = fileSC.nextLine().trim();
 
-        String line1 = strSC.nextLine().trim();
-        String line2 = strSC.nextLine().trim();
-        String line3 = strSC.nextLine().trim();
-
-        Scanner scanLine1 = new Scanner(line1.trim()).useDelimiter("\t");
-        Scanner scanLine2 = new Scanner(line2.trim()).useDelimiter("\t");
-        Scanner scanLine3 = new Scanner(line3.trim()).useDelimiter("\t");
+        Scanner scanLine1 = new Scanner(line1).useDelimiter("\t");
+        Scanner scanLine2 = new Scanner(line2).useDelimiter("\t");
+        Scanner scanLine3 = new Scanner(line3).useDelimiter("\t");
 
         //Accumulator lists
         ArrayList<Assignment> assList = new ArrayList<Assignment>();
@@ -165,15 +175,15 @@ public abstract class MyGradeBook {
                 assList.add(ass);
             }
             catch (Exception e) {
-                System.out.println("String formatted incorrectly");
+                System.out.println("File formatted incorrectly");
             }
         }
 
         // Create student object
-        while (strSC.hasNextLine()) {
+        while (fileSC.hasNextLine()) {
             ArrayList<Assignment> urList = new ArrayList<Assignment>();
 
-            String line = strSC.nextLine();
+            String line = fileSC.nextLine();
             Scanner studScan = new Scanner(line).useDelimiter("\t");
 
             String user = studScan.next();
@@ -184,7 +194,6 @@ public abstract class MyGradeBook {
 
             Student stud = new Student(user, first, last, advisor, year);
             studList.add(stud);
-
 
             int count = 0;
             while (studScan.hasNextDouble()) {
@@ -208,14 +217,14 @@ public abstract class MyGradeBook {
             }
             map.put(stud, urList);
         }
-
-
+        
         return new Course(map);
+        }
+        
+        else {
+            return new Course();
+        }
     }
-
-
-
-
 
     ///////////////////////////////////////////////////////////////////////////
     // DYNAMIC METHODS ////////////////////////////////////////////////////////
@@ -233,83 +242,92 @@ public abstract class MyGradeBook {
      *            and gradesForStudent.txt.
      * @throws FileNotFoundException 
      */
-    public void processFile(String filename) throws FileNotFoundException {
+    public void processFile(String filename) {
 
         // load the file
         File file = new File(filename);
-        Scanner sc = new Scanner(file).useDelimiter("\n");
+        Scanner sc;
+        try {
+            sc = new Scanner(file).useDelimiter("\n");
 
-        ArrayList<Assignment> assList = new ArrayList<Assignment>();
-        ArrayList<Student> studList = new ArrayList<Student>();
+            ArrayList<Assignment> assList = new ArrayList<Assignment>();
+            ArrayList<Student> studList = new ArrayList<Student>();
 
-        // Pick the first String (the type of processing)
-        String type = sc.next();
+            // Pick the first String (the type of processing)
+            String type = sc.next();
 
-        //Add a list of grades to GradeBook
-        if (type.equals("ASSIGNMENT")) {
+            //Add a list of grades to GradeBook
+            if (type.equals("ASSIGNMENT")) {
 
-            while (sc.hasNext()) {
-                String name = sc.next();
-                double total = sc.nextDouble();
-                double weight = sc.nextDouble();
+                while (sc.hasNext()) {
+                    String name = sc.next();
+                    double total = sc.nextDouble();
+                    double weight = sc.nextDouble();
 
-                Assignment made = new Assignment(name, total, weight);
-                assList.add(made);
+                    Assignment made = new Assignment(name, total, weight);
+                    assList.add(made);
 
-                try {
-                    sc.next();
+                    try {
+                        sc.next();
+                    }
+                    catch (Exception e) { }
                 }
-                catch (Exception e) { }
+                this.addGrades(assList);
             }
-            this.addGrades(assList);
-        }
 
-        //Add a list of students to the GradeBook
-        else if (type.equals("STUDENT")) {
+            //Add a list of students to the GradeBook
+            else if (type.equals("STUDENT")) {
 
-            while (sc.hasNext()) {
+                while (sc.hasNext()) {
+                    String username = sc.next();
+                    String firstName = sc.next();
+                    String middleName = sc.next();
+                    String lastName = sc.next();
+                    int year = sc.nextInt();
+
+                    Student stud = new Student(username, firstName,
+                            middleName, lastName, year);
+
+                    studList.add(stud);
+
+                    try {
+                        sc.next(); 
+                    }
+                    catch (Exception e) { }
+                }
+                this.addStudents(studList);
+            }
+
+            else if (type.equals("GRADES_FOR_STUDENT")) {
                 String username = sc.next();
-                String firstName = sc.next();
-                String middleName = sc.next();
-                String lastName = sc.next();
-                int year = sc.nextInt();
 
-                Student stud = new Student(username, firstName,
-                        middleName, lastName, year);
+                while (sc.hasNext()) {
+                    String assName = sc.next();
+                    double grade = sc.nextInt();
 
-                studList.add(stud);
-
-                try {
-                    sc.next(); 
+                    this.changeGrade(assName, username, grade);
                 }
-                catch (Exception e) { }
             }
-            this.addStudents(studList);
-        }
 
-        else if (type.equals("GRADES_FOR_STUDENT")) {
-            String username = sc.next();
-
-            while (sc.hasNext()) {
+            else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
                 String assName = sc.next();
-                double grade = sc.nextInt();
 
-                this.changeGrade(assName, username, grade);
+                while (sc.hasNext()) {
+                    String username = sc.next();
+                    double grade = sc.nextInt();
+
+                    this.changeGrade(assName, username, grade);
+                }
+            }
+
+            else {
+                throw new RuntimeException();
             }
         }
 
-        else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
-            String assName = sc.next();
-
-            while (sc.hasNext()) {
-                String username = sc.next();
-                double grade = sc.nextInt();
-
-                this.changeGrade(assName, username, grade);
-            }
-        }
-        else {
-            throw new RuntimeException();
+        catch (FileNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
         }
     }
 
@@ -419,7 +437,8 @@ public abstract class MyGradeBook {
      * @param newGrade
      *            the new grade for the given assignment and student
      * @return whether there was a grade to change. Returns true if the given
-     *         assignment/student combination exists, returns false otherwise
+     *         assignment/student combination exists, and username’s 
+     *         assignmentName grade is now newGrade, returns false otherwise
      */
     // TODO ...
     public abstract boolean changeGrade(String assignmentName,
@@ -591,11 +610,11 @@ public abstract class MyGradeBook {
      * 
      * @param aList the list of assignments to add to every student
      */
-    protected abstract void addGrades(ArrayList<Assignment> aList);
+    public abstract void addGrades(ArrayList<Assignment> aList);
 
     /**
      * add students to the student list
      * @param studList the students to add
      */
-    protected abstract void addStudents(ArrayList<Student> studList);
+    public abstract void addStudents(ArrayList<Student> studList);
 }

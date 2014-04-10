@@ -33,7 +33,7 @@ public class BlackBoxTests {
         try {
             book1 = MyGradeBook.initializeWithFile("initial.txt");
             testBook = MyGradeBook.initializeWithFile("testFile.txt");
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -73,7 +73,7 @@ public class BlackBoxTests {
             assertEquals(testBook.outputCurrentGrades(), outputCurrent);
 
         }
-        catch (FileNotFoundException e) {
+        catch (Exception e) {
             // To catch/test expected exceptions
             assertTrue(false);
         }
@@ -84,7 +84,7 @@ public class BlackBoxTests {
             System.out.println("This shouldn't work");
             assertFalse(true);
         }
-        catch (FileNotFoundException e) {
+        catch (Exception e) {
             System.out.println("File is not found");
             assertTrue(true);
         }
