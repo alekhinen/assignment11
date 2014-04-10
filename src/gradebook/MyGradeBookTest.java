@@ -452,9 +452,8 @@ public class MyGradeBookTest {
         try {
             MyGradeBook notmt = MyGradeBook.initializeWithFile("initial.txt");
             notmt.addStudents(stud);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("this test failed");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
         }
 
         mtbook.addStudents(stud);
@@ -520,7 +519,7 @@ public class MyGradeBookTest {
         try {
             MyGradeBook.initializeWithFile("initial.txt");
         } 
-        catch (FileNotFoundException e) {
+        catch (Exception e) {
             System.out.println("File Not Found");
         }
     }
@@ -533,9 +532,10 @@ public class MyGradeBookTest {
     @Test
     public void testInitializeString() {
         this.reset();
-        String test = 
-                "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5" +
-                "\nabetaylor" + "\tIsabella\tTaylor\tBaker\t2016\t8\t71";
+        String test = "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5\nabetaylor\tIsabella\tTaylor\tBaker\t2016\t8\t71";
+        
+        System.out.println(MyGradeBook.initializeWithString(test));
+        
         MyGradeBook.initializeWithString(test);
     }
     /** test the studentcomparator 
@@ -552,5 +552,12 @@ public class MyGradeBookTest {
         assertEquals(sComp.compare(this.s2, this.s3), 6);
         assertEquals(sComp.compare(this.s3, this.s1), 11);
         assertEquals(sComp.compare(this.s3, this.s2), -6);
+    }
+    
+    @Test
+    public void testThis() {
+        this.reset();
+        
+        
     }
 }
