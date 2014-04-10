@@ -1,9 +1,7 @@
 package gradebook;
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -32,7 +30,7 @@ public class Course extends MyGradeBook {
      * @author Austin Colcord
      * @version 2014-04-08
      * 
-     * @param studAssignMap
+     * @param studAssignMap the hashmap of students and lists of assignments
      */
     Course(HashMap<Student, ArrayList<Assignment>> studAssignMap) {
         this.studAssignMap = studAssignMap;
@@ -62,7 +60,7 @@ public class Course extends MyGradeBook {
      * @author Austin Colcord
      * @version 2014-04-08 TESTED
      * 
-     * 
+     * @return Course a new empty instance of a course
      */
     public static Course newGradeBook() {
         return new Course();
@@ -76,6 +74,7 @@ public class Course extends MyGradeBook {
      * 
      * @param map the HashMap<Student, ArrayList <Assignment>>
      *               to create the course with
+     * @return Course a new instance of a course with a hashmap
      */
     public static Course newGradeBook(
             HashMap<Student, ArrayList<Assignment>> map) {
@@ -175,11 +174,11 @@ public class Course extends MyGradeBook {
         double sum = 0;
 
         for (Double d : list) {
-            if (!d.equals(null)) {
+            if (d != null) {
                 sum += d;
             }
         }
-        return sum/totalStudents;
+        return sum / totalStudents;
     }
 
     /**
@@ -201,11 +200,11 @@ public class Course extends MyGradeBook {
         for (Student s : students) {
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
 
-            for(int i = 0; i < ass.size(); i++) {
+            for (int i = 0; i < ass.size(); i++) {
                 Assignment current = ass.get(i);
 
                 if (current.name.equals(assignmentName)) {
-                    double percent = 100 * (current.score/current.total);
+                    double percent = 100 * (current.score / current.total);
                     result.add(percent);
                 }
             }
@@ -233,11 +232,13 @@ public class Course extends MyGradeBook {
 
         //if x is even, take the higher value
         if (list.size() % 1 == 1) {
-            int x = list.size()/2;
+            int x = list.size() / 2;
             return list.get(x + 1);
         }
         //else return the middle
-        else return list.get(list.size()/2);
+        else {
+            return list.get(list.size() / 2);
+        }
     }
 
 
@@ -324,11 +325,11 @@ public class Course extends MyGradeBook {
      * 
      * @author Nick Alekhine
      * @version 2014-04-07 TESTED
-     * @param username
-     * @return
+     * @param username the username to search for in this gradebook
+     * @return Student the student that is found out of the gradebook
      */
     // TODO return a println when there is no result?
-    public Student getStudent(String username) {
+    protected Student getStudent(String username) {
         // Get all students 
         Set<Student> students = this.studAssignMap.keySet();
 
@@ -447,8 +448,8 @@ public class Course extends MyGradeBook {
      *         Assignments are to remain in the same order as given.
      */
     @Override
-    public String outputStudentGrades(String username) 
-            throws NoSuchElementException {
+    public String outputStudentGrades(
+            String username) throws NoSuchElementException {
 
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
@@ -528,7 +529,8 @@ public class Course extends MyGradeBook {
      *         order as given.
      */
     @Override
-    public String outputAssignmentGrades(String assignName) {
+    public String outputAssignmentGrades(
+            String assignName) throws NoSuchElementException {
         String result = "ASSIGNMENT_GRADES\n";
 
         if (this.studAssignMap.isEmpty()) {
@@ -604,7 +606,7 @@ public class Course extends MyGradeBook {
      *         alphabetically.
      */
     @Override
-    public String outputGradebook() {
+    public String outputGradebook() throws NoSuchElementException {
 
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
@@ -680,13 +682,13 @@ public class Course extends MyGradeBook {
      * 
      * @author charlesperrone
      * 
-     * @param assList
+     * @param assList the assignment list to add grades from
      */
     public void addGrades(ArrayList<Assignment> assList) {
         HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
         Set<Student> studs = this.studAssignMap.keySet();
 
-        for(Student s : studs) {
+        for (Student s : studs) {
             ArrayList<Assignment> current = map.get(s);
             ArrayList<Assignment> result = new ArrayList<Assignment>();
             result.addAll(current);

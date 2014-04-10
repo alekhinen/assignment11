@@ -3,7 +3,7 @@
  * A set of ANSI escaped color codes.
  * 
  * @author milliway of tupmudsites forum.
- * @source http://www.topmudsites.com/forums/mud-coding/413-java-ansi.html
+ * source: http://www.topmudsites.com/forums/mud-coding/413-java-ansi.html
  * @version 2014-04-08
  *
  */
@@ -63,6 +63,6 @@ public final class ANSI {
     public static final String BACKGROUND_WHITE = "\u001B[47m";
 
     /** Disable automatic constructor */
-    private ANSI() {}
+    private ANSI() { }
 
 }

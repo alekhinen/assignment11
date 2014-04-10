@@ -138,6 +138,7 @@ public class Interfacer {
      * @author Nick Alekhine
      * @version 2014-04-08
      * 
+     * @return String the input of the user
      */
     public String inputter() {
         // Create an instance of Scanner
@@ -161,6 +162,7 @@ public class Interfacer {
      * @author Nick Alehine
      * @version 2014-04-08
      * 
+     * @param input the string to input to the interface
      */
     public void optionsInput(String input) {
         ///////////////////////////////////////////////////////////////////////
@@ -307,6 +309,7 @@ public class Interfacer {
      * @author Nick Alekhine
      * @version 2014-04-08
      * 
+     * @param mgb the gradebook to import into the instance
      */
     public void gradeBookMenu(MyGradeBook mgb) {
         this.pause();
@@ -480,6 +483,8 @@ public class Interfacer {
      * @author Nick Alekhine
      * @version 2014-04-08
      * 
+     * @param input the string that the user inputs
+     * @param mgb the MyGradeBook to throw the input into with the action
      */
     // TODO need to test on non-empty mgb
     public void gradeBookInput(String input, MyGradeBook mgb) {
@@ -784,7 +789,8 @@ public class Interfacer {
     public void pause() {
         try {
             Thread.sleep(1500);
-        } catch(InterruptedException ex) {
+        } 
+        catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
     }
