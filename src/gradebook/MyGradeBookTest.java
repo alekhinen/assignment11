@@ -484,7 +484,6 @@ public class MyGradeBookTest {
         try {
             MyGradeBook blank = MyGradeBook.initialize();
             blank.processFile("addAssignments.txt");
-            
         }
         catch (Exception e) {
             System.out.println("File not found");
@@ -496,6 +495,15 @@ public class MyGradeBookTest {
         }
         catch (Exception e) {
             System.out.println("File not Found");
+        }
+        this.reset();
+        try {
+            MyGradeBook blank = MyGradeBook.initializeWithFile("initial.txt");
+            blank.processFile("gradesForStudent.txt");
+            System.out.println(blank);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
