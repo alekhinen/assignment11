@@ -2,6 +2,7 @@ package gradebook;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -201,7 +202,7 @@ public class Course extends MyGradeBook {
         double sum = 0;
 
         for (Double d : list) {
-            if (d != null) {
+            if (!(d == null)) {
                 sum += d;
             }
         }
@@ -554,8 +555,7 @@ public class Course extends MyGradeBook {
      *         Assignments are to remain in the same order as given.
      */
     @Override
-    public String outputStudentGrades(
-            String username) throws NoSuchElementException {
+    public String outputStudentGrades(String u) throws NoSuchElementException {
 
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
@@ -565,7 +565,7 @@ public class Course extends MyGradeBook {
         boolean hasFoundStudent = false;
 
         for (Student s : this.studAssignMap.keySet()) {
-            if (username.equals(s.userName)) {
+            if (u.equals(s.userName)) {
                 hasFoundStudent = true;
                 break;
             }
@@ -588,7 +588,7 @@ public class Course extends MyGradeBook {
 
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
 
-            if (s.userName.equals(username)) {
+            if (s.userName.equals(u)) {
                 String assString = "";
                 for (Assignment a : ass) {
                     assString = assString + a.name + "\t" + a.score + "\n";
@@ -806,8 +806,30 @@ public class Course extends MyGradeBook {
 
     @Override
     public void addStudents(ArrayList<Student> studList) {
-        // TODO Auto-generated method stub
-
+        Set<Student> studSet = this.studAssignMap.keySet();
+        Iterator<Student> it = studSet.iterator();
+        ArrayList<Assignment> newStudList = new ArrayList<Assignment>();
+        
+        if (this.studAssignMap.isEmpty()) {
+            for (Student s : studList) {
+                this.studAssignMap.put(s, new ArrayList<Assignment>());
+            }
+        }
+        
+        else {
+            Student template = it.next();
+            ArrayList<Assignment> tempList = this.studAssignMap.get(template);
+            
+            for (Assignment a : tempList) {
+                Assignment neu = new Assignment(a.name, a.total, a.weight);
+                newStudList.add(neu);
+            }
+            
+            for (Student s : studList) {
+                this.studAssignMap.put(s, newStudList);
+            }
+        }
+        
     }
 
 

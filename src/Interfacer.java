@@ -55,8 +55,9 @@ public class Interfacer {
 
         // ABOUT
         System.out.println(ANSI.HIGH_INTENSITY + "About" + ANSI.SANE);
-        System.out.println("    This is a short description about what this "
-                + "is."
+        System.out.println("    This is a digital grade book for teachers at "
+                + "a school system to easily manage their courses by keeping "
+                + "track of assignments and students.  "
                 + "\n");
 
     }
@@ -598,6 +599,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double avg = mgb.average(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
@@ -617,6 +619,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double median = mgb.median(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
@@ -639,6 +642,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double min = mgb.min(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
@@ -660,6 +664,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double max = mgb.max(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
