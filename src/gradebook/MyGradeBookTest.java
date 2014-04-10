@@ -389,12 +389,13 @@ public class MyGradeBookTest {
         this.reset();
 
         try {
-            MyGradeBook.initialize().processFile("addAssignments.txt");
+            MyGradeBook blank = MyGradeBook.initialize();
+            blank.processFile("addAssignments.txt");
+            
         }
         catch (Exception e) {
             System.out.println("File not found");
         }
-
 
         try {
             this.c1.processFile("addStudents.txt");
@@ -533,8 +534,6 @@ public class MyGradeBookTest {
     public void testInitializeString() {
         this.reset();
         String test = "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5\nabetaylor\tIsabella\tTaylor\tBaker\t2016\t8\t71";
-        
-        System.out.println(MyGradeBook.initializeWithString(test));
         
         MyGradeBook.initializeWithString(test);
     }

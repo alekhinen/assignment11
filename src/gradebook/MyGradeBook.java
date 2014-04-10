@@ -151,7 +151,6 @@ public abstract class MyGradeBook {
         Scanner fileSC = new Scanner(startingString).useDelimiter("\t");
 
         fileSC.next();
-        System.out.println(fileSC.hasNextLine());
         
         if (fileSC.hasNextLine()) {
         String line1 = fileSC.nextLine().trim();
@@ -226,10 +225,6 @@ public abstract class MyGradeBook {
             return new Course();
         }
     }
-
-
-
-
 
     ///////////////////////////////////////////////////////////////////////////
     // DYNAMIC METHODS ////////////////////////////////////////////////////////
