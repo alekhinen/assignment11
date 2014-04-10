@@ -2,6 +2,8 @@
 /**
  * A set of ANSI escaped color codes.
  * 
+ * these are escape code sequences for coloring the interface
+ * 
  * @author milliway of tupmudsites forum.
  * source: http://www.topmudsites.com/forums/mud-coding/413-java-ansi.html
  * @version 2014-04-08
@@ -69,6 +71,8 @@ public final class ANSI {
      * 
      * @author Austin Colcord
      * @version 2014-04-10
+     * 
+     * @return ANSI the new ANSI instance
      */
     public static ANSI newANSI() {
         return new ANSI();

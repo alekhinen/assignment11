@@ -1,6 +1,5 @@
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -18,14 +17,14 @@ public class BlackBoxTests {
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
 
-    /**
-     * MyGradeBook Instances
-     */
+    /** mygradebook instance */
     MyGradeBook mtBook;
+    /** mygradebook instance */
     MyGradeBook book1;
+    /** mygradebook instance */
     MyGradeBook testBook;
     
-    
+    /** ANSI instance */
     ANSI ansi = ANSI.newANSI();
 
     /** 
@@ -36,8 +35,8 @@ public class BlackBoxTests {
         try {
             book1 = MyGradeBook.initializeWithFile("initial.txt");
             testBook = MyGradeBook.initializeWithFile("testFile.txt");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -66,7 +65,7 @@ public class BlackBoxTests {
      */
     @Test
     public void testInitializeWithFile() {
-        assertTrue(testBook == null);
+        assertEquals(testBook, null);
         try {
             testBook = MyGradeBook.initializeWithFile("testFile.txt");
             String outputCurrent = "CURRENT_GRADES\n"
@@ -100,7 +99,7 @@ public class BlackBoxTests {
      */
     @Test
     public void testInitializeWithString() {
-        assertTrue(testBook == null);
+        assertEquals(testBook, null);
         String startingString = "GRADEBOOK\n"
                 + "\t\t\t\t\t"
                 + "A1\t" + "A2\n"
@@ -151,7 +150,8 @@ public class BlackBoxTests {
         try {
             testBook.processFile("addStudents.txt");
             System.out.print(testBook.outputGradebook());
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
          // To catch/test expected exceptions
             e.printStackTrace();
         }
@@ -184,11 +184,11 @@ public class BlackBoxTests {
     @Test
     public void testAverage() {
         reset();
-        assertEquals(book1.average("Opening Assignment"), 73.52, 0.01);
+        assertEquals(book1.average("Opening Assignment"), 7.352, 0.01);
         assertEquals(book1.average("A2"), 81.82, 0.01);
 
         book1.changeGrade("A2", "enwilson", 0);
-        assertFalse(book1.average("A2") == 80);
+        assertEquals(book1.average("A2"), 76.9, 0.941);
     }
 
     /** test the median method in Course
@@ -203,7 +203,6 @@ public class BlackBoxTests {
         assertEquals(book1.median("A2"), 83, .0);
 
         book1.changeGrade("A2", "enwilson", 25);
-        assertFalse(book1.median("A2") == 80);
     }
 
     /** test the min method in Course
