@@ -55,8 +55,9 @@ public class Interfacer {
 
         // ABOUT
         System.out.println(ANSI.HIGH_INTENSITY + "About" + ANSI.SANE);
-        System.out.println("    This is a short description about what this "
-                + "is."
+        System.out.println("    This is a digital grade book for teachers at "
+                + "a school system to easily manage their courses by keeping "
+                + "track of assignments and students.  "
                 + "\n");
 
     }

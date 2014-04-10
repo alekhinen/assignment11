@@ -168,7 +168,34 @@ public class Course extends MyGradeBook {
      * @param assignmentName - name of the assignment
      * @return the average across all students for assignmentName
      */
-    public double average(String assignmentName) {
+    public double average(
+            String assignmentName) throws NoSuchElementException {
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("This Gradebook is Empty");
+        }
+        
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+
+        Student firstStudent = studList.get(0);
+
+        ArrayList<Assignment> firstAssignList = 
+                this.studAssignMap.get(firstStudent);
+
+
+        boolean hasFoundAssignment = false;
+
+        for (Assignment a : firstAssignList) {
+            if (a.name.equals(assignmentName)) {
+                hasFoundAssignment = true;
+                break;
+            }
+        }
+        
+        if (!hasFoundAssignment) {
+            throw new NoSuchElementException(
+                    "The given assignment does not exist");
+        }
 
         ArrayList<Double> list = this.makeList(assignmentName);
         double totalStudents = list.size();
@@ -197,6 +224,7 @@ public class Course extends MyGradeBook {
         Set<Student> students = this.studAssignMap.keySet();
 
         ArrayList<Double> result = new ArrayList<Double>();
+        
 
         for (Student s : students) {
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
@@ -225,7 +253,34 @@ public class Course extends MyGradeBook {
      *            name of the assignment
      * @return the median across all students for assignmentName
      */
-    public double median(String assignmentName) {
+    public double median(String assignmentName) throws NoSuchElementException {
+        
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("This Gradebook is Empty");
+        }
+        
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+
+        Student firstStudent = studList.get(0);
+
+        ArrayList<Assignment> firstAssignList = 
+                this.studAssignMap.get(firstStudent);
+
+
+        boolean hasFoundAssignment = false;
+
+        for (Assignment a : firstAssignList) {
+            if (a.name.equals(assignmentName)) {
+                hasFoundAssignment = true;
+                break;
+            }
+        }
+        
+        if (!hasFoundAssignment) {
+            throw new NoSuchElementException(
+                    "The given assignment does not exist");
+        }
 
         ArrayList<Double> list = this.makeList(assignmentName);
 
@@ -253,8 +308,35 @@ public class Course extends MyGradeBook {
      *            name of the assignment
      * @return the min across all students for assignmentName
      */
-    public double min(String assignmentName) {
+    public double min(String assignmentName) throws NoSuchElementException {
 
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("This Gradebook is Empty");
+        }
+        
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+
+        Student firstStudent = studList.get(0);
+
+        ArrayList<Assignment> firstAssignList = 
+                this.studAssignMap.get(firstStudent);
+
+
+        boolean hasFoundAssignment = false;
+
+        for (Assignment a : firstAssignList) {
+            if (a.name.equals(assignmentName)) {
+                hasFoundAssignment = true;
+                break;
+            }
+        }
+        
+        if (!hasFoundAssignment) {
+            throw new NoSuchElementException(
+                    "The given assignment does not exist");
+        }
+        
         ArrayList<Double> list = this.makeList(assignmentName);
 
         list.removeAll(Collections.singleton(null));
@@ -272,8 +354,35 @@ public class Course extends MyGradeBook {
      *            name of the assignment
      * @return the max across all students for assignmentName
      */
-    public double max(String assignmentName) {
+    public double max(String assignmentName) throws NoSuchElementException {
 
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("This Gradebook is Empty");
+        }
+        
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+
+        Student firstStudent = studList.get(0);
+
+        ArrayList<Assignment> firstAssignList = 
+                this.studAssignMap.get(firstStudent);
+
+
+        boolean hasFoundAssignment = false;
+
+        for (Assignment a : firstAssignList) {
+            if (a.name.equals(assignmentName)) {
+                hasFoundAssignment = true;
+                break;
+            }
+        }
+        
+        if (!hasFoundAssignment) {
+            throw new NoSuchElementException(
+                    "The given assignment does not exist");
+        }
+        
         ArrayList<Double> list = this.makeList(assignmentName);
 
         list.removeAll(Collections.singleton(null));
@@ -300,7 +409,6 @@ public class Course extends MyGradeBook {
      *         assignment grade divide by total point value for the assignment
      *         times the percent of semester.
      */
-    // TODO return a println when there is no result?
     public double currentGrade(String username) {
         // Get the student with the given username
         Student s = this.getStudent(username); 
@@ -329,7 +437,6 @@ public class Course extends MyGradeBook {
      * @param username the username to search for in this gradebook
      * @return Student the student that is found out of the gradebook
      */
-    // TODO return a println when there is no result?
     protected Student getStudent(String username) {
         // Get all students 
         Set<Student> students = this.studAssignMap.keySet();
@@ -372,7 +479,6 @@ public class Course extends MyGradeBook {
      * @param username - username for the student
      * @return the grade earned by username for assignmentName
      */
-    // TODO return a println when there is no result?
     @Override
     public double assignmentGrade(String assignmentName, String username) {
         double result = 0;
@@ -680,7 +786,8 @@ public class Course extends MyGradeBook {
      * Add all of the elements in the given arrayList to 
      * every student's assignment list
      * 
-     * @author charlesperrone
+     * @author Charles Perrone
+     * @version 2014-04-09
      * 
      * @param assList the assignment list to add grades from
      */
@@ -697,8 +804,14 @@ public class Course extends MyGradeBook {
             this.studAssignMap.put(s, result);
         }
     }
-
-    @Override
+    
+    /** adds an arrayList of students to the current course
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-09
+     * 
+     * @param studList the arraylist of students to add
+     */
     public void addStudents(ArrayList<Student> studList) {
         Set<Student> studSet = this.studAssignMap.keySet();
         Iterator<Student> it = studSet.iterator();
@@ -723,8 +836,5 @@ public class Course extends MyGradeBook {
                 this.studAssignMap.put(s, newStudList);
             }
         }
-        
     }
-
-
 }

@@ -127,7 +127,7 @@ public abstract class MyGradeBook {
         
         }
         
-        catch(Exception e) {
+        catch(FileNotFoundException e) {
             System.out.println("File not found.");
         }
         return new Course(map);
