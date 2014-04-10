@@ -547,7 +547,7 @@ public class Course extends MyGradeBook {
      * @author Austin Colcord
      * @version 2014-04-09
      * 
-     * @param username
+     * @param u
      *            username for student
      * @return a String that contains the current grades of username. The String
      *         should be formatted like studentGrades.txt---STUDENT_GRADES
