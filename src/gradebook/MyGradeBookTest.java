@@ -51,7 +51,7 @@ public class MyGradeBookTest {
     /** Assignment 8 */
     Assignment a8;
 
-    
+
     /** Assignments List 1 */
     ArrayList<Assignment> aList1;
     /** Assignments List 2 */
@@ -80,7 +80,7 @@ public class MyGradeBookTest {
 
         /** Assignments */
         this.a0 = new Assignment("Assignment0", 100, .25);
-        
+
         this.a1 = new Assignment("Assignment1", 100, 90, .25);
         this.a2 = new Assignment("Assignment2", 120, 115, .50);
 
@@ -288,6 +288,7 @@ public class MyGradeBookTest {
     /** test the min method
      * 
      * @author Charles Perrone
+     * @author Austin Colcord
      * @version 2014-04-08
      */
     @Test
@@ -301,6 +302,7 @@ public class MyGradeBookTest {
     /** test the max method
      * 
      * @author Charles Perrone
+     * @author Austin Colcord
      * @version 2014-04-08
      */
     @Test
@@ -314,7 +316,8 @@ public class MyGradeBookTest {
     /** test the getStudent method in GradeBook
      * 
      * @author Nick Alekhine
-     * @version 2014-04-07
+     * @author Austin Colcord
+     * @version 2014-04-09
      */
     @Test
     public void testGetStudent() {
@@ -328,7 +331,8 @@ public class MyGradeBookTest {
     /** test the currentGrade method in GradeBook
      * 
      * @author Nick Alekhine
-     * @version 2014-04-07
+     * @author Austin Colcord
+     * @version 2014-04-09
      */
     @Test
     public void testCurrentGrade() {
@@ -342,7 +346,8 @@ public class MyGradeBookTest {
     /** test the currentGrades method in GradeBook
      * 
      * @author Nick Alekhine
-     * @version 2014-04-07
+     * @author Austin Colcord
+     * @version 2014-04-09
      */
     @Test
     public void testCurrentGrades() {
@@ -358,7 +363,8 @@ public class MyGradeBookTest {
     /** test the assignmentGrade method in GradeBook
      *
      * @author Nick Alekhine
-     * @version 2014-04-07
+     * @author Austin Colcord
+     * @version 2014-04-09
      */
     @Test
     public void testAssignmentGrade() {
@@ -373,8 +379,10 @@ public class MyGradeBookTest {
         assertEquals(this.c1.assignmentGrade("Assignment1", "als;dkjf"), 0, .0);
     }
 
-    /**
-     * To test the processFile method
+    /** test the processFile method
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-09
      */
     @Test
     public void testProcessFile() {
@@ -396,16 +404,21 @@ public class MyGradeBookTest {
         }
 
     }
-    
+
+    /** test the processString method
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-09
+     */
     @Test
     public void testProcessString() {
         this.reset();
         String additionalString = "ASSIGNMENT\nFirst Group Project\n150\n10\nASSIGNMENT\nTest\n100\n25";
-        
+
         MyGradeBook.initialize().processString(additionalString);
     }
 
-    
+
     /** To test the addStudents method
      * 
      * @author Austin Colcord
@@ -415,26 +428,26 @@ public class MyGradeBookTest {
     @Test
     public void testAddStudents() {
         this.reset();
-        
+
         ArrayList<Student> stud = new ArrayList<Student>();
         stud.add(this.s2);
         stud.add(this.s1);
-        
+
         Course testCourse = new Course();
-        
+
         testCourse.addStudents(stud);
-        
+
         Set<Student> tCourseSet = testCourse.studAssignMap.keySet();
         List<Student> tCourseList = new ArrayList<Student>(tCourseSet);
-        
+
         Set<Student> c1CourseSet = this.c1.studAssignMap.keySet();
         List<Student> c1CourseList = new ArrayList<Student>(c1CourseSet);
-        
+
         assertEquals(tCourseList, stud);
         assertFalse(c1CourseList.equals(stud));
         assertTrue(tCourseList.equals(stud));
-        
-        
+
+
         MyGradeBook mtbook = MyGradeBook.initialize();
         try {
             MyGradeBook notmt = MyGradeBook.initializeWithFile("initial.txt");
@@ -443,12 +456,12 @@ public class MyGradeBookTest {
             e.printStackTrace();
             System.out.println("this test failed");
         }
-        
+
         mtbook.addStudents(stud);
-        
-        
+
+
     }
-    
+
     /** test the addgrades method in course
      * 
      * @author Austin Colcord
@@ -495,12 +508,15 @@ public class MyGradeBookTest {
         assertEquals(MyGradeBook.initialize(), new Course());
     }
 
-    /** test the method initializeFile */
+    /** test the method initializeFile
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-09
+     */
     @Test
     public void testInitializeFile() {
         this.reset();
-        assertTrue(true);
-        assertFalse(false);
+
         try {
             MyGradeBook.initializeWithFile("initial.txt");
         } 
@@ -508,12 +524,18 @@ public class MyGradeBookTest {
             System.out.println("File Not Found");
         }
     }
-    
+
+    /** test the initialize with string method in MyGradeBook
+     * 
+     * @author Charles Perrone
+     * @version 2014-04-09
+     */
     @Test
     public void testInitializeString() {
         this.reset();
-        String test = "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5\nabetaylor" + 
-        "\tIsabella\tTaylor\tBaker\t2016\t8\t71";
+        String test = 
+                "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5" +
+                "\nabetaylor" + "\tIsabella\tTaylor\tBaker\t2016\t8\t71";
         MyGradeBook.initializeWithString(test);
     }
     /** test the studentcomparator 
