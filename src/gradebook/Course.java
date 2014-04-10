@@ -791,7 +791,7 @@ public class Course extends MyGradeBook {
      * 
      * @param assList the assignment list to add grades from
      */
-    public void addGrades(ArrayList<Assignment> assList) {
+    protected void addGrades(ArrayList<Assignment> assList) {
         HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
         Set<Student> studs = this.studAssignMap.keySet();
 
@@ -812,8 +812,7 @@ public class Course extends MyGradeBook {
      * 
      * @param studList the arraylist of students to add
      */
-    @Override
-    public void addStudents(ArrayList<Student> studList) {
+    protected void addStudents(ArrayList<Student> studList) {
         Set<Student> studSet = this.studAssignMap.keySet();
         Iterator<Student> it = studSet.iterator();
         ArrayList<Assignment> newStudList = new ArrayList<Assignment>();

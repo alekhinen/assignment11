@@ -7,7 +7,12 @@ import org.junit.Test;
 
 import gradebook.*;
 
-
+/**
+ * The blackbox testing class for all methods 
+ * associated with the MyGradeBook class.
+ * @author Chris Clark
+ * @version 2014-04-09
+ */
 public class BlackBoxTests {
 
     ///////////////////////////////////////////////////////////////////////////
@@ -75,16 +80,59 @@ public class BlackBoxTests {
         }
     }
 
-    /** test the initializeWithString method in Course **/
+    /** test the initializeWithString method in Course
+     * 
+     * @author Chris Clark
+     * @version 2014-04-09
+     */
     @Test
     public void testInitializeWithString() {
-        //TODO
+        assertTrue(testBook == null);
+        String startingString = "GRADEBOOK\n"
+                + "\t\t\t\t\t"
+                + "A1\t" + "A2\n"
+                + "\t\t\t\t\t"
+                + "100.0\t" + "100.0\n"
+                + "\t\t\t\t\t"
+                + "5.0\t" + "5.0\n"
+                + "chperrone\t" + "Charles\t" + "Haydon\t" + "Perrone\t"
+                + "2017\t" + "80.0\t" + "71.0\n"
+                + "nalekhn\t" + "Nick\t" + "Alex\t" + "Alekhine\t"
+                + "2017\t" + "80.0\t" + "79.0\n"
+                + "thmyolk\t" + "Thom\t" + "Mearle\t" + "Yorke\t"
+                + "2017\t" + "60.0\t" + "90.0\n";
+        try {
+            testBook = MyGradeBook.initializeWithString(startingString);
+            String outputCurrent = "CURRENT_GRADES\n"
+                    + "chperrone\t" + "75.5\n"
+                    + "nalekhn\t" + "79.5\n"
+                    + "thmyolk\t" + "75.0\n";
+            assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+
+            // To test Exception
+            book1 = MyGradeBook.initializeWithString(
+                    "Incorrectly Formatted String");
+        }
+        catch (Exception e) {
+            // To catch/test expected exceptions
+        }
     }
 
-    /** test the processFile method in Course **/
+    /** test the processFile method in Course
+     * 
+     * @author Chris Clark
+     * @version 2014-04-09
+     */
     @Test
     public void testProcessFile() {
-        //TODO
+        reset();
+//        try {
+//            testBook.processFile("addStudents.txt");
+//            System.out.print(testBook.outputGradebook());
+//        } catch (FileNotFoundException e) {
+//         // To catch/test expected exceptions
+//            e.printStackTrace();
+//        }
     }
 
     /** test the processString method in Course **/
@@ -144,7 +192,6 @@ public class BlackBoxTests {
     @Test
     public void testMin() {
         reset();
-        reset();
         assertEquals(testBook.min("A1"), 60, 0);
 
         testBook.changeGrade("A1", "thmyolk", 99);
@@ -189,7 +236,6 @@ public class BlackBoxTests {
     @Test
     public void testCurrentGrades() {
         reset();
-        System.out.print(mtBook.currentGrades());
         HashMap<String, Double> testBookCurrentGrades = 
                 new HashMap<String, Double>();
 
@@ -236,7 +282,6 @@ public class BlackBoxTests {
     @Test
     public void testOutputAssignmentGrades() {
         reset();
-        System.out.print(testBook.outputAssignmentGrades("A1"));
         String a1OutputCurrent = "ASSIGNMENT_GRADES\n"
                 + "A1\n"
                 + "100.0\n"

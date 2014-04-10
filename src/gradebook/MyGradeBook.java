@@ -1,8 +1,5 @@
 package gradebook;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,13 +139,13 @@ public abstract class MyGradeBook {
         HashMap<Student, ArrayList<Assignment>> map = 
                 new HashMap<Student, ArrayList<Assignment>>();
 
-        Scanner fileSC = new Scanner(startingString).useDelimiter("\t");
+        Scanner strSC = new Scanner(startingString).useDelimiter("\t");
 
-        fileSC.next();
+        strSC.next();
 
-        String line1 = fileSC.nextLine().trim();
-        String line2 = fileSC.nextLine().trim();
-        String line3 = fileSC.nextLine().trim();
+        String line1 = strSC.nextLine().trim();
+        String line2 = strSC.nextLine().trim();
+        String line3 = strSC.nextLine().trim();
 
         Scanner scanLine1 = new Scanner(line1.trim()).useDelimiter("\t");
         Scanner scanLine2 = new Scanner(line2.trim()).useDelimiter("\t");
@@ -168,15 +165,15 @@ public abstract class MyGradeBook {
                 assList.add(ass);
             }
             catch (Exception e) {
-                System.out.println("File formatted incorrectly");
+                System.out.println("String formatted incorrectly");
             }
         }
 
         // Create student object
-        while (fileSC.hasNextLine()) {
+        while (strSC.hasNextLine()) {
             ArrayList<Assignment> urList = new ArrayList<Assignment>();
 
-            String line = fileSC.nextLine();
+            String line = strSC.nextLine();
             Scanner studScan = new Scanner(line).useDelimiter("\t");
 
             String user = studScan.next();
@@ -594,11 +591,11 @@ public abstract class MyGradeBook {
      * 
      * @param aList the list of assignments to add to every student
      */
-    public abstract void addGrades(ArrayList<Assignment> aList);
+    protected abstract void addGrades(ArrayList<Assignment> aList);
 
     /**
      * add students to the student list
      * @param studList the students to add
      */
-    public abstract void addStudents(ArrayList<Student> studList);
+    protected abstract void addStudents(ArrayList<Student> studList);
 }
