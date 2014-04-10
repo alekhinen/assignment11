@@ -449,11 +449,11 @@ public class Course extends MyGradeBook {
     @Override
     public String outputStudentGrades(String username) 
             throws NoSuchElementException {
-        
+
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
         }
-        
+
         String result;
         boolean hasFoundStudent = false;
 
@@ -464,43 +464,45 @@ public class Course extends MyGradeBook {
             }
         }
 
-        if (hasFoundStudent) {
-            result = "STUDENT_GRADES\n";
-
-            ArrayList<Student> studList =
-                    new ArrayList<Student>(this.studAssignMap.keySet());
-
-            Collections.sort(studList, new StudentComparator());
-
-
-            for (Student s : studList) {
-
-                ArrayList<Assignment> ass = this.studAssignMap.get(s);
-
-                if (s.userName.equals(username)) {
-                    String assString = "";
-                    for (Assignment a : ass) {
-                        assString = assString + a.name + "\t" + a.score + "\n";
-                    }
-                    result = 
-                            result + 
-                            s.userName + "\n" +
-                            s.firstName + "\n" +
-                            s.lastName + "\n" +
-                            s.advisor + "\n" +
-                            s.gradYear + "\n" +
-                            "----\n" +
-                            assString +
-                            "----\n" +
-                            "CURRENT GRADE" + "\t" + 
-                            this.currentGrade(s.userName) + "\n";
-                    break;
-                }
-            }
-        }
-        else {
+        if (!hasFoundStudent) {
             throw new NoSuchElementException("Student does not exist!");
         }
+
+
+        result = "STUDENT_GRADES\n";
+
+        ArrayList<Student> studList =
+                new ArrayList<Student>(this.studAssignMap.keySet());
+
+        Collections.sort(studList, new StudentComparator());
+
+
+        for (Student s : studList) {
+
+            ArrayList<Assignment> ass = this.studAssignMap.get(s);
+
+            if (s.userName.equals(username)) {
+                String assString = "";
+                for (Assignment a : ass) {
+                    assString = assString + a.name + "\t" + a.score + "\n";
+                }
+                result = 
+                        result + 
+                        s.userName + "\n" +
+                        s.firstName + "\n" +
+                        s.lastName + "\n" +
+                        s.advisor + "\n" +
+                        s.gradYear + "\n" +
+                        "----\n" +
+                        assString +
+                        "----\n" +
+                        "CURRENT GRADE" + "\t" + 
+                        this.currentGrade(s.userName) + "\n";
+                break;
+            }
+        }
+
+
 
         return result;
     }
@@ -532,9 +534,9 @@ public class Course extends MyGradeBook {
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
         }
-        
 
-        
+
+
         ArrayList<Student> studList =
                 new ArrayList<Student>(this.studAssignMap.keySet());
 
@@ -544,8 +546,8 @@ public class Course extends MyGradeBook {
 
         ArrayList<Assignment> firstAssignList = 
                 this.studAssignMap.get(firstStudent);
-        
-        
+
+
         boolean hasFoundAssignment = false;
 
         for (Assignment a : firstAssignList) {
@@ -554,11 +556,11 @@ public class Course extends MyGradeBook {
                 break;
             }
         }
-        
+
         if (!hasFoundAssignment) {
             throw new NoSuchElementException("The assignment does not exist!");
         }
-        
+
 
         String assignInfo = "";
 
@@ -603,7 +605,7 @@ public class Course extends MyGradeBook {
      */
     @Override
     public String outputGradebook() {
-        
+
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
         }
