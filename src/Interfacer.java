@@ -593,6 +593,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double avg = mgb.average(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
@@ -612,6 +613,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double median = mgb.median(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
@@ -634,6 +636,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double min = mgb.min(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
@@ -655,6 +658,7 @@ public class Interfacer {
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
             try {
+                System.out.println("Hit enter again.");
                 Double max = mgb.max(aname);
                 System.out.println("The average grade for " 
                         + this.inputter()
