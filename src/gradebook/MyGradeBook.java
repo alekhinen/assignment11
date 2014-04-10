@@ -42,7 +42,7 @@ public abstract class MyGradeBook {
      * @throws FileNotFoundException 
      */
     public static MyGradeBook initializeWithFile(
-            String filename) throws FileNotFoundException {
+            String filename) throws RuntimeException, FileNotFoundException {
 
         HashMap<Student, ArrayList<Assignment>> map = 
                 new HashMap<Student, ArrayList<Assignment>>();
@@ -75,7 +75,7 @@ public abstract class MyGradeBook {
                 assList.add(ass);
             }
             catch (Exception e) {
-                System.out.println("File formatted incorrectly");
+                throw new RuntimeException("File formatted incorrectly");
             }
         }
 
