@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 /** represents the grade book of a course that holds a hashmap of the students
@@ -408,7 +409,10 @@ public class Course extends MyGradeBook {
      *         alphabetically.
      */
     @Override
-    public String outputCurrentGrades() {
+    public String outputCurrentGrades() throws NoSuchElementException {
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
+        }
 
         String result = "CURRENT_GRADES\n";
 
@@ -443,38 +447,61 @@ public class Course extends MyGradeBook {
      *         Assignments are to remain in the same order as given.
      */
     @Override
-    public String outputStudentGrades(String username) {
-        String result = "STUDENT_GRADES\n";
+    public String outputStudentGrades(String username) 
+            throws NoSuchElementException {
+        
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
+        }
+        
+        String result;
+        boolean hasFoundStudent = false;
 
-        ArrayList<Student> studList =
-                new ArrayList<Student>(this.studAssignMap.keySet());
-
-        Collections.sort(studList, new StudentComparator());
-
-        for (Student s : studList) {
-
-            ArrayList<Assignment> ass = this.studAssignMap.get(s);
-
-            if (s.userName.equals(username)) {
-                String assString = "";
-                for (Assignment a : ass) {
-                    assString = assString + a.name + "\t" + a.score + "\n";
-                }
-                result = 
-                        result + 
-                        s.userName + "\n" +
-                        s.firstName + "\n" +
-                        s.lastName + "\n" +
-                        s.advisor + "\n" +
-                        s.gradYear + "\n" +
-                        "----\n" +
-                        assString +
-                        "----\n" +
-                        "CURRENT GRADE" + "\t" + 
-                        this.currentGrade(s.userName) + "\n";
+        for (Student s : this.studAssignMap.keySet()) {
+            if (username.equals(s)) {
+                hasFoundStudent = true;
                 break;
             }
         }
+
+        if (hasFoundStudent) {
+            result = "STUDENT_GRADES\n";
+
+            ArrayList<Student> studList =
+                    new ArrayList<Student>(this.studAssignMap.keySet());
+
+            Collections.sort(studList, new StudentComparator());
+
+
+            for (Student s : studList) {
+
+                ArrayList<Assignment> ass = this.studAssignMap.get(s);
+
+                if (s.userName.equals(username)) {
+                    String assString = "";
+                    for (Assignment a : ass) {
+                        assString = assString + a.name + "\t" + a.score + "\n";
+                    }
+                    result = 
+                            result + 
+                            s.userName + "\n" +
+                            s.firstName + "\n" +
+                            s.lastName + "\n" +
+                            s.advisor + "\n" +
+                            s.gradYear + "\n" +
+                            "----\n" +
+                            assString +
+                            "----\n" +
+                            "CURRENT GRADE" + "\t" + 
+                            this.currentGrade(s.userName) + "\n";
+                    break;
+                }
+            }
+        }
+        else {
+            throw new NoSuchElementException("Student does not exist!");
+        }
+
         return result;
     }
 
@@ -502,6 +529,12 @@ public class Course extends MyGradeBook {
     public String outputAssignmentGrades(String assignName) {
         String result = "ASSIGNMENT_GRADES\n";
 
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
+        }
+        
+
+        
         ArrayList<Student> studList =
                 new ArrayList<Student>(this.studAssignMap.keySet());
 
@@ -511,6 +544,21 @@ public class Course extends MyGradeBook {
 
         ArrayList<Assignment> firstAssignList = 
                 this.studAssignMap.get(firstStudent);
+        
+        
+        boolean hasFoundAssignment = false;
+
+        for (Assignment a : firstAssignList) {
+            if (a.name.equals(assignName)) {
+                hasFoundAssignment = true;
+                break;
+            }
+        }
+        
+        if (!hasFoundAssignment) {
+            throw new NoSuchElementException("The assignment does not exist!");
+        }
+        
 
         String assignInfo = "";
 
@@ -555,6 +603,10 @@ public class Course extends MyGradeBook {
      */
     @Override
     public String outputGradebook() {
+        
+        if (this.studAssignMap.isEmpty()) {
+            throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
+        }
 
         ///GETTING THE ASSIGNMENT NAMES, TOTALS, AND WEIGHTS FOR TOP ROW//////
 
@@ -582,9 +634,9 @@ public class Course extends MyGradeBook {
 
         //////GRABBING THE STUDENT'S INFO WITH RESPECTIVE ASSIGNMENT GRADES///
         Collections.sort(studList, new StudentComparator());
-        
+
         String totalStudInfo = "";
-        
+
         for (Student s : studList) {
             String thisStudAssInfo = "";
             for (Assignment ass : this.studAssignMap.get(s)) {
