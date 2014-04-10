@@ -226,13 +226,15 @@ public class MyGradeBookTest {
     public void testMakeList() {
         this.reset();
         assertEquals(this.c1.makeList("Assignment1"), 
-                Arrays.asList(45.0, 90.0, 96.0));
+                new ArrayList<Double>(Arrays.asList(45.0, 90.0, 96.0)));
         this.reset();
         assertEquals(this.c1.makeList("AssignmentNull"),
-                Arrays.asList());
+                new ArrayList<Double>());
         this.reset();
         assertEquals(this.c1.makeList("Assignment2"),
-                Arrays.asList(66.66666666666666, 95.0, 95.83333333333334));   
+                new ArrayList<Double>(
+                        Arrays.asList(
+                                66.66666666666666, 95.0, 95.83333333333334)));   
     }
     
     /** test the average method
