@@ -2,6 +2,7 @@ package gradebook;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -699,8 +700,32 @@ public class Course extends MyGradeBook {
 
     @Override
     public void addStudents(ArrayList<Student> studList) {
-        // TODO Auto-generated method stub
-
+        Set<Student> studSet = this.studAssignMap.keySet();
+        Iterator<Student> it = studSet.iterator();
+        ArrayList<Assignment> newStudList = new ArrayList<Assignment>();
+        
+        if (this.studAssignMap.isEmpty()) {
+            for (Student s : studList) {
+                this.studAssignMap.put(s, new ArrayList<Assignment>());
+            }
+            //System.out.println(this.studAssignMap);
+        }
+        
+        else {
+            Student template = it.next();
+            ArrayList<Assignment> tempList = this.studAssignMap.get(template);
+            
+            for (Assignment a : tempList) {
+                Assignment neu = new Assignment(a.name, a.total, a.weight);
+                newStudList.add(neu);
+            }
+            
+            for (Student s : studList) {
+                this.studAssignMap.put(s, newStudList);
+            }
+            System.out.println(this.studAssignMap);
+        }
+        
     }
 
 

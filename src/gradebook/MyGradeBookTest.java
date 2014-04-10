@@ -377,6 +377,14 @@ public class MyGradeBookTest {
         }
 
     }
+    
+    @Test
+    public void testProcessString() {
+        this.reset();
+        String additionalString = "ASSIGNMENT\nFirst Group Project\n150\n10\nASSIGNMENT\nTest\n100\n25";
+        
+        MyGradeBook.initialize().processString(additionalString);
+    }
 
     /**
      * To test the addGrades method
@@ -384,6 +392,31 @@ public class MyGradeBookTest {
     @Test
     public void testAddGrades() {
         MyGradeBook book = MyGradeBook.initialize();
+        
+    }
+    
+    /**
+     * To test the addStudents method
+     */
+    @Test
+    public void testAddStudents() {
+        this.reset();
+        
+        ArrayList<Student> stud = new ArrayList<Student>();
+        stud.add(this.s1);
+        stud.add(this.s2);
+        
+        MyGradeBook mtbook = MyGradeBook.initialize();
+        try {
+            MyGradeBook notmt = MyGradeBook.initializeWithFile("initial.txt");
+            notmt.addStudents(stud);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.out.println("this test failed");
+        }
+        
+        mtbook.addStudents(stud);
     }
 
     /** test the newGradeBook method in Course
@@ -416,5 +449,13 @@ public class MyGradeBookTest {
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found");
         }
+    }
+    
+    @Test
+    public void testInitializeString() {
+        this.reset();
+        String test = "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100\n1\t5\nabetaylor" + 
+        "\tIsabella\tTaylor\tBaker\t2016\t8\t71";
+        MyGradeBook.initializeWithString(test);
     }
 }
