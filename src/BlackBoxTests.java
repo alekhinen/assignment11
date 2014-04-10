@@ -72,12 +72,21 @@ public class BlackBoxTests {
                     + "thmyolk\t" + "75.0\n";
             assertEquals(testBook.outputCurrentGrades(), outputCurrent);
 
-            // To test FileNotFoundException
-            book1 = MyGradeBook.initializeWithFile("FakeFilename.txt");
         }
         catch (FileNotFoundException e) {
             // To catch/test expected exceptions
             assertTrue(false);
+        }
+        
+        // To test FileNotFoundException
+        try {
+            book1 = MyGradeBook.initializeWithFile("FakeFilename.txt");
+            System.out.println("This shouldn't work");
+            assertFalse(true);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File is not found");
+            assertTrue(true);
         }
     }
 
@@ -109,14 +118,22 @@ public class BlackBoxTests {
                     + "nalekhn\t" + "79.5\n"
                     + "thmyolk\t" + "75.0\n";
             assertEquals(testBook.outputCurrentGrades(), outputCurrent);
-
-            // To test Exception
-            book1 = MyGradeBook.initializeWithString(
-                    "Incorrectly Formatted String");
         }
         catch (Exception e) {
             // To catch/test expected exceptions
             assertTrue(false);
+        }
+        
+        // To test Exception
+        try {
+            book1 = MyGradeBook.initializeWithString(
+                    "Incorrectly Formatted String");
+            assertTrue(false);
+            System.out.println("This should not pass");
+        }
+        catch (Exception e) {
+            assertTrue(true);
+            System.out.println("String format is incorrect.");
         }
     }
 
