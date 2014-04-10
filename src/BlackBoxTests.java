@@ -77,6 +77,7 @@ public class BlackBoxTests {
         }
         catch (FileNotFoundException e) {
             // To catch/test expected exceptions
+            assertTrue(false);
         }
     }
 
@@ -115,6 +116,7 @@ public class BlackBoxTests {
         }
         catch (Exception e) {
             // To catch/test expected exceptions
+            assertTrue(false);
         }
     }
 
