@@ -25,8 +25,6 @@ public final class ANSI {
     public static final String BLINK = "\u001B[5m";
     /** Rapid blinking text */
     public static final String RAPID_BLINK = "\u001B[6m";
-    /** */
-    public static final String REVERSE_VIDEO = "\u001B[7m";
     /** Invisible text */
     public static final String INVISIBLE_TEXT = "\u001B[8m";
     
