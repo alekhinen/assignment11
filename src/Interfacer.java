@@ -785,7 +785,8 @@ public class Interfacer {
     public void pause() {
         try {
             Thread.sleep(1500);
-        } catch (InterruptedException ex) {
+        } 
+        catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
     }

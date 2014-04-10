@@ -174,7 +174,7 @@ public class Course extends MyGradeBook {
         double sum = 0;
 
         for (Double d : list) {
-            if (!(d == null)) {
+            if (d != null) {
                 sum += d;
             }
         }
@@ -448,7 +448,8 @@ public class Course extends MyGradeBook {
      *         Assignments are to remain in the same order as given.
      */
     @Override
-    public String outputStudentGrades(String u) throws NoSuchElementException {
+    public String outputStudentGrades(
+            String username) throws NoSuchElementException {
 
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("THIS GRADEBOOK IS EMPTY");
@@ -458,7 +459,7 @@ public class Course extends MyGradeBook {
         boolean hasFoundStudent = false;
 
         for (Student s : this.studAssignMap.keySet()) {
-            if (u.equals(s.userName)) {
+            if (username.equals(s.userName)) {
                 hasFoundStudent = true;
                 break;
             }
@@ -481,7 +482,7 @@ public class Course extends MyGradeBook {
 
             ArrayList<Assignment> ass = this.studAssignMap.get(s);
 
-            if (s.userName.equals(u)) {
+            if (s.userName.equals(username)) {
                 String assString = "";
                 for (Assignment a : ass) {
                     assString = assString + a.name + "\t" + a.score + "\n";
