@@ -36,6 +36,16 @@ Need to work on this.
 - [x] outputAssignmentGrades(String assignName) AUSTIN
 - [X] outputGradebook() AUSTIN
 
+### Testing in MyGradeBookTests
+- [x] MyGradeBook tests
+	These both may be able to be covered in BlackBox Testing
+		-initialize methods need to be tested
+		-processing methods need to be testing
+- [x] Course tests AUSTIN
+- [x] Assignment tests AUSTIN
+- [x] Student tests AUSTIN
+
+
 ### Distribution of Work
 #### Nick Alekhine
 - Build User Interface
@@ -59,9 +69,12 @@ Need to work on this.
 #### Austin Colcord
 - Work on methods for Gradebook
     - changeGrade
-- Quality Control, Testing.
-- Linking MyGradebook to Gradebook.
-- Output Methods
+    - all output methods
+- Quality Control, Testing (WhiteBox - MyGradeBookTest.java)
+- Student Comparator (by username)
+- Linking MyGradebook to Gradebook
+- Equals methods for all classes
+- Hashcode methods for all classes
 
 #### Chris Clark
 - BlackBox Testing
