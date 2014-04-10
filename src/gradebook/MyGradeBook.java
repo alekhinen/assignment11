@@ -299,7 +299,12 @@ public abstract class MyGradeBook {
                     String assName = sc.next();
                     double grade = sc.nextInt();
 
+                    try {
                     this.changeGrade(assName, username, grade);
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -310,7 +315,12 @@ public abstract class MyGradeBook {
                     String username = sc.next();
                     double grade = sc.nextInt();
 
+                    try {
                     this.changeGrade(assName, username, grade);
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -400,7 +410,12 @@ public abstract class MyGradeBook {
                 String assName = sc.next();
                 double grade = sc.nextInt();
 
+                try {
                 this.changeGrade(assName, username, grade);
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -411,7 +426,12 @@ public abstract class MyGradeBook {
                 String username = sc.next();
                 double grade = sc.nextInt();
 
+                try {
                 this.changeGrade(assName, username, grade);
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         else {
