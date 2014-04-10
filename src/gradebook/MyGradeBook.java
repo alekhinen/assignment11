@@ -419,7 +419,8 @@ public abstract class MyGradeBook {
      * @param newGrade
      *            the new grade for the given assignment and student
      * @return whether there was a grade to change. Returns true if the given
-     *         assignment/student combination exists, returns false otherwise
+     *         assignment/student combination exists, and username’s 
+     *         assignmentName grade is now newGrade, returns false otherwise
      */
     // TODO ...
     public abstract boolean changeGrade(String assignmentName,
