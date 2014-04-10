@@ -509,7 +509,9 @@ public class Interfacer {
             }
             catch (Exception e) {
                 System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
-                        + "Something unexpected happened.");
+                        + "Something unexpected happened."
+                        + "It could be due to the file not existing or"
+                        + " it being improperly formatted.");
                 System.out.println(e 
                         + "\n" 
                         + ANSI.SANE + ANSI.BLACK);
@@ -531,7 +533,9 @@ public class Interfacer {
             }
             catch (Exception e) {
                 System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
-                        + "Something unexpected happened.");
+                        + "Something unexpected happened."
+                        + " It could be due to an improperly formatted "
+                        + "string.");
                 System.out.println(e 
                         + "\n" 
                         + ANSI.SANE + ANSI.BLACK);
@@ -677,7 +681,9 @@ public class Interfacer {
             }
             catch (Exception e) {
                 System.out.println(ANSI.HIGH_INTENSITY + ANSI.RED
-                        + "Something unexpected happened.");
+                        + "Something unexpected happened. It could be"
+                        + "due to a student having null values "
+                        + "for assignments.");
                 System.out.println(e 
                         + "\n" 
                         + ANSI.SANE + ANSI.BLACK);
@@ -696,7 +702,8 @@ public class Interfacer {
                 System.out.println("");
             }
             catch (Exception e) {
-                System.out.println("An error occurred.");
+                System.out.println("An error occurred. It could be due to"
+                        + "a student having null values for assignments");
                 System.out.println(e);
                 System.out.println("");
             }
@@ -714,7 +721,9 @@ public class Interfacer {
                 System.out.println(cgs + "\n");
             }
             catch (Exception e) {
-                System.out.println("An error occurred.");
+                System.out.println("An error occurred."
+                        + "The student might have null values for their"
+                        + "assignments or the student might not exist");
                 System.out.println(e);
                 System.out.println("");
             }
@@ -730,7 +739,8 @@ public class Interfacer {
                 System.out.println("\n\n");
             }
             catch (Exception e) {
-                System.out.println("An error occurred.");
+                System.out.println("An error occurred."
+                        + "It could be due to the assignment not existing.");
                 System.out.println(e);
                 System.out.println("");
             }
