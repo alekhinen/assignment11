@@ -1,11 +1,9 @@
 package gradebook;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * 
@@ -43,12 +41,11 @@ public abstract class MyGradeBook {
      * @return a MyGradebook that contains the grade book from filename
      * @throws FileNotFoundException 
      */
-    public static MyGradeBook initializeWithFile(String filename) 
-            throws FileNotFoundException {
+    public static MyGradeBook initializeWithFile(
+            String filename) throws FileNotFoundException {
 
-        MyGradeBook blank = MyGradeBook.initialize();
-        HashMap<Student, ArrayList<Assignment>> map 
-        = new HashMap<Student, ArrayList<Assignment>>();
+        HashMap<Student, ArrayList<Assignment>> map = 
+                new HashMap<Student, ArrayList<Assignment>>();
 
 
         File file = new File(filename);
@@ -68,7 +65,7 @@ public abstract class MyGradeBook {
         ArrayList<Assignment> assList = new ArrayList<Assignment>();
         ArrayList<Student> studList = new ArrayList<Student>();
 
-        while(scanLine1.hasNext()) {
+        while (scanLine1.hasNext()) {
             try {
                 String assName = scanLine1.next();
                 double total = scanLine2.nextDouble();
@@ -77,13 +74,13 @@ public abstract class MyGradeBook {
                 Assignment ass = new Assignment(assName, total, weight);
                 assList.add(ass);
             }
-            catch(Exception e) {
+            catch (Exception e) {
                 System.out.println("File formatted incorrectly");
             }
         }
 
         // Create student object
-        while(fileSC.hasNextLine()) {
+        while (fileSC.hasNextLine()) {
             ArrayList<Assignment> urList = new ArrayList<Assignment>();
 
             String line = fileSC.nextLine();
@@ -100,7 +97,7 @@ public abstract class MyGradeBook {
 
 
             int count = 0;
-            while(studScan.hasNextDouble()) {
+            while (studScan.hasNextDouble()) {
 
                 if (count > assList.size()) {
                     throw new RuntimeException("assignment list number error");
@@ -114,7 +111,8 @@ public abstract class MyGradeBook {
                     double total = current.total;
                     count++;
 
-                    Assignment newass = new Assignment(name, total, next, weight);
+                    Assignment newass = 
+                            new Assignment(name, total, next, weight);
                     urList.add(newass);
                 }
             }
@@ -177,7 +175,7 @@ public abstract class MyGradeBook {
         //Add a list of grades to GradeBook
         if (type.equals("ASSIGNMENT")) {
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String name = sc.next();
                 double total = sc.nextDouble();
                 double weight = sc.nextDouble();
@@ -188,7 +186,7 @@ public abstract class MyGradeBook {
                 try {
                     sc.next();
                 }
-                catch(Exception e) { }
+                catch (Exception e) { }
             }
             this.addGrades(assList);
         }
@@ -196,7 +194,7 @@ public abstract class MyGradeBook {
         //Add a list of students to the GradeBook
         else if (type.equals("STUDENT")) {
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String username = sc.next();
                 String firstName = sc.next();
                 String middleName = sc.next();
@@ -211,14 +209,14 @@ public abstract class MyGradeBook {
                 try {
                     sc.next(); 
                 }
-                catch(Exception e) { }
+                catch (Exception e) { }
             }
         }
 
         else if (type.equals("GRADES_FOR_STUDENT")) {
             String username = sc.next();
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String assName = sc.next();
                 double grade = sc.nextInt();
 
@@ -229,14 +227,16 @@ public abstract class MyGradeBook {
         else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
             String assName = sc.next();
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String username = sc.next();
                 double grade = sc.nextInt();
 
                 this.changeGrade(assName, username, grade);
             }
         }
-        else throw new RuntimeException();
+        else {
+            throw new RuntimeException();
+        }
     }
 
 
@@ -439,11 +439,14 @@ public abstract class MyGradeBook {
 
     /**
      * Add a list of Assignments to every student's list of assignments
+     * 
+     * @param aList the list of assignments to add to every student
      */
     public abstract void addGrades(ArrayList<Assignment> aList);
 
     /**
-     * 
+     * add students to the student list
+     * @param studList the students to add
      */
     public abstract void addStudents(ArrayList<Student> studList);
 }
