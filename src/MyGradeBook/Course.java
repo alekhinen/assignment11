@@ -458,7 +458,7 @@ public class Course extends MyGradeBook {
         boolean hasFoundStudent = false;
 
         for (Student s : this.studAssignMap.keySet()) {
-            if (username.equals(s)) {
+            if (username.equals(s.userName)) {
                 hasFoundStudent = true;
                 break;
             }
