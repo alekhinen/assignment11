@@ -1,4 +1,4 @@
-package MyGradeBook;
+package gradebook;
 /** represents a single assignment that is assigned under a course
  * containing a name for the assignment, a weight for the total course grade,
  * and a score that the individual received. the score will only be set

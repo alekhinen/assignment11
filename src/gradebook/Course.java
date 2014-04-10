@@ -1,4 +1,4 @@
-package MyGradeBook;
+package gradebook;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;

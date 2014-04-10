@@ -1,4 +1,4 @@
-package MyGradeBook;
+package gradebook;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

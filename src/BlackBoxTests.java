@@ -1,11 +1,10 @@
 import static org.junit.Assert.*;
+import gradebook.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
-
-import MyGradeBook.*;
 
 
 public class BlackBoxTests {

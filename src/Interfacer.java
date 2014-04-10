@@ -1,7 +1,7 @@
 
-import java.util.Scanner;
+import gradebook.MyGradeBook;
 
-import MyGradeBook.MyGradeBook;
+import java.util.Scanner;
 
 
 /**

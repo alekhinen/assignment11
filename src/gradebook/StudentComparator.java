@@ -1,4 +1,4 @@
-package MyGradeBook;
+package gradebook;
 
 import java.util.Comparator;
 
