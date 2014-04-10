@@ -36,14 +36,19 @@ Need to work on this.
 - [x] outputAssignmentGrades(String assignName) AUSTIN
 - [X] outputGradebook() AUSTIN
 
-### Testing in MyGradeBookTests
-- [x] MyGradeBook tests
-	These both may be able to be covered in BlackBox Testing
-		-initialize methods need to be tested
-		-processing methods need to be testing
-- [x] Course tests AUSTIN
-- [x] Assignment tests AUSTIN
-- [x] Student tests AUSTIN
+### Testing CheckList
+#### MyGradeBookTest.java
+##### AUSTIN
+- [ ] MyGradeBook
+	- These both may be able to be covered in BlackBox Testing
+		- [ ] initialize methods need to be tested
+		- [ ] processing methods need to be testing
+- [x] Course AUSTIN
+- [x] Assignment AUSTIN
+- [x] Student AUSTIN
+#### BlackBoxTests.java
+##### CHRIS
+- [ ] MyGradeBook
 
 
 ### Distribution of Work
