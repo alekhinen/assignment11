@@ -292,6 +292,7 @@ public class MyGradeBookTest {
     public void testMin() {
         this.reset();
         assertEquals(c1.min("Assignment1"), 45.0, .001);
+        assertEquals(c1.min("Assignment2"), 66.6, .066666666666666);
     }
 
     /** test the max method
