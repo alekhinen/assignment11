@@ -371,7 +371,7 @@ public class MyGradeBookTest {
         this.reset();
         assertEquals(90, 
                 this.c1.assignmentGrade("Assignment1", "chperrone"), .01);
-        assertEquals(95.83,
+        assertEquals(115.0,
                 this.c1.assignmentGrade("Assignment2", "chperrone"), .01);
         assertEquals(0, 
                 this.c1.assignmentGrade("Assignment3", "chperrone"), .01);

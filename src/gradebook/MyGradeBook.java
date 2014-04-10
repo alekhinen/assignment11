@@ -72,17 +72,16 @@ public abstract class MyGradeBook {
 
         //build the list of assignments
         while (scanLine1.hasNext()) {
-            try {
                 String assName = scanLine1.next();
                 double total = scanLine2.nextDouble();
                 double weight = scanLine3.nextDouble();
 
                 Assignment ass = new Assignment(assName, total, weight);
                 assList.add(ass);
-            }
-            catch (Exception e) {
-                System.out.println("File formatted incorrectly");
-            }
+            //}
+            //catch (Exception e) {
+            //    System.out.println("File formatted incorrectly");
+            //}
         }
 
         // Create student object
@@ -124,11 +123,10 @@ public abstract class MyGradeBook {
             }
             map.put(stud, urList);
         }
-        
         }
         
         catch(FileNotFoundException e) {
-            System.out.println("File not found.");
+            e.printStackTrace();
         }
         return new Course(map);
     }

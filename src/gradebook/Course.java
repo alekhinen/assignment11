@@ -481,6 +481,7 @@ public class Course extends MyGradeBook {
      */
     @Override
     public double assignmentGrade(String assignmentName, String username) {
+        
         double result = 0;
         ArrayList<Assignment> assignments = new ArrayList<Assignment>();
         Student s = this.getStudent(username);
@@ -490,13 +491,13 @@ public class Course extends MyGradeBook {
 
             for (Assignment a : assignments) {
                 if (a.name.equals(assignmentName)) {
-                    result = ((a.score / a.total) * 100);
+                    result = a.score;
                     break;
                 }
             }
         }
 
-        result = Math.round( result * 100.0 ) / 100.0;
+        //result = Math.round( result * 100.0 ) / 100.0;
         return result;
     }
 
