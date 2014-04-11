@@ -1,6 +1,6 @@
 package gradebook;
 import java.io.File;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -100,13 +100,16 @@ class Course extends MyGradeBook {
     public void processFile(String filename) {
 
         // load the file
-        File file;
+        File file = new File(filename);
         Scanner sc;
         try {
-            file = new File(filename);
             sc = new Scanner(file).useDelimiter("\n");
 
-            ArrayList<Assignment> asignList = new ArrayList<Assignment>();
+            if (!sc.hasNext()) {
+                throw new IndexOutOfBoundsException();
+            }
+            
+            ArrayList<Assignment> assignList = new ArrayList<Assignment>();
             ArrayList<Student> studList = new ArrayList<Student>();
 
             // Pick the first String (the type of processing)
@@ -121,16 +124,16 @@ class Course extends MyGradeBook {
                     double weight = sc.nextDouble();
 
                     Assignment made = new Assignment(name, total, weight);
-                    asignList.add(made);
+                    assignList.add(made);
 
-                    try {
-                        sc.next();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        sc.next();
+//                    }
+//                    catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
                 }
-                this.addGrades(asignList);
+                this.addGrades(assignList);
             }
 
             //Add a list of students to the GradeBook
@@ -148,12 +151,12 @@ class Course extends MyGradeBook {
 
                     studList.add(stud);
 
-                    try {
-                        sc.next(); 
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        sc.next(); 
+//                    }
+//                    catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
                 }
                 this.addStudents(studList);
             }
@@ -191,11 +194,11 @@ class Course extends MyGradeBook {
             }
 
             else {
-                throw new RuntimeException();
+                return;
             }
         }
 
-        catch (FileNotFoundException e1) {
+        catch (Exception e1) {
             e1.printStackTrace();
         }
     }
@@ -220,7 +223,7 @@ class Course extends MyGradeBook {
         // load the file
         Scanner sc = new Scanner(additionalString).useDelimiter("\n");
 
-        ArrayList<Assignment> asignList = new ArrayList<Assignment>();
+        ArrayList<Assignment> assignList = new ArrayList<Assignment>();
         ArrayList<Student> studList = new ArrayList<Student>();
 
         // Pick the first String (the type of processing)
@@ -235,7 +238,7 @@ class Course extends MyGradeBook {
                 double weight = sc.nextDouble();
 
                 Assignment made = new Assignment(name, total, weight);
-                asignList.add(made);
+                assignList.add(made);
 
                 try {
                     sc.next();
@@ -244,7 +247,7 @@ class Course extends MyGradeBook {
                     e.printStackTrace();
                 }
             }
-            this.addGrades(asignList);
+            this.addGrades(assignList);
         }
 
         //Add a list of students to the GradeBook
