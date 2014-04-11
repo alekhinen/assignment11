@@ -1,9 +1,12 @@
 package gradebook;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.util.Set;
 
 /** represents the grade book of a course that holds a hashmap of the students
@@ -80,6 +83,232 @@ class Course extends MyGradeBook {
     public static Course newGradeBook(
             HashMap<Student, ArrayList<Assignment>> map) {
         return new Course(map);
+    }
+
+    /**
+     * Add to the state of this grade book---new assignments, new students, new
+     * grades---by processing filename
+     * 
+     * @param filename
+     *            the filename for a file that contains information that will be
+     *            added to the grade book. The file could contain several
+     *            different types of information---new assignments, new
+     *            students, new grades. The file will be formatted like
+     *            addAssignments.txt, addStudents.txt, gradesForAssignment1.txt,
+     *            and gradesForStudent.txt.
+     */
+    public void processFile(String filename) {
+
+        
+        // load the file
+        File file;
+        Scanner sc;
+        try {
+            System.out.print(this);
+            file = new File(filename);
+            sc = new Scanner(file).useDelimiter("\n");
+
+            ArrayList<Assignment> asignList = new ArrayList<Assignment>();
+            ArrayList<Student> studList = new ArrayList<Student>();
+
+            // Pick the first String (the type of processing)
+            String type = sc.next();
+
+            //Add a list of grades to GradeBook
+            if (type.equals("ASSIGNMENT")) {
+
+                while (sc.hasNext()) {
+                    String name = sc.next();
+                    double total = sc.nextDouble();
+                    double weight = sc.nextDouble();
+
+                    Assignment made = new Assignment(name, total, weight);
+                    asignList.add(made);
+
+                    try {
+                        sc.next();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                this.addGrades(asignList);
+            }
+
+            //Add a list of students to the GradeBook
+            else if (type.equals("STUDENT")) {
+
+                while (sc.hasNext()) {
+                    String username = sc.next();
+                    String firstName = sc.next();
+                    String middleName = sc.next();
+                    String lastName = sc.next();
+                    int year = sc.nextInt();
+
+                    Student stud = new Student(username, firstName,
+                            middleName, lastName, year);
+
+                    studList.add(stud);
+
+                    try {
+                        sc.next(); 
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                this.addStudents(studList);
+            }
+
+            else if (type.equals("GRADES_FOR_STUDENT")) {
+                String username = sc.next();
+
+                while (sc.hasNext()) {
+                    String assName = sc.next();
+                    double grade = sc.nextInt();
+
+                    try {
+                        this.changeGrade(assName, username, grade);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
+                String assignName = sc.next();
+
+                while (sc.hasNext()) {
+                    String username = sc.next();
+                    double grade = sc.nextInt();
+
+                    try {
+                        this.changeGrade(assignName, username, grade);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            else {
+                throw new RuntimeException();
+            }
+            System.out.print(this);
+        }
+
+        catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+
+
+
+    /**
+     * Add to the state of this grade book---new assignments, new students, new
+     * grades---by processing additionalString
+     * 
+     * @param additionalString
+     *            String that contains information that will be added to the
+     *            grade book. The String could contain several different types
+     *            of information---new assignments, new students, new grades.
+     *            The String will be formatted like addAssignments.txt,
+     *            addStudents.txt, gradesForAssignment1.txt, and
+     *            gradesForStudent.txt.
+     */
+    public void processString(String additionalString) {
+
+        // load the file
+        Scanner sc = new Scanner(additionalString).useDelimiter("\n");
+
+        ArrayList<Assignment> asignList = new ArrayList<Assignment>();
+        ArrayList<Student> studList = new ArrayList<Student>();
+
+        // Pick the first String (the type of processing)
+        String type = sc.next();
+
+        //Add a list of grades to GradeBook
+        if (type.equals("ASSIGNMENT")) {
+
+            while (sc.hasNext()) {
+                String name = sc.next();
+                double total = sc.nextDouble();
+                double weight = sc.nextDouble();
+
+                Assignment made = new Assignment(name, total, weight);
+                asignList.add(made);
+
+                try {
+                    sc.next();
+                }
+                catch (Exception e) { 
+                    e.printStackTrace();
+                }
+            }
+            this.addGrades(asignList);
+        }
+
+        //Add a list of students to the GradeBook
+        else if (type.equals("STUDENT")) {
+
+            while (sc.hasNext()) {
+                String username = sc.next();
+                String firstName = sc.next();
+                String middleName = sc.next();
+                String lastName = sc.next();
+                int year = sc.nextInt();
+
+                Student stud = new Student(username, firstName,
+                        middleName, lastName, year);
+
+                studList.add(stud);
+
+                try {
+                    sc.next(); 
+                }
+                catch (Exception e) { 
+                    e.printStackTrace();
+                }
+            }
+            this.addStudents(studList);
+        }
+
+        else if (type.equals("GRADES_FOR_STUDENT")) {
+            String username = sc.next();
+
+            while (sc.hasNext()) {
+                String assName = sc.next();
+                double grade = sc.nextInt();
+
+                try {
+                    this.changeGrade(assName, username, grade);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
+            String assName = sc.next();
+
+            while (sc.hasNext()) {
+                String username = sc.next();
+                double grade = sc.nextInt();
+
+                try {
+                    this.changeGrade(assName, username, grade);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            throw new RuntimeException();
+        }
     }
 
     /** overriding the equals method for GradeBook class
@@ -173,7 +402,7 @@ class Course extends MyGradeBook {
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("This Gradebook is Empty");
         }
-        
+
         ArrayList<Student> studList =
                 new ArrayList<Student>(this.studAssignMap.keySet());
 
@@ -191,7 +420,7 @@ class Course extends MyGradeBook {
                 break;
             }
         }
-        
+
         if (!hasFoundAssignment) {
             throw new NoSuchElementException(
                     "The given assignment does not exist");
@@ -224,7 +453,7 @@ class Course extends MyGradeBook {
         Set<Student> students = this.studAssignMap.keySet();
 
         ArrayList<Double> result = new ArrayList<Double>();
-        
+
 
         for (Student s : students) {
             ArrayList<Assignment> assign = this.studAssignMap.get(s);
@@ -254,11 +483,11 @@ class Course extends MyGradeBook {
      * @return the median across all students for assignmentName
      */
     public double median(String assignmentName) throws NoSuchElementException {
-        
+
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("This Gradebook is Empty");
         }
-        
+
         ArrayList<Student> studList =
                 new ArrayList<Student>(this.studAssignMap.keySet());
 
@@ -276,7 +505,7 @@ class Course extends MyGradeBook {
                 break;
             }
         }
-        
+
         if (!hasFoundAssignment) {
             throw new NoSuchElementException(
                     "The given assignment does not exist");
@@ -313,7 +542,7 @@ class Course extends MyGradeBook {
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("This Gradebook is Empty");
         }
-        
+
         ArrayList<Student> studList =
                 new ArrayList<Student>(this.studAssignMap.keySet());
 
@@ -331,12 +560,12 @@ class Course extends MyGradeBook {
                 break;
             }
         }
-        
+
         if (!hasFoundAssignment) {
             throw new NoSuchElementException(
                     "The given assignment does not exist");
         }
-        
+
         ArrayList<Double> list = this.makeList(assignmentName);
 
         list.removeAll(Collections.singleton(null));
@@ -359,7 +588,7 @@ class Course extends MyGradeBook {
         if (this.studAssignMap.isEmpty()) {
             throw new NoSuchElementException("This Gradebook is Empty");
         }
-        
+
         ArrayList<Student> studList =
                 new ArrayList<Student>(this.studAssignMap.keySet());
 
@@ -377,12 +606,12 @@ class Course extends MyGradeBook {
                 break;
             }
         }
-        
+
         if (!hasFoundAssignment) {
             throw new NoSuchElementException(
                     "The given assignment does not exist");
         }
-        
+
         ArrayList<Double> list = this.makeList(assignmentName);
 
         list.removeAll(Collections.singleton(null));
@@ -481,7 +710,7 @@ class Course extends MyGradeBook {
      */
     @Override
     public double assignmentGrade(String assignmentName, String username) {
-        
+
         double result = 0;
         ArrayList<Assignment> assignments = new ArrayList<Assignment>();
         Student s = this.getStudent(username);
@@ -805,7 +1034,7 @@ class Course extends MyGradeBook {
             this.studAssignMap.put(s, result);
         }
     }
-    
+
     /** adds an arrayList of students to the current course
      * 
      * @author Charles Perrone
@@ -817,22 +1046,22 @@ class Course extends MyGradeBook {
         Set<Student> studSet = this.studAssignMap.keySet();
         Iterator<Student> it = studSet.iterator();
         ArrayList<Assignment> newStudList = new ArrayList<Assignment>();
-        
+
         if (this.studAssignMap.isEmpty()) {
             for (Student s : studList) {
                 this.studAssignMap.put(s, new ArrayList<Assignment>());
             }
         }
-        
+
         else {
             Student template = it.next();
             ArrayList<Assignment> tempList = this.studAssignMap.get(template);
-            
+
             for (Assignment a : tempList) {
                 Assignment neu = new Assignment(a.name, a.total, a.weight);
                 newStudList.add(neu);
             }
-            
+
             for (Student s : studList) {
                 this.studAssignMap.put(s, newStudList);
             }

@@ -74,9 +74,6 @@ public class MyGradeBookTest {
     MyGradeBook mtBook;
     /** mygradebook instance */
     MyGradeBook book1;
-    /** mygradebook instance */
-    MyGradeBook testBook;
-
 
     /** 
      * To set values to each variable. 
@@ -130,7 +127,6 @@ public class MyGradeBookTest {
         mtBook = MyGradeBook.initialize();
         try {
             book1 = MyGradeBook.initializeWithFile("initial.txt");
-            testBook = MyGradeBook.initializeWithFile("testFile.txt");
         } 
         catch (Exception e) {
             e.printStackTrace();
@@ -174,22 +170,33 @@ public class MyGradeBookTest {
      */
     @Test
     public void testInitializeWithFile() {
-        assertEquals(testBook, null);
-        testBook = MyGradeBook.initializeWithFile("testFile.txt");
-        String outputCurrent = "CURRENT_GRADES\n"
-                + "chperrone\t" + "75.5\n"
-                + "nalekhn\t" + "79.5\n"
-                + "thmyolk\t" + "75.0\n";
-        assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+        try {
+            assertEquals(book1, null);
+            book1 = MyGradeBook.initializeWithFile("initial.txt");
+            String outputCurrent = "STUDENT_GRADES\n"
+                    + "enwilson\n"
+                    + "Aiden\n"
+                    + "Wilson\n"
+                    + "Nelson\n"
+                    + "2014\n"
+                    + "----\n"
+                    + "Opening Assignment\t" + "8.0\n"
+                    + "A2\t" + "83.0\n"
+                    + "----\n"
+                    + "CURRENT GRADE\t" + "82.5\n";
+            assertEquals(book1.outputStudentGrades("enwilson"), outputCurrent);
 
+        }
+        catch (Exception e) {
+            // To catch/test expected exceptions
+            assertTrue(false);
+        }
 
         // To test FileNotFoundException
         try {
             book1 = MyGradeBook.initializeWithFile("FakeFilename.txt");
-            System.out.println("This shouldn't work");
         }
         catch (Exception e) {
-            System.out.println("File is not found");
             assertTrue(true);
         }
     }
@@ -201,28 +208,77 @@ public class MyGradeBookTest {
      */
     @Test
     public void testInitializeWithString() {
-        assertEquals(testBook, null);
-        String startingString = "GRADEBOOK\n"
-                + "\t\t\t\t\t"
-                + "A1\t" + "A2\n"
-                + "\t\t\t\t\t"
-                + "100.0\t" + "100.0\n"
-                + "\t\t\t\t\t"
-                + "5.0\t" + "5.0\n"
-                + "chperrone\t" + "Charles\t" + "Haydon\t" + "Perrone\t"
-                + "2017\t" + "80.0\t" + "71.0\n"
-                + "nalekhn\t" + "Nick\t" + "Alex\t" + "Alekhine\t"
-                + "2017\t" + "80.0\t" + "79.0\n"
-                + "thmyolk\t" + "Thom\t" + "Mearle\t" + "Yorke\t"
-                + "2017\t" + "60.0\t" + "90.0\n";
-        //try {
-        testBook = MyGradeBook.initializeWithString(startingString);
-        String outputCurrent = "CURRENT_GRADES\n"
-                + "chperrone\t" + "75.5\n"
-                + "nalekhn\t" + "79.5\n"
-                + "thmyolk\t" + "75.0\n";
-        assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+        try {
+            assertEquals(book1, null);
 
+            String startingString = "GRADEBOOK\n"
+                    + "\t\t\t\t\t"
+                    + "Opening Assignment\t" + "A2\n"
+                    + "\t\t\t\t\t"
+                    + "10\t" + "100\n"
+                    + "\t\t\t\t\t"
+                    + "1\t" + "5\n"
+                    + "abetaylor\t" + "Isabella\t" + "Taylor\t" + "Baker\t"
+                    + "2016\t" + "8\t" + "71\n"
+                    + "abethes\t" + "Elizabeth\t" + "White Jones\t" + "Nelson\t"
+                    + "2014\t" + "6\t" + "90\n"
+                    + "acit\t" + "Jacob\t" + "Smith\t" + "Scott\t"
+                    + "2014\t" + "8\t" + "79\n"
+                    + "ahrown\t" + "Noah\t" + "Brown\t" + "Adams\t"
+                    + "2017\t" + "8\t" + "85\n"
+                    + "amller\t" + "Liam\t" + "Miller\t" + "Scott\t"
+                    + "2014\t" + "5\t" + "74\n"
+                    + "are\t" + "Emily Ann\t" + "Moore\t" + "Scott\t"
+                    + "2014\t" + "9\t" + "58\n"
+                    + "enwilson\t" + "Aiden\t" + "Wilson\t" + "Nelson\t"
+                    + "2014\t" + "8\t" + "83\n"
+                    + "gailarti\t" + "Abigail\t" + "Martin\t" + "Green\t"
+                    + "2015\t" + "7\t" + "79\n"
+                    + "marson\t" + "Emma\t" + "Anderson\t" + "Green\t"
+                    + "2015\t" + "7\t" + "81\n"
+                    + "michaeia\t" + "Michael\t" + "Garcia\t" + "Baker\t"
+                    + "2016\t" + "5\t" + "100\n"
+                    + "mijacks\t" + "Mia\t" + "Jackson\t" + "Baker\t"
+                    + "2016\t" + "5\t" + "50\n"
+                    + "oliviaas\t" + "Olivia\t" + "Thomas\t" + "Adams\t"
+                    + "2017\t" + "6\t" + "94\n"
+                    + "onon\t" + "Mason\t" + "Johnson\t" + "Green\t"
+                    + "2015\t" + "10\t" + "81\n"
+                    + "onson\t" + "Madison\t" + "Thompson\t" + "Adams\t"
+                    + "2017\t" + "9\t" + "89\n"
+                    + "thms\t" + "Ethan\t" + "Williams\t" + "Baker\t"
+                    + "2016\t" + "8\t" + "89\n"
+                    + "vaern\t" + "Ava\t" + "Hernandez\t" + "Nelson\t"
+                    + "2014\t" + "6\t" + "91\n"
+                    + "ydenavi\t" + "Jayden\t" + "Davis\t" + "Green\t"
+                    + "2015\t" + "10\t" + "97\n";
+
+            book1 = MyGradeBook.initializeWithString(startingString);
+            String outputCurrent = "CURRENT_GRADES\n"
+                    + "abetaylor\t" + "72.5\n"
+                    + "abethes\t" + "85.0\n"
+                    + "acit\t" + "79.17\n"
+                    + "ahrown\t" + "84.17\n"
+                    + "amller\t" + "70.0\n"
+                    + "are\t" + "63.33\n"
+                    + "enwilson\t" + "82.5\n"
+                    + "gailarti\t" + "77.5\n"
+                    + "marson\t" + "79.17\n"
+                    + "michaeia\t" + "91.67\n"
+                    + "mijacks\t" + "50.0\n"
+                    + "oliviaas\t" + "88.33\n"
+                    + "onon\t" + "84.17\n"
+                    + "onson\t" + "89.17\n"
+                    + "thms\t" + "87.5\n"
+                    + "vaern\t" + "85.83\n"
+                    + "ydenavi\t" + "97.5\n";
+
+            assertEquals(book1.outputCurrentGrades(), outputCurrent);
+        }
+        catch (Exception e) {
+            // To catch/test expected exceptions
+            assertTrue(false);
+        }
 
         // To test Exception
         try {
@@ -247,14 +303,13 @@ public class MyGradeBookTest {
         reset();
         assertTrue(true);
         try {
-            testBook.processFile("addStudents.txt");
-            System.out.print(testBook.outputGradebook());
+            book1.processFile("addStudents.txt");
+            System.out.print(book1.outputGradebook());
         } 
         catch (Exception e) {
             // To catch/test expected exceptions
-            e.printStackTrace();
+//            e.printStackTrace();
         }
-
 
         try {
             MyGradeBook blank = MyGradeBook.initialize();
@@ -534,10 +589,10 @@ public class MyGradeBookTest {
         assertEquals(c1.min("Assignment2"), 80.0, .067);
         assertEquals(c1.min("Assignment3"), 90.0, .000);
 
-        assertEquals(testBook.min("A1"), 60, 0);
+        assertEquals(book1.min("A2"), 50.0, 0);
 
-        testBook.changeGrade("A1", "thmyolk", 99);
-        assertEquals(testBook.min("A1"), 80, 0);
+        book1.changeGrade("A2", "mijacks", 99.0);
+        assertEquals(book1.min("A2"), 58.0, 0);
 
         try {
             Course.newGradeBook().min("TEST");
@@ -575,10 +630,10 @@ public class MyGradeBookTest {
         assertEquals(c1.max("Assignment2"), 115.0, .034);
         assertEquals(c1.max("Assignment3"), 90.0, .000);
 
-        assertEquals(testBook.max("A1"), 80, 0);
+        assertEquals(book1.max("A2"), 100.0, 0);
 
-        testBook.changeGrade("A1", "chperrone", 100);
-        assertEquals(testBook.max("A1"), 100, 0);
+        book1.changeGrade("A2", "michaeia", 10.0);
+        assertEquals(book1.max("A2"), 97.0, 0);
 
         try {
             Course.newGradeBook().max("TEST");
@@ -657,15 +712,29 @@ public class MyGradeBookTest {
         assertEquals(result, this.c1.currentGrades());
         assertEquals(this.c1.currentGrades(), this.c2.currentGrades());
 
-        HashMap<String, Double> testBookCurrentGrades = 
+        HashMap<String, Double> book1CurrentGrades = 
                 new HashMap<String, Double>();
 
-        testBookCurrentGrades.put("chperrone", 75.5);
-        testBookCurrentGrades.put("thmyolk", 75.0);
-        testBookCurrentGrades.put("nalekhn", 79.5);
+        book1CurrentGrades.put("mijacks", 50.0);
+        book1CurrentGrades.put("thms", 87.5);
+        book1CurrentGrades.put("onson", 89.17);
+        book1CurrentGrades.put("marson", 79.17);
+        book1CurrentGrades.put("acit", 79.17);
+        book1CurrentGrades.put("vaern", 85.83);
+        book1CurrentGrades.put("oliviaas", 88.33);
+        book1CurrentGrades.put("abetaylor", 72.5);
+        book1CurrentGrades.put("ydenavi", 97.5);
+        book1CurrentGrades.put("onon", 84.17);
+        book1CurrentGrades.put("are", 63.33);
+        book1CurrentGrades.put("enwilson", 82.5);
+        book1CurrentGrades.put("ahrown", 84.17);
+        book1CurrentGrades.put("michaeia", 91.67);
+        book1CurrentGrades.put("amller", 70.0);
+        book1CurrentGrades.put("gailarti", 77.5);
+        book1CurrentGrades.put("abethes", 85.0);
 
         assertEquals(mtBook.currentGrades().toString(), "{}");
-        assertEquals(testBook.currentGrades(), testBookCurrentGrades);
+        assertEquals(book1.currentGrades(), book1CurrentGrades);
     }
 
     /** test the assignmentGrade method in GradeBook
@@ -686,13 +755,10 @@ public class MyGradeBookTest {
         assertEquals(this.c1.assignmentGrade("asldfjk", "chperrone"), 0, .00);
         assertEquals(this.c1.assignmentGrade("Assignment1", "als;dkjf"), 0, .0);
 
-        assertEquals(testBook.assignmentGrade("A1", "chperrone"), 80, 0);
-        assertEquals(testBook.assignmentGrade("A2", "chperrone"), 71, 0);
+        assertEquals(book1.assignmentGrade(
+                "Opening Assignment", "enwilson"), 8.0, 0);
+        assertEquals(book1.assignmentGrade("A2", "enwilson"), 83.0, 0);
     }
-
-
-
-
 
     /** To test the addStudents method
      * 
@@ -823,12 +889,25 @@ public class MyGradeBookTest {
     public void testOutputCurrentGrades() {
         reset();
         String outputCurrent = "CURRENT_GRADES\n"
-                + "chperrone\t" + "75.5\n"
-                + "nalekhn\t" + "79.5\n"
-                + "thmyolk\t" + "75.0\n";
-        assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+                + "abetaylor\t" + "72.5\n"
+                + "abethes\t" + "85.0\n"
+                + "acit\t" + "79.17\n"
+                + "ahrown\t" + "84.17\n"
+                + "amller\t" + "70.0\n"
+                + "are\t" + "63.33\n"
+                + "enwilson\t" + "82.5\n"
+                + "gailarti\t" + "77.5\n"
+                + "marson\t" + "79.17\n"
+                + "michaeia\t" + "91.67\n"
+                + "mijacks\t" + "50.0\n"
+                + "oliviaas\t" + "88.33\n"
+                + "onon\t" + "84.17\n"
+                + "onson\t" + "89.17\n"
+                + "thms\t" + "87.5\n"
+                + "vaern\t" + "85.83\n"
+                + "ydenavi\t" + "97.5\n";
+        assertEquals(book1.outputCurrentGrades(), outputCurrent);
     }
-
 
     /** test the outputAssignmentGrades method in Course
      *
@@ -839,21 +918,35 @@ public class MyGradeBookTest {
     public void testOutputAssignmentGrades() {
         reset();
         String a1OutputCurrent = "ASSIGNMENT_GRADES\n"
-                + "A1\n"
+                + "A2\n"
                 + "100.0\n"
                 + "5.0\n"
                 + "----\n"
-                + "chperrone\t" + "80.0\n"
-                + "nalekhn\t" + "80.0\n"
-                + "thmyolk\t" + "60.0\n"
+                + "abetaylor\t" + "71.0\n"
+                + "abethes\t" + "90.0\n"
+                + "acit\t" + "79.0\n"
+                + "ahrown\t" + "85.0\n"
+                + "amller\t" + "74.0\n"
+                + "are\t" + "58.0\n"
+                + "enwilson\t" + "83.0\n"
+                + "gailarti\t" + "79.0\n"
+                + "marson\t" + "81.0\n"
+                + "michaeia\t" + "100.0\n"
+                + "mijacks\t" + "50.0\n"
+                + "oliviaas\t" + "94.0\n"
+                + "onon\t" + "81.0\n"
+                + "onson\t" + "89.0\n"
+                + "thms\t" + "89.0\n"
+                + "vaern\t" + "91.0\n"
+                + "ydenavi\t" + "97.0\n"
                 + "----\n"
                 + "STATS\n"
-                + "Average\t" + "73.33333333333333\n"
-                + "Median\t" + "80.0\n"
-                + "Max\t" + "80.0\n"
-                + "Min\t" + "60.0";
+                + "Average\t" + "81.82352941176471\n"
+                + "Median\t" + "83.0\n"
+                + "Max\t" + "100.0\n"
+                + "Min\t" + "50.0";
 
-        assertEquals(testBook.outputAssignmentGrades("A1"), a1OutputCurrent);
+        assertEquals(book1.outputAssignmentGrades("A2"), a1OutputCurrent);
     }
 
     /** test the outputGradebook method in Course
@@ -864,20 +957,48 @@ public class MyGradeBookTest {
     @Test
     public void testOutputGradebook() {
         reset();
-        String outputTestBook = "GRADEBOOK\n"
+        String outputBook1 = "GRADEBOOK\n"
                 + "\t\t\t\t\t"
-                + "A1\t" + "A2\n"
+                + "Opening Assignment\t" + "A2\n"
                 + "\t\t\t\t\t"
-                + "100.0\t" + "100.0\n"
+                + "10.0\t" + "100.0\n"
                 + "\t\t\t\t\t"
-                + "5.0\t" + "5.0\n"
-                + "chperrone\t" + "Charles\t" + "Haydon\t" + "Perrone\t"
-                + "2017\t" + "80.0\t" + "71.0\n"
-                + "nalekhn\t" + "Nick\t" + "Alex\t" + "Alekhine\t"
-                + "2017\t" + "80.0\t" + "79.0\n"
-                + "thmyolk\t" + "Thom\t" + "Mearle\t" + "Yorke\t"
-                + "2017\t" + "60.0\t" + "90.0\n";
+                + "1.0\t" + "5.0\n"
+                + "abetaylor\t" + "Isabella\t" + "Taylor\t" + "Baker\t"
+                + "2016\t" + "8.0\t" + "71.0\n"
+                + "abethes\t" + "Elizabeth\t" + "White Jones\t" + "Nelson\t"
+                + "2014\t" + "6.0\t" + "90.0\n"
+                + "acit\t" + "Jacob\t" + "Smith\t" + "Scott\t"
+                + "2014\t" + "8.0\t" + "79.0\n"
+                + "ahrown\t" + "Noah\t" + "Brown\t" + "Adams\t"
+                + "2017\t" + "8.0\t" + "85.0\n"
+                + "amller\t" + "Liam\t" + "Miller\t" + "Scott\t"
+                + "2014\t" + "5.0\t" + "74.0\n"
+                + "are\t" + "Emily Ann\t" + "Moore\t" + "Scott\t"
+                + "2014\t" + "9.0\t" + "58.0\n"
+                + "enwilson\t" + "Aiden\t" + "Wilson\t" + "Nelson\t"
+                + "2014\t" + "8.0\t" + "83.0\n"
+                + "gailarti\t" + "Abigail\t" + "Martin\t" + "Green\t"
+                + "2015\t" + "7.0\t" + "79.0\n"
+                + "marson\t" + "Emma\t" + "Anderson\t" + "Green\t"
+                + "2015\t" + "7.0\t" + "81.0\n"
+                + "michaeia\t" + "Michael\t" + "Garcia\t" + "Baker\t"
+                + "2016\t" + "5.0\t" + "100.0\n"
+                + "mijacks\t" + "Mia\t" + "Jackson\t" + "Baker\t"
+                + "2016\t" + "5.0\t" + "50.0\n"
+                + "oliviaas\t" + "Olivia\t" + "Thomas\t" + "Adams\t"
+                + "2017\t" + "6.0\t" + "94.0\n"
+                + "onon\t" + "Mason\t" + "Johnson\t" + "Green\t"
+                + "2015\t" + "10.0\t" + "81.0\n"
+                + "onson\t" + "Madison\t" + "Thompson\t" + "Adams\t"
+                + "2017\t" + "9.0\t" + "89.0\n"
+                + "thms\t" + "Ethan\t" + "Williams\t" + "Baker\t"
+                + "2016\t" + "8.0\t" + "89.0\n"
+                + "vaern\t" + "Ava\t" + "Hernandez\t" + "Nelson\t"
+                + "2014\t" + "6.0\t" + "91.0\n"
+                + "ydenavi\t" + "Jayden\t" + "Davis\t" + "Green\t"
+                + "2015\t" + "10.0\t" + "97.0\n";
 
-        assertEquals(testBook.outputGradebook(), outputTestBook);
+        assertEquals(book1.outputGradebook(), outputBook1);
     }
 }
