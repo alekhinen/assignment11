@@ -1,0 +1,69 @@
+### Distribution of Work
+#### Nick Alekhine
+- Initial Discussion and Draw-Ups of Class Structure
+- Initial conversations with use cases
+- Introduction
+- Worked on functional and non-functional requirements
+- Build User Interface
+- Build several methods for Gradebook 
+    - getStudent 
+    - currentGrade 
+    - currentGrades
+    - assignmentGrades
+- Work on Design Document
+- Work on UML diagram
+- Work on README
+- Work on presentation
+
+#### Charles Perrone
+- Initial Discussion and Draw-Ups of Class Structure
+- Worked on functional and non-functional requirements
+- Worked on creating logical use cases
+- Build file parser
+- Parse files and text inputs
+- Build several methods for Gradebook
+    - initialize()
+    - initializeWithFile(String)
+    - initializeWithString(String)
+    - processFile(String)
+    - processString(String)
+    - Average
+    - median
+    - min
+    - max
+- Wrote Assignment
+- Wrote Course
+- Wrote Student
+
+#### Austin Colcord
+- Initial Discussion and Draw-Ups of Class Structure
+- Final UML Diagram Construction
+- Final Module Dependency Diagram Construction
+- Work on methods for Gradebook
+    - changeGrade
+    - outputCurrentGrades()
+    - outputStudentGrades(String username) 
+    - outputAssignmentGrades(String assignName)
+    - outputGradebook()
+- Quality Control, Testing (WhiteBox - MyGradeBookTest.java)
+- Student Comparator (by username)
+- Linking MyGradebook to Course
+- Wrote Assignment
+- Wrote Course
+- Wrote Student
+- Equals methods for all classes
+- Hashcode methods for all classes
+- Co-wrote presentation
+
+#### Chris Clark
+- Discussion with functional and non-functional requirements
+- Worked on method ideas for class structure
+- Helped with UML Diagram
+- BlackBox Testing for all methods and classes
+- Quality Control with testing, commenting, and formatting
+
+
+
+
+
+
