@@ -63,7 +63,7 @@ public abstract class MyGradeBook {
             Scanner scanLine3 = new Scanner(line3.trim()).useDelimiter("\t");
 
             //Accumulator lists
-            ArrayList<Assignment> assList = new ArrayList<Assignment>();
+            ArrayList<Assignment> asignList = new ArrayList<Assignment>();
             ArrayList<Student> studList = new ArrayList<Student>();
 
             //build the list of assignments
@@ -72,8 +72,8 @@ public abstract class MyGradeBook {
                 double total = scanLine2.nextDouble();
                 double weight = scanLine3.nextDouble();
 
-                Assignment ass = new Assignment(assName, total, weight);
-                assList.add(ass);
+                Assignment assign= new Assignment(assName, total, weight);
+                asignList.add(assign);
                 //}
                 //catch (Exception e) {
                 //    System.out.println("File formatted incorrectly");
@@ -100,21 +100,21 @@ public abstract class MyGradeBook {
                 int count = 0;
                 while (studScan.hasNextDouble()) {
 
-                    if (count > assList.size()) {
+                    if (count > asignList.size()) {
                         throw new RuntimeException("assignment list number error");
                     }
 
                     else {
                         double next = studScan.nextDouble();
-                        Assignment current = assList.get(count);
+                        Assignment current = asignList.get(count);
                         String name = current.name;
                         double weight = current.weight;
                         double total = current.total;
                         count++;
 
-                        Assignment newass = 
+                        Assignment newAssign= 
                                 new Assignment(name, total, next, weight);
-                        urList.add(newass);
+                        urList.add(newAssign);
                     }
                 }
                 map.put(stud, urList);
@@ -156,7 +156,7 @@ public abstract class MyGradeBook {
             Scanner scanLine3 = new Scanner(line3).useDelimiter("\t");
 
             //Accumulator lists
-            ArrayList<Assignment> assList = new ArrayList<Assignment>();
+            ArrayList<Assignment> asignList = new ArrayList<Assignment>();
             ArrayList<Student> studList = new ArrayList<Student>();
 
             while (scanLine1.hasNext()) {
@@ -165,8 +165,8 @@ public abstract class MyGradeBook {
                     double total = scanLine2.nextDouble();
                     double weight = scanLine3.nextDouble();
 
-                    Assignment ass = new Assignment(assName, total, weight);
-                    assList.add(ass);
+                    Assignment assign= new Assignment(assName, total, weight);
+                    asignList.add(assign);
                 }
                 catch (Exception e) {
                     System.out.println("File formatted incorrectly");
@@ -192,21 +192,21 @@ public abstract class MyGradeBook {
                 int count = 0;
                 while (studScan.hasNextDouble()) {
 
-                    if (count > assList.size()) {
+                    if (count > asignList.size()) {
                         throw new RuntimeException("assignment list number error");
                     }
 
                     else {
                         double next = studScan.nextDouble();
-                        Assignment current = assList.get(count);
+                        Assignment current = asignList.get(count);
                         String name = current.name;
                         double weight = current.weight;
                         double total = current.total;
                         count++;
 
-                        Assignment newass = 
+                        Assignment newAssign= 
                                 new Assignment(name, total, next, weight);
-                        urList.add(newass);
+                        urList.add(newAssign);
                     }
                 }
                 map.put(stud, urList);
@@ -244,7 +244,7 @@ public abstract class MyGradeBook {
         try {
             sc = new Scanner(file).useDelimiter("\n");
 
-            ArrayList<Assignment> assList = new ArrayList<Assignment>();
+            ArrayList<Assignment> asignList = new ArrayList<Assignment>();
             ArrayList<Student> studList = new ArrayList<Student>();
 
             // Pick the first String (the type of processing)
@@ -259,14 +259,14 @@ public abstract class MyGradeBook {
                     double weight = sc.nextDouble();
 
                     Assignment made = new Assignment(name, total, weight);
-                    assList.add(made);
+                    asignList.add(made);
 
                     try {
                         sc.next();
                     }
                     catch (Exception e) { }
                 }
-                this.addGrades(assList);
+                this.addGrades(asignList);
             }
 
             //Add a list of students to the GradeBook
@@ -355,7 +355,7 @@ public abstract class MyGradeBook {
         // load the file
         Scanner sc = new Scanner(additionalString).useDelimiter("\n");
 
-        ArrayList<Assignment> assList = new ArrayList<Assignment>();
+        ArrayList<Assignment> asignList = new ArrayList<Assignment>();
         ArrayList<Student> studList = new ArrayList<Student>();
 
         // Pick the first String (the type of processing)
@@ -370,14 +370,14 @@ public abstract class MyGradeBook {
                 double weight = sc.nextDouble();
 
                 Assignment made = new Assignment(name, total, weight);
-                assList.add(made);
+                asignList.add(made);
 
                 try {
                     sc.next();
                 }
                 catch (Exception e) { }
             }
-            this.addGrades(assList);
+            this.addGrades(asignList);
         }
 
         //Add a list of students to the GradeBook

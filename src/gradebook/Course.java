@@ -227,10 +227,10 @@ public class Course extends MyGradeBook {
         
 
         for (Student s : students) {
-            ArrayList<Assignment> ass = this.studAssignMap.get(s);
+            ArrayList<Assignment> assign = this.studAssignMap.get(s);
 
-            for (int i = 0; i < ass.size(); i++) {
-                Assignment current = ass.get(i);
+            for (int i = 0; i < assign.size(); i++) {
+                Assignment current = assign.get(i);
 
                 if (current.name.equals(assignmentName)) {
                     double percent = current.score;
@@ -587,11 +587,11 @@ public class Course extends MyGradeBook {
 
         for (Student s : studList) {
 
-            ArrayList<Assignment> ass = this.studAssignMap.get(s);
+            ArrayList<Assignment> assign = this.studAssignMap.get(s);
 
             if (s.userName.equals(u)) {
                 String assString = "";
-                for (Assignment a : ass) {
+                for (Assignment a : assign) {
                     assString = assString + a.name + "\t" + a.score + "\n";
                 }
                 result = 
@@ -750,8 +750,8 @@ public class Course extends MyGradeBook {
 
         for (Student s : studList) {
             String thisStudAssInfo = "";
-            for (Assignment ass : this.studAssignMap.get(s)) {
-                thisStudAssInfo = thisStudAssInfo + "\t" + ass.score;
+            for (Assignment assign : this.studAssignMap.get(s)) {
+                thisStudAssInfo = thisStudAssInfo + "\t" + assign.score;
             }
 
             totalStudInfo =
@@ -790,9 +790,9 @@ public class Course extends MyGradeBook {
      * @author Charles Perrone
      * @version 2014-04-09
      * 
-     * @param assList the assignment list to add grades from
+     * @param assignList the assignment list to add grades from
      */
-    public void addGrades(ArrayList<Assignment> assList) {
+    public void addGrades(ArrayList<Assignment> assignList) {
         HashMap<Student, ArrayList<Assignment>> map = this.studAssignMap;
         Set<Student> studs = this.studAssignMap.keySet();
 
@@ -800,7 +800,7 @@ public class Course extends MyGradeBook {
             ArrayList<Assignment> current = map.get(s);
             ArrayList<Assignment> result = new ArrayList<Assignment>();
             result.addAll(current);
-            result.addAll(assList);
+            result.addAll(assignList);
 
             this.studAssignMap.put(s, result);
         }
