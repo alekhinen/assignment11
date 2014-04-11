@@ -10,7 +10,7 @@ package gradebook;
  * @version 2014-04-06
  *
  */
-public class Assignment {
+class Assignment {
 
     ///////////////////////////////////////////////////////////////////////////
     // FIELDS /////////////////////////////////////////////////////////////////
@@ -130,7 +130,7 @@ public class Assignment {
      * 
      * @param newScore the new score that the student receives (Double)
      */
-    public void changeScore(Double newScore) {
+    protected void changeScore(Double newScore) {
         this.score = newScore;
     }
 }
