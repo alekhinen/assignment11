@@ -202,7 +202,7 @@ public class BlackBoxTests {
         assertTrue(true);
         try {
             book1.processFile("addStudents.txt");
-            System.out.print(book1.outputGradebook());
+//            System.out.print(book1.outputGradebook());
         } 
         catch (Exception e) {
             // To catch/test expected exceptions
