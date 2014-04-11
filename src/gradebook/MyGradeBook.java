@@ -72,7 +72,7 @@ public abstract class MyGradeBook {
                 double total = scanLine2.nextDouble();
                 double weight = scanLine3.nextDouble();
 
-                Assignment assign= new Assignment(assName, total, weight);
+                Assignment assign = new Assignment(assName, total, weight);
                 asignList.add(assign);
                 //}
                 //catch (Exception e) {
@@ -113,7 +113,7 @@ public abstract class MyGradeBook {
                         double total = current.total;
                         count++;
 
-                        Assignment newAssign= 
+                        Assignment newAssign = 
                                 new Assignment(name, total, next, weight);
                         urList.add(newAssign);
                     }
@@ -166,7 +166,7 @@ public abstract class MyGradeBook {
                     double total = scanLine2.nextDouble();
                     double weight = scanLine3.nextDouble();
 
-                    Assignment assign= new Assignment(assName, total, weight);
+                    Assignment assign = new Assignment(assName, total, weight);
                     asignList.add(assign);
                 }
                 catch (Exception e) {
@@ -206,7 +206,7 @@ public abstract class MyGradeBook {
                         double total = current.total;
                         count++;
 
-                        Assignment newAssign= 
+                        Assignment newAssign = 
                                 new Assignment(name, total, next, weight);
                         urList.add(newAssign);
                     }
@@ -307,7 +307,7 @@ public abstract class MyGradeBook {
                     try {
                         this.changeGrade(assName, username, grade);
                     }
-                    catch(Exception e) {
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

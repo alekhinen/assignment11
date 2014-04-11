@@ -67,6 +67,13 @@ public class MyGradeBookTest {
     /** Course 2 */
     Course c2;
 
+    /** mygradebook instance */
+    MyGradeBook mtBook;
+    /** mygradebook instance */
+    MyGradeBook book1;
+    /** mygradebook instance */
+    MyGradeBook testBook;
+
 
     /** 
      * To set values to each variable. 
@@ -116,6 +123,15 @@ public class MyGradeBookTest {
         this.c1 = new Course(this.map1);
 
         this.c2 = new Course(this.map1);
+
+        mtBook = MyGradeBook.initialize();
+        try {
+            book1 = MyGradeBook.initializeWithFile("initial.txt");
+            testBook = MyGradeBook.initializeWithFile("testFile.txt");
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -125,6 +141,152 @@ public class MyGradeBookTest {
     ///////////////////////////////////////////////////////////////////////////
     // METHODS ////////////////////////////////////////////////////////////////
 
+    /** test the initialize method in Course 
+     * 
+     * @author Chris Clark
+     * @version 2014-04-08
+     */
+    @Test
+    public void testInitialize() {
+        reset();
+        assertEquals(MyGradeBook.initialize(), mtBook);
+        assertFalse(MyGradeBook.initialize().equals(book1));
+    }
+
+    /** test the initialize method in MyGradeBook
+     * 
+     * @author Austin Colcord
+     * @version 2014-04-08
+     */
+    @Test
+    public void testInitializeCourse() {
+        this.reset();
+        assertEquals(MyGradeBook.initialize(), new Course());
+    }
+
+    /** test the initializeWithFile method in Course
+     *
+     * @author Chris Clark
+     * @version 2014-04-09
+     */
+    @Test
+    public void testInitializeWithFile() {
+        assertEquals(testBook, null);
+        testBook = MyGradeBook.initializeWithFile("testFile.txt");
+        String outputCurrent = "CURRENT_GRADES\n"
+                + "chperrone\t" + "75.5\n"
+                + "nalekhn\t" + "79.5\n"
+                + "thmyolk\t" + "75.0\n";
+        assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+
+
+        // To test FileNotFoundException
+        try {
+            book1 = MyGradeBook.initializeWithFile("FakeFilename.txt");
+            System.out.println("This shouldn't work");
+        }
+        catch (Exception e) {
+            System.out.println("File is not found");
+            assertTrue(true);
+        }
+    }
+
+    /** test the initializeWithString method in Course
+     * 
+     * @author Chris Clark
+     * @version 2014-04-09
+     */
+    @Test
+    public void testInitializeWithString() {
+        assertEquals(testBook, null);
+        String startingString = "GRADEBOOK\n"
+                + "\t\t\t\t\t"
+                + "A1\t" + "A2\n"
+                + "\t\t\t\t\t"
+                + "100.0\t" + "100.0\n"
+                + "\t\t\t\t\t"
+                + "5.0\t" + "5.0\n"
+                + "chperrone\t" + "Charles\t" + "Haydon\t" + "Perrone\t"
+                + "2017\t" + "80.0\t" + "71.0\n"
+                + "nalekhn\t" + "Nick\t" + "Alex\t" + "Alekhine\t"
+                + "2017\t" + "80.0\t" + "79.0\n"
+                + "thmyolk\t" + "Thom\t" + "Mearle\t" + "Yorke\t"
+                + "2017\t" + "60.0\t" + "90.0\n";
+        //try {
+        testBook = MyGradeBook.initializeWithString(startingString);
+        String outputCurrent = "CURRENT_GRADES\n"
+                + "chperrone\t" + "75.5\n"
+                + "nalekhn\t" + "79.5\n"
+                + "thmyolk\t" + "75.0\n";
+        assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+
+
+        // To test Exception
+        try {
+            book1 = MyGradeBook.initializeWithString(
+                    "Incorrectly Formatted String");
+            System.out.println("This should not pass");
+        }
+        catch (Exception e) {
+            assertTrue(true);
+            System.out.println("String format is incorrect.");
+        }
+    }
+
+
+    /** test the processFile method in Course
+     * 
+     * @author Chris Clark
+     * @version 2014-04-09
+     */
+    @Test
+    public void testProcessFile() {
+        reset();
+        try {
+            testBook.processFile("addStudents.txt");
+            System.out.print(testBook.outputGradebook());
+        } 
+        catch (Exception e) {
+            // To catch/test expected exceptions
+            e.printStackTrace();
+        }
+
+
+        try {
+            MyGradeBook blank = MyGradeBook.initialize();
+            blank.processFile("addAssignments.txt");
+        }
+        catch (Exception e) {
+            System.out.println("File not found");
+        }
+
+        try {
+            this.c1.processFile("addStudents.txt");
+            System.out.println(this.c1);
+        }
+        catch (Exception e) {
+            System.out.println("File not Found");
+        }
+        this.reset();
+        try {
+            MyGradeBook blank = MyGradeBook.initializeWithFile("initial.txt");
+            blank.processFile("gradesForStudent.txt");
+            System.out.println(blank);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        String additionalAssignment = 
+                "ASSIGNMENT\nFirst Group Project\n150"
+                        + "\n10\nASSIGNMENT\nTest\n100\n25";
+
+        MyGradeBook test = MyGradeBook.initializeWithFile("initial.txt");
+
+        test.processString(additionalAssignment);
+        System.out.println(test);
+
+    }
 
     /** test the equals method in gradeBook, assignment, and student 
      * 
@@ -197,6 +359,7 @@ public class MyGradeBookTest {
     /** test the changeGrade method in GradeBook 
      * 
      * @author Austin Colcord
+     * @author Chris Clark
      * @version 2014-04-08
      * */
     @Test
@@ -213,6 +376,10 @@ public class MyGradeBookTest {
         assertEquals(this.a4.score, new Double(80));
         this.c1.changeGrade("Assignment2", "thmyolk", new Double(70));
         assertEquals(this.a4.score, new Double(70));
+        
+        assertTrue(book1.changeGrade("A2", "enwilson", 95));
+        assertFalse(book1.changeGrade("A3", "enwilson", 10));
+        assertFalse(book1.changeGrade("A2", "clarkch", 100));
     }
 
     /** test the changeScore grade in Assignment 
@@ -260,6 +427,7 @@ public class MyGradeBookTest {
      * 
      * @author Charles Perrone
      * @author Austin Colcord
+     * @author Chris Clark
      * @version 2014-04-08
      */
     @Test
@@ -268,6 +436,13 @@ public class MyGradeBookTest {
         assertEquals(c1.average("Assignment1"), 77.0, .001);
         assertEquals(c1.average("Assignment2"), 103.0, .001);
         assertEquals(c1.average("Assignment3"), 90.0, .001);
+        
+        assertEquals(book1.average("Opening Assignment"), 7.352, 0.01);
+        assertEquals(book1.average("A2"), 81.82, 0.01);
+
+        book1.changeGrade("A2", "enwilson", 0);
+        assertEquals(book1.average("A2"), 76.9, 0.941);
+        
         try {
             Course.newGradeBook().average("TEST");
             System.out.println("Should throw an exception.");
@@ -294,25 +469,31 @@ public class MyGradeBookTest {
      * 
      * @author Charles Perrone
      * @author Austin Colcord
+     * @author Chris Clark
      * @version 2014-04-08
      */
     @Test
     public void testMedian() {
         this.reset();
-        
+
         HashMap<Student, ArrayList<Assignment>> newHash = 
                 new HashMap<Student, ArrayList<Assignment>>();
         newHash.put(this.s1, this.aList1);
         newHash.put(this.s2, this.aList1);
-        
+
         Course newCourse = Course.newGradeBook(newHash);
-        
+
         //list with an even size
         assertEquals(c1.median("Assignment1"), 90.0, .001);
         assertEquals(c1.median("Assignment3"), 90.0, .001);
         assertEquals(newCourse.median("Assignment1"), 90, .00);
         assertEquals(c1.median("Assignment2"), 114.0, .001);
         
+        assertEquals(book1.median("Opening Assignment"), 8.0, .0);
+        assertEquals(book1.median("A2"), 83, .0);
+
+        book1.changeGrade("A2", "enwilson", 25);
+
         try {
             Course.newGradeBook().median("TEST");
             System.out.println("Should throw an exception.");
@@ -339,6 +520,7 @@ public class MyGradeBookTest {
      * 
      * @author Charles Perrone
      * @author Austin Colcord
+     * @author Chris Clark
      * @version 2014-04-08
      */
     @Test
@@ -348,6 +530,11 @@ public class MyGradeBookTest {
         assertEquals(c1.min("Assignment2"), 80.0, .067);
         assertEquals(c1.min("Assignment3"), 90.0, .000);
         
+        assertEquals(testBook.min("A1"), 60, 0);
+
+        testBook.changeGrade("A1", "thmyolk", 99);
+        assertEquals(testBook.min("A1"), 80, 0);
+
         try {
             Course.newGradeBook().min("TEST");
             System.out.println("Should throw an exception.");
@@ -374,6 +561,7 @@ public class MyGradeBookTest {
      * 
      * @author Charles Perrone
      * @author Austin Colcord
+     * @author Chris Clark
      * @version 2014-04-08
      */
     @Test
@@ -383,6 +571,11 @@ public class MyGradeBookTest {
         assertEquals(c1.max("Assignment2"), 115.0, .034);
         assertEquals(c1.max("Assignment3"), 90.0, .000);
         
+        assertEquals(testBook.max("A1"), 80, 0);
+
+        testBook.changeGrade("A1", "chperrone", 100);
+        assertEquals(testBook.max("A1"), 100, 0);
+
         try {
             Course.newGradeBook().max("TEST");
             System.out.println("Should throw an exception.");
@@ -424,6 +617,7 @@ public class MyGradeBookTest {
      * 
      * @author Nick Alekhine
      * @author Austin Colcord
+     * @authr Chris Clark
      * @version 2014-04-09
      */
     @Test
@@ -433,12 +627,20 @@ public class MyGradeBookTest {
         assertEquals(93.89, this.c1.currentGrade("chperrone"), .01);
         assertEquals(67.08, this.c1.currentGrade("thmyolk"), .01);
         assertEquals(0, this.c1.currentGrade("a;ldfjk"), .00);
+        
+        assertEquals(book1.currentGrade("enwilson"), 82.5, 0.001);
+        assertEquals(book1.currentGrade("onon"), 84.17, 0.001);
+
+        book1.changeGrade("A2", "enwilson", 100);
+
+        assertEquals(book1.currentGrade("enwilson"), 96.6, 0.1);
     }
 
     /** test the currentGrades method in GradeBook
      * 
      * @author Nick Alekhine
      * @author Austin Colcord
+     * @author Chris Clark
      * @version 2014-04-09
      */
     @Test
@@ -450,6 +652,16 @@ public class MyGradeBookTest {
         result.put("nalekhn", (double) 94);
         assertEquals(result, this.c1.currentGrades());
         assertEquals(this.c1.currentGrades(), this.c2.currentGrades());
+        
+        HashMap<String, Double> testBookCurrentGrades = 
+                new HashMap<String, Double>();
+
+        testBookCurrentGrades.put("chperrone", 75.5);
+        testBookCurrentGrades.put("thmyolk", 75.0);
+        testBookCurrentGrades.put("nalekhn", 79.5);
+
+        assertEquals(mtBook.currentGrades().toString(), "{}");
+        assertEquals(testBook.currentGrades(), testBookCurrentGrades);
     }
 
     /** test the assignmentGrade method in GradeBook
@@ -469,62 +681,13 @@ public class MyGradeBookTest {
                 this.c1.assignmentGrade("Assignment3", "chperrone"), .01);
         assertEquals(this.c1.assignmentGrade("asldfjk", "chperrone"), 0, .00);
         assertEquals(this.c1.assignmentGrade("Assignment1", "als;dkjf"), 0, .0);
+    
+        assertEquals(testBook.assignmentGrade("A1", "chperrone"), 80, 0);
+        assertEquals(testBook.assignmentGrade("A2", "chperrone"), 71, 0);
     }
 
-    /** test the processFile method
-     * 
-     * @author Charles Perrone
-     * @version 2014-04-09
-     */
-    @Test
-    public void testProcessFile() {
-        this.reset();
 
-        try {
-            MyGradeBook blank = MyGradeBook.initialize();
-            blank.processFile("addAssignments.txt");
-        }
-        catch (Exception e) {
-            System.out.println("File not found");
-        }
 
-        try {
-            this.c1.processFile("addStudents.txt");
-            System.out.println(this.c1);
-        }
-        catch (Exception e) {
-            System.out.println("File not Found");
-        }
-        this.reset();
-        try {
-            MyGradeBook blank = MyGradeBook.initializeWithFile("initial.txt");
-            blank.processFile("gradesForStudent.txt");
-            System.out.println(blank);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /** test the processString method
-     * 
-     * @author Charles Perrone
-     * @version 2014-04-09
-     */
-    @Test
-    public void testProcessString() {
-        this.reset();
-        String additionalAssignment = 
-                "ASSIGNMENT\nFirst Group Project\n150"
-                + "\n10\nASSIGNMENT\nTest\n100\n25";
-
-        MyGradeBook test = MyGradeBook.initializeWithFile("initial.txt");
-        
-        test.processString(additionalAssignment);
-        System.out.println(test);
-        
-        
-    }
 
 
     /** To test the addStudents method
@@ -567,8 +730,8 @@ public class MyGradeBookTest {
             System.out.println("Correctly throws exception.");
             System.out.println(e);
         }
-        
-       
+
+
 
         mtbook.addStudents(stud);
 
@@ -610,16 +773,7 @@ public class MyGradeBookTest {
                 Course.newGradeBook()));
     }
 
-    /** test the initialize method in MyGradeBook
-     * 
-     * @author Austin Colcord
-     * @version 2014-04-08
-     */
-    @Test
-    public void testInitialize() {
-        this.reset();
-        assertEquals(MyGradeBook.initialize(), new Course());
-    }
+
 
     /** test the method initializeFile
      * 
@@ -639,21 +793,7 @@ public class MyGradeBookTest {
         }
     }
 
-//    /** test the initialize with string method in MyGradeBook
-//     * 
-//     * @author Charles Perrone
-//     * @version 2014-04-09
-//     */
-//    @Test
-//    public void testInitializeString() {
-//        this.reset();
-//        assertTrue(true);
-//        String test = 
-//                "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100"
-//                + "\n1\t5\nabetaylor\tIsabella\tTaylor\tBaker\t2016\t8\t71";
-//        
-//        MyGradeBook.initializeWithString(test);
-//    }
+   
     /** test the studentcomparator 
      * 
      * @author Austin Colcord
@@ -670,4 +810,70 @@ public class MyGradeBookTest {
         assertEquals(sComp.compare(this.s3, this.s2), -6);
     }
     
+    /** test the outputCurrentGrades method in Course
+    *
+    * @author Chris Clark
+    * @version 2014-04-09
+    */
+   @Test
+   public void testOutputCurrentGrades() {
+       reset();
+       String outputCurrent = "CURRENT_GRADES\n"
+               + "chperrone\t" + "75.5\n"
+               + "nalekhn\t" + "79.5\n"
+               + "thmyolk\t" + "75.0\n";
+       assertEquals(testBook.outputCurrentGrades(), outputCurrent);
+   }
+
+   
+   /** test the outputAssignmentGrades method in Course
+   *
+   * @author Chris Clark
+   * @version 2014-04-09
+   */
+  @Test
+  public void testOutputAssignmentGrades() {
+      reset();
+      String a1OutputCurrent = "ASSIGNMENT_GRADES\n"
+              + "A1\n"
+              + "100.0\n"
+              + "5.0\n"
+              + "----\n"
+              + "chperrone\t" + "80.0\n"
+              + "nalekhn\t" + "80.0\n"
+              + "thmyolk\t" + "60.0\n"
+              + "----\n"
+              + "STATS\n"
+              + "Average\t" + "73.33333333333333\n"
+              + "Median\t" + "80.0\n"
+              + "Max\t" + "80.0\n"
+              + "Min\t" + "60.0";
+
+      assertEquals(testBook.outputAssignmentGrades("A1"), a1OutputCurrent);
+  }
+  
+  /** test the outputGradebook method in Course
+  *
+  * @author Chris Clark
+  * @version 2014-04-09
+  */
+ @Test
+ public void testOutputGradebook() {
+     reset();
+     String outputTestBook = "GRADEBOOK\n"
+             + "\t\t\t\t\t"
+             + "A1\t" + "A2\n"
+             + "\t\t\t\t\t"
+             + "100.0\t" + "100.0\n"
+             + "\t\t\t\t\t"
+             + "5.0\t" + "5.0\n"
+             + "chperrone\t" + "Charles\t" + "Haydon\t" + "Perrone\t"
+             + "2017\t" + "80.0\t" + "71.0\n"
+             + "nalekhn\t" + "Nick\t" + "Alex\t" + "Alekhine\t"
+             + "2017\t" + "80.0\t" + "79.0\n"
+             + "thmyolk\t" + "Thom\t" + "Mearle\t" + "Yorke\t"
+             + "2017\t" + "60.0\t" + "90.0\n";
+
+     assertEquals(testBook.outputGradebook(), outputTestBook);
+ }
 }
