@@ -15,15 +15,15 @@ class Student {
     // FIELDS /////////////////////////////////////////////////////////////////
 
     /** The username of this student */
-    String userName;
+    protected String userName;
     /** The first name of this student */
-    String firstName;
+    protected String firstName;
     /** The last name of this student */
-    String lastName;
+    protected String lastName;
     /** The advisor name of this student */
-    String advisor;
+    protected String advisor;
     /** The year that this student is graduating */
-    int gradYear;
+    protected int gradYear;
 
 
 
@@ -41,7 +41,7 @@ class Student {
      * @param advisor the student's advisor
      * @param gradYear the student's graduation year
      */
-    public Student(String userName, 
+    protected Student(String userName, 
             String firstName, 
             String lastName, 
             String advisor, 
