@@ -246,7 +246,7 @@ public class BlackBoxTests {
     @Test
     public void testMedian() {
         reset();
-        assertEquals(book1.median("A2"), 83, .0);
+        assertEquals(book1.median("Opening Assignment"), 8.0, .0);
 
         book1.changeGrade("A2", "enwilson", 25);
         assertEquals(book1.median("A2"), 81, .0);

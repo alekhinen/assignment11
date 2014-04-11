@@ -99,12 +99,10 @@ class Course extends MyGradeBook {
      */
     public void processFile(String filename) {
 
-        
         // load the file
         File file;
         Scanner sc;
         try {
-            System.out.print(this);
             file = new File(filename);
             sc = new Scanner(file).useDelimiter("\n");
 
@@ -195,7 +193,6 @@ class Course extends MyGradeBook {
             else {
                 throw new RuntimeException();
             }
-            System.out.print(this);
         }
 
         catch (FileNotFoundException e1) {
@@ -515,14 +512,16 @@ class Course extends MyGradeBook {
 
         list.removeAll(Collections.singleton(null));
 
-        //if x is even, take the higher value
-        if (list.size() % 1 == 1) {
-            int x = list.size() / 2;
-            return list.get(x + 1);
+        int listMid = list.size() / 2;
+        double result = list.get(listMid);
+        
+        //if x is even, take the average of the two middle elements
+        if (list.size() % 2 == 0) {
+            return ((result + list.get(listMid - 1)) / 2); 
         }
         //else return the middle
         else {
-            return list.get(list.size() / 2);
+            return result;
         }
     }
 
