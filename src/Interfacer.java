@@ -22,7 +22,6 @@ public class Interfacer {
      * 
      * @param args - command line arguments
      */
-    // TODO gotta build this out.
     public static void main(String[] args) {
         // Create an instance of Interfacer
         Interfacer ui = new Interfacer();
@@ -490,12 +489,10 @@ public class Interfacer {
      * @param input the string that the user inputs
      * @param mgb the MyGradeBook to throw the input into with the action
      */
-    // TODO need to test on non-empty mgb
     public void gradeBookInput(String input, MyGradeBook mgb) {
 
         // PROCESS
         if (input.equals("p_file")) {
-            // TODO
             System.out.println("Process A File");
             System.out.print("Enter the filepath: ");
             System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
@@ -519,7 +516,6 @@ public class Interfacer {
             }
         }
         else if (input.equals("p_string")) {
-            // TODO
             System.out.println("Process A String Input");
             System.out.println("Enter the string input: ");
             System.out.print(ANSI.GREEN + ANSI.HIGH_INTENSITY);
@@ -601,7 +597,6 @@ public class Interfacer {
 
         // STATISTICS
         else if (input.equals("s_average")) {
-            // TODO fucked up for empty mgb and incorrect assignment
             System.out.println("Assignment Average");
             System.out.print("\nEnter the Assignment name: ");
             String aname = this.inputter();
@@ -709,8 +704,6 @@ public class Interfacer {
             }
         }
         else if (input.equals("v_student")) {
-            // TODO outputs a null when given empty or non-existent student
-            // for method outputStudentGrades.
             System.out.println("View Current Grade For Student");
             System.out.print("\nEnter the username: ");
             String username = this.inputter();
@@ -729,7 +722,6 @@ public class Interfacer {
             }
         }
         else if (input.equals("v_assignment")) {
-            // TODO returns null for empty and when aname doesn't exist.
             System.out.println("View Grades For Assignment");
             System.out.print("\nEnter the assignment name: ");
             String aname = this.inputter();
@@ -746,7 +738,6 @@ public class Interfacer {
             }
         }
         else if (input.equals("v_gradebook")) {
-            // TODO outputs null when empty.
             System.out.println("view the entire gradebook...");
             System.out.println("View Entire Gradebook");
             try {
