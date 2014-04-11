@@ -23,7 +23,7 @@ class Course extends MyGradeBook {
     // FIELDS /////////////////////////////////////////////////////////////////
 
     /** The mapping of students and assignments. */
-    HashMap<Student, ArrayList<Assignment>> studAssignMap;
+    protected HashMap<Student, ArrayList<Assignment>> studAssignMap;
 
     ///////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS ///////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ class Course extends MyGradeBook {
      * 
      * @param studAssignMap the hashmap of students and lists of assignments
      */
-    Course(HashMap<Student, ArrayList<Assignment>> studAssignMap) {
+    protected Course(HashMap<Student, ArrayList<Assignment>> studAssignMap) {
         this.studAssignMap = studAssignMap;
     }
 
@@ -48,7 +48,7 @@ class Course extends MyGradeBook {
      * 
      * @param studAssignMap
      */
-    Course() {
+    protected Course() {
         this.studAssignMap = new HashMap<Student, ArrayList<Assignment>>();
     }
 
@@ -66,7 +66,7 @@ class Course extends MyGradeBook {
      * 
      * @return Course a new empty instance of a course
      */
-    public static Course newGradeBook() {
+    protected static Course newGradeBook() {
         return new Course();
     }
 
@@ -80,7 +80,7 @@ class Course extends MyGradeBook {
      *               to create the course with
      * @return Course a new instance of a course with a hashmap
      */
-    public static Course newGradeBook(
+    protected static Course newGradeBook(
             HashMap<Student, ArrayList<Assignment>> map) {
         return new Course(map);
     }
@@ -448,7 +448,7 @@ class Course extends MyGradeBook {
      * @param assignmentName the assignment we are searching for
      * @return the sorted ArrayList
      */
-    public ArrayList<Double> makeList(String assignmentName) {
+    protected ArrayList<Double> makeList(String assignmentName) {
 
         Set<Student> students = this.studAssignMap.keySet();
 

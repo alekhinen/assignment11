@@ -16,13 +16,13 @@ class Assignment {
     // FIELDS /////////////////////////////////////////////////////////////////
 
     /** The name of this assignment */
-    String name;
+    protected String name;
     /** The total points of this assignment */
-    Double total;
+    protected Double total;
     /** the weight of this assignment on the full grade */
-    Double weight;
+    protected Double weight;
     /** The score received on this assignment */
-    Double score;
+    protected Double score;
 
 
     ///////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ class Assignment {
      *               the overall grade of the student
      * The score will be set when the instructor changes the student's grade
      */
-    Assignment(String name, double total, double weight) {
+    protected Assignment(String name, double total, double weight) {
         this.name = name;
         this.total = total;
         this.weight = weight;
@@ -51,7 +51,8 @@ class Assignment {
      *               the overall grade of the student
      * @param score the scored grade for the assignment
      */
-    public Assignment(String name, double total, double score, double weight) {
+    protected Assignment(
+            String name, double total, double score, double weight) {
         this.name = name;
         this.total = total;
         this.weight = weight;
