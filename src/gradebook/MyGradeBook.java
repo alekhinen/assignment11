@@ -101,7 +101,8 @@ public abstract class MyGradeBook {
                 while (studScan.hasNextDouble()) {
 
                     if (count > asignList.size()) {
-                        throw new RuntimeException("assignment list number error");
+                        throw new RuntimeException(
+                                "assignment list number error");
                     }
 
                     else {
@@ -121,7 +122,7 @@ public abstract class MyGradeBook {
             }
         }
 
-        catch(FileNotFoundException e) {
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return new Course(map);
@@ -193,7 +194,8 @@ public abstract class MyGradeBook {
                 while (studScan.hasNextDouble()) {
 
                     if (count > asignList.size()) {
-                        throw new RuntimeException("assignment list number error");
+                        throw new RuntimeException(
+                                "assignment list number error");
                     }
 
                     else {
@@ -234,7 +236,6 @@ public abstract class MyGradeBook {
      *            students, new grades. The file will be formatted like
      *            addAssignments.txt, addStudents.txt, gradesForAssignment1.txt,
      *            and gradesForStudent.txt.
-     * @throws FileNotFoundException 
      */
     public void processFile(String filename) {
 
@@ -264,7 +265,9 @@ public abstract class MyGradeBook {
                     try {
                         sc.next();
                     }
-                    catch (Exception e) { }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 this.addGrades(asignList);
             }
@@ -287,7 +290,9 @@ public abstract class MyGradeBook {
                     try {
                         sc.next(); 
                     }
-                    catch (Exception e) { }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 this.addStudents(studList);
             }
@@ -300,7 +305,7 @@ public abstract class MyGradeBook {
                     double grade = sc.nextInt();
 
                     try {
-                    this.changeGrade(assName, username, grade);
+                        this.changeGrade(assName, username, grade);
                     }
                     catch(Exception e) {
                         e.printStackTrace();
@@ -309,16 +314,16 @@ public abstract class MyGradeBook {
             }
 
             else if (type.equals("GRADES_FOR_ASSIGNMENT")) {
-                String assName = sc.next();
+                String assignName = sc.next();
 
                 while (sc.hasNext()) {
                     String username = sc.next();
                     double grade = sc.nextInt();
 
                     try {
-                    this.changeGrade(assName, username, grade);
+                        this.changeGrade(assignName, username, grade);
                     }
-                    catch(Exception e) {
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -330,7 +335,6 @@ public abstract class MyGradeBook {
         }
 
         catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }
@@ -375,7 +379,9 @@ public abstract class MyGradeBook {
                 try {
                     sc.next();
                 }
-                catch (Exception e) { }
+                catch (Exception e) { 
+                    e.printStackTrace();
+                }
             }
             this.addGrades(asignList);
         }
@@ -398,7 +404,9 @@ public abstract class MyGradeBook {
                 try {
                     sc.next(); 
                 }
-                catch (Exception e) { }
+                catch (Exception e) { 
+                    e.printStackTrace();
+                }
             }
             this.addStudents(studList);
         }
@@ -411,9 +419,9 @@ public abstract class MyGradeBook {
                 double grade = sc.nextInt();
 
                 try {
-                this.changeGrade(assName, username, grade);
+                    this.changeGrade(assName, username, grade);
                 }
-                catch(Exception e) {
+                catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -427,9 +435,9 @@ public abstract class MyGradeBook {
                 double grade = sc.nextInt();
 
                 try {
-                this.changeGrade(assName, username, grade);
+                    this.changeGrade(assName, username, grade);
                 }
-                catch(Exception e) {
+                catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -454,7 +462,6 @@ public abstract class MyGradeBook {
      *         assignment/student combination exists, and username’s 
      *         assignmentName grade is now newGrade, returns false otherwise
      */
-    // TODO ...
     public abstract boolean changeGrade(String assignmentName,
             String username, double newGrade);
 
@@ -466,7 +473,6 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the average across all students for assignmentName
      */
-    // TODO ...
     public abstract double average(String assignmentName);
 
 
@@ -477,7 +483,6 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the median across all students for assignmentName
      */
-    // TODO ...
     public abstract double median(String assignmentName);
 
 
@@ -488,7 +493,6 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the min across all students for assignmentName
      */
-    // TODO ...
     public abstract double min(String assignmentName);
 
 
@@ -499,7 +503,6 @@ public abstract class MyGradeBook {
      *            name of the assignment
      * @return the max across all students for assignmentName
      */
-    // TODO ...
     public abstract double max(String assignmentName);
 
 

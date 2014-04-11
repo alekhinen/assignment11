@@ -639,21 +639,21 @@ public class MyGradeBookTest {
         }
     }
 
-    /** test the initialize with string method in MyGradeBook
-     * 
-     * @author Charles Perrone
-     * @version 2014-04-09
-     */
-    @Test
-    public void testInitializeString() {
-        this.reset();
-        assertTrue(true);
-        String test = 
-                "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100"
-                + "\n1\t5\nabetaylor\tIsabella\tTaylor\tBaker\t2016\t8\t71";
-        
-        MyGradeBook.initializeWithString(test);
-    }
+//    /** test the initialize with string method in MyGradeBook
+//     * 
+//     * @author Charles Perrone
+//     * @version 2014-04-09
+//     */
+//    @Test
+//    public void testInitializeString() {
+//        this.reset();
+//        assertTrue(true);
+//        String test = 
+//                "GRADEBOOK\n\t\t\tOpening Assignment\tA2\n10\t100"
+//                + "\n1\t5\nabetaylor\tIsabella\tTaylor\tBaker\t2016\t8\t71";
+//        
+//        MyGradeBook.initializeWithString(test);
+//    }
     /** test the studentcomparator 
      * 
      * @author Austin Colcord
