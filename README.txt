@@ -1,7 +1,12 @@
 Assignment 11 - MyGradeBook
 
 ==== HOW TO RUN THE PROGRAM ====
-In order to run the program, please cd into the bin/ directory of the application. From there, enter:
+In order to run the program, please cd into the directory of the application. From there, enter:
+    
+    javac Interfacer.java 
+
+To compile the Interfacer class. 
+From there, you can run this command:
 
     java Interfacer 
 
